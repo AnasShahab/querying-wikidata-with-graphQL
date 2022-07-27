@@ -1,0 +1,19 @@
+{
+  "name": "graphql-ld",
+  "version": "1.0.0",
+  "description": "grapghql-ld-test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "anas",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-ld": "^1.4.0",
+    "graphql-ld-sparqlendpoint": "^1.0.1"
+  },
+  "type": "module"
+}
