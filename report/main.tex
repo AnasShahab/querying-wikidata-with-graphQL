@@ -1,0 +1,70 @@
+\documentclass[12 pt, a4paper]{report}
+%\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{setspace}
+%\usepackage[top=1 in,bottom=1 in,left=3.2 cm,right=2.6 cm]{geometry}
+%\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{graphicx}
+%\renewcommand{\baselinestretch}{2}
+\renewcommand{\thesection}{\arabic{section}}
+%\raggedbottom
+\usepackage[sort&compress,numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nottoc]{tocbibind}
+\usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{lipsum}
+
+%\def\keywords{\vspace{.5em}
+%{\textit{Keywords}:\,\relax%
+%}}
+%\def\endkeywords{\par}
+
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Keywords---}} #1
+}
+
+
+\begin{document}
+%\maketitle
+\input{title.tex}
+
+\onehalfspacing
+\pagenumbering{roman}
+\begin{abstract}
+\lipsum[1]
+\\[0.5 cm]
+\centerline{\keywords{x, y, z}}
+
+\end{abstract}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+\pagebreak
+
+%\doublespacing
+\pagenumbering{arabic}
+\section{Introduction}
+\lipsum[1]
+
+
+\section{Literature Review}
+\label{sec:review}
+\lipsum[1]
+
+\section{Challenges faced and Conclusion}
+\lipsum[1]
+
+%\appendix
+\singlespacing
+\bibliographystyle{splncs04}
+\bibliography{main}
+
+
+\end{document}
