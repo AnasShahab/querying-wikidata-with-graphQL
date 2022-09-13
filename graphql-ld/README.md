@@ -1,7 +1,12 @@
-# Using graphql-ld to query wikidata using graphql query and a JSON-LD context as input
+# Using graphql-ld to query wikidata using graphql query and a JSON-LD context as inputs
 #### For example we want to find all the films that star Brad Pitt.
 
-## Input graphql
+## Usage
+    graphql-ld-sparqlendpoint <jsonld context file> <graphql query> <endpoint>
+    graphql-ld-sparqlendpoint context.jsonld index.qraphql https://query.wikidata.org/sparql
+
+## Example
+#### Graphql query
     {
         id (instance: film ) {
             name
@@ -9,7 +14,7 @@
         }
     }
 
-## Input JSON-LD context for wikidata
+#### JSON-LD context
     {
     "@context": {
         "instance": "http://www.wikidata.org/prop/direct/P31",
@@ -20,7 +25,7 @@
         }
     }
 
-## Output query result in JSON format
+#### Output query result in JSON format
     {
         id: {
             starring: [ 'http://www.wikidata.org/entity/Q35332' ],
@@ -99,7 +104,7 @@
         }
     }
 
-## The generated SPARQL query
+#### The generated SPARQL query
     SELECT ?id ?id_name ?id_starring WHERE {
         ?id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11424>;
         <http://www.wikidata.org/prop/direct/P1476> ?id_name;
