@@ -1,11 +1,11 @@
 # Using graphql-ld to query wikidata using graphql query and a JSON-LD context as inputs
-#### For example we want to find all the films that star Brad Pitt.
 
 ## Usage
     graphql-ld-sparqlendpoint <jsonld context file> <graphql query> <endpoint>
     graphql-ld-sparqlendpoint context.jsonld index.qraphql https://query.wikidata.org/sparql
 
 ## Example
+#### For example we want to find all the films that star Brad Pitt.
 #### Graphql query
     {
         id (instance: film ) {
