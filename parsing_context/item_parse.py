@@ -1,37 +1,33 @@
-# pip install sparqlwrapper
-# https://rdflib.github.io/sparqlwrapper/
-import sys
-from SPARQLWrapper import SPARQLWrapper, JSON
 import json
 
-endpoint_url = "https://query.wikidata.org/sparql"
-
-query = """SELECT ?labels ?items
-WHERE {
-  ?items wdt:P31 wd:Q6256.
-  ?items rdfs:label ?labels FILTER(lang(?labels)="en")
-}"""
-
-
-def get_results(endpoint_url, query):
-    user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
-    # TODO adjust user agent; see https://w.wiki/CX6
-    sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
-    return sparql.query().convert()
-
-#results is a dictionary
-results = get_results(endpoint_url, query)
-
+count=0
 my_dict={}
 
-for result in results["results"]["bindings"]:
-    print(result['labels']['value'], end=" ")
-    my_key=result['labels']['value']
-    print(result['items']['value'], end='\n')
-    my_value=result['items']['value']
-    my_dict[my_key]=my_value
+with open('item_complete_list_raw.txt', encoding='utf8') as f2:
+    for line in f2:
+        
+        if count<1000:
 
-with open('output_item_parse.json', 'w', encoding='utf-8') as f2:
-    json.dump(my_dict, f2, ensure_ascii=False, indent=4)
+            
+
+
+            line=line.strip().split(" ",2) #remove new line and split line in a list of 3 strings
+
+            line[2]=line[2].replace(" ","_").split("@") #replace spaces in key with _ and split key to remove @            
+        
+            line[2][0]=line[2][0].strip('"') #remove "" from key
+
+            myKey=line[2][0]
+
+            line[0]=line[0].strip('<>') #remove <> from value
+
+            myValue=line[0]
+            
+            my_dict[myKey]=myValue
+
+            count+=1
+        else:
+            break
+
+with open('item_complete_list.json', 'w', encoding='utf-8') as f1:
+   json.dump(my_dict, f1, sort_keys = True, ensure_ascii=False, indent=4)

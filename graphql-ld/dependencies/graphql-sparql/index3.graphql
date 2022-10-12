@@ -1,0 +1,9 @@
+{
+  hero {
+    name
+    friends(first:2 offset:10) {
+      totalCount
+      name
+    }
+  }
+}
