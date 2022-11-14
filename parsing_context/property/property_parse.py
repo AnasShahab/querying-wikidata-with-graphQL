@@ -33,10 +33,10 @@ my_dict={}
 
 for result in results["results"]["bindings"]:
     # print(result['idLabel']['value'], end=" ")
-    my_key=result['idLabel']['value']
+    my_key=result['idLabel']['value'].replace(" ","_")
     # print(result['id']['value'], end='\n')
     my_value=result['id']['value']
     my_dict[my_key]=my_value
 
-with open('output_property_parse.json', 'w', encoding='utf-8') as f1:
+with open('practise.json', 'w', encoding='utf-8') as f1:
     json.dump(my_dict, f1, ensure_ascii=False, indent=4)
