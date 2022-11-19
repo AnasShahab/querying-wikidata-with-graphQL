@@ -27,6 +27,7 @@ graphql-to-sparql <your_context.jsonld> <your_query.graphql>
 ```
 Go to the forked [project](https://github.com/AnasShahab/graphql-to-sparql.js-wikidata) for details on usage with examples.
 
+* * *
 
 ### HypergraphQL:
 
