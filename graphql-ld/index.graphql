@@ -1,4 +1,0 @@
-query {
-        id (instance: film )
-        starring (label: "Brad Pitt")
-    }

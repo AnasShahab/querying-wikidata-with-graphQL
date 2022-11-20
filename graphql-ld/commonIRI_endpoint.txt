@@ -1,8 +1,0 @@
-instance of:
-http://www.wikidata.org/prop/direct/P31
-
-subclass of:
-http://www.wikidata.org/prop/direct/P279
-
-sparql endpoint for wikidata
-https://query.wikidata.org/sparql

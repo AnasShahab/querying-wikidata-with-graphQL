@@ -1,0 +1,9 @@
+{
+  id(instance: cat){
+    id@single
+    sex@single
+    birthDate@single
+    name@single
+    birthPlace@single
+  }
+}
