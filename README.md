@@ -25,7 +25,7 @@ Usage:
 graphql-to-sparql <your_context.jsonld> <your_query.graphql>
 ```
 
-Go to the [graphql-ld](https://github.com/AnasShahab/querying-wikidata-with-graphQL/tree/main/graphql-lds) section for usage with examples.
+Go to the [graphql-ld](https://github.com/AnasShahab/querying-wikidata-with-graphQL/tree/main/graphql-ld) section for usage with examples.
 
 * * *
 
