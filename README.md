@@ -12,7 +12,6 @@ Usage:
 ```sh
 graphql-ld-sparqlendpoint <your_context.jsonld> <your_query.graphql> https://query.wikidata.org/sparql
 ```
-Go to the forked [project](https://github.com/AnasShahab/GraphQL-LD-SPARQLEndpoint.js-wikidata) for details on usage with examples.
 
 ##### Viewing the generated SPARQL query:
 
@@ -25,7 +24,8 @@ Usage:
 ```sh
 graphql-to-sparql <your_context.jsonld> <your_query.graphql>
 ```
-Go to the forked [project](https://github.com/AnasShahab/graphql-to-sparql.js-wikidata) for details on usage with examples.
+
+Go to the [graphql-ld](https://github.com/AnasShahab/querying-wikidata-with-graphQL/tree/main/graphql-lds) section for usage with examples.
 
 * * *
 
