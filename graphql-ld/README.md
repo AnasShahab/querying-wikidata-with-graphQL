@@ -41,7 +41,7 @@ graphql-to-sparql context.jsonld query.qraphql
     }
     
     
-#### Run the tool ***graphql-ld-sparqlendpoint*** query the Wikidata SPARQL endpoint
+#### Run the tool ***graphql-ld-sparqlendpoint*** to query the Wikidata SPARQL endpoint
 ```sh
 graphql-ld-sparqlendpoint context.jsonld query.qraphql https://query.wikidata.org/sparql
 ```
