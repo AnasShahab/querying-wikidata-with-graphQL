@@ -1,6 +1,0 @@
-Include the following in the package.json file, otherwise an error will be shown. The ES6 Modules syntax requires this.
-
-"type": "module"
-
-Ref: https://bobbyhadz.com/blog/javascript-syntaxerror-cannot-use-import-statement-outside-module
-

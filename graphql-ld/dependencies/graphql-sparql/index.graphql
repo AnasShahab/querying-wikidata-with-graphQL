@@ -1,6 +1,0 @@
-{
-  id
-  ... on film {
-    starring(label: "Brad Pitt")
-  }
-}

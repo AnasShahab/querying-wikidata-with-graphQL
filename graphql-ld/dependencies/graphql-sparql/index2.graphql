@@ -1,7 +1,0 @@
-{
-  softwareName: label @single
-  developer @single(scope: all) {
-    label
-    country(label_en: "Belgium")
-  }
-}
