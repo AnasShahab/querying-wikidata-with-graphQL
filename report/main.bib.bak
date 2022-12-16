@@ -1,0 +1,125 @@
+@Misc{Kroetzsch2020,
+  author       = {Markus Krötzsch},
+  howpublished = {{Available at \url{https://iccl.inf.tu-dresden.de/web/Knowledge_Graphs_(WS2020)/en} 2022-10-01}},
+  title        = {{Knowledge Graphs}},
+  year         = {2020},
+}
+
+@Article{Hogan2021,
+  author     = {Hogan, Aidan and Blomqvist, Eva and Cochez, Michael and D’amato, Claudia and Melo, Gerard De and Gutierrez, Claudio and Kirrane, Sabrina and Gayo, Jos\'{e} Emilio Labra and Navigli, Roberto and Neumaier, Sebastian and Ngomo, Axel-Cyrille Ngonga and Polleres, Axel and Rashid, Sabbir M. and Rula, Anisa and Schmelzeisen, Lukas and Sequeda, Juan and Staab, Steffen and Zimmermann, Antoine},
+  journal    = {ACM Comput. Surv.},
+  title      = {{Knowledge Graphs}},
+  year       = {2021},
+  issn       = {0360-0300},
+  month      = {jul},
+  number     = {4},
+  volume     = {54},
+  abstract   = {In this article, we provide a comprehensive introduction to knowledge graphs, which have recently garnered significant attention from both industry and academia in scenarios that require exploiting diverse, dynamic, large-scale collections of data. After some opening remarks, we motivate and contrast various graph-based data models, as well as languages used to query and validate knowledge graphs. We explain how knowledge can be represented and extracted using a combination of deductive and inductive techniques. We conclude with high-level future research directions for knowledge graphs.},
+  address    = {New York, NY, USA},
+  articleno  = {71},
+  doi        = {10.1145/3447772},
+  issue_date = {May 2022},
+  keywords   = {graph databases, ontologies, graph neural networks, embeddings, graph algorithms, Knowledge graphs, rule mining, shapes, graph query languages},
+  numpages   = {37},
+  publisher  = {Association for Computing Machinery},
+  url        = {https://doi.org/10.1145/3447772},
+}
+
+@Article{Nonaka1995,
+  author  = {Nonaka, Ikujiro},
+  journal = {New York},
+  title   = {Takeuchi.(1995) the knowledge creating company},
+  year    = {1995},
+}
+
+@Misc{R.Cyganiak2014,
+  author       = {R. Cyganiak, D. Wood, and M. Lanthaler},
+  howpublished = {{Available at \url{https://www.w3.org/TR/rdf11-concepts/} 2022-11-28}},
+  title        = {{RDF 1.1 Concepts and Abstract Syntax}},
+  year         = {2014},
+}
+
+@Misc{Tehnologies2022,
+  author       = {Oxford Semantic Tehnologies},
+  howpublished = {{Available at \url{https://www.oxfordsemantic.tech/fundamentals/what-is-an-iri-what-does-iri-mean} 2022-11-28}},
+  title        = {{What is an IRI? (What does IRI mean?)}},
+  year         = {2022},
+}
+
+@Misc{Seaborne2020,
+  author       = {Andy Seaborne},
+  howpublished = {{Available at \url{https://afs.github.io/rdf-iri-syntax.html} 2022-11-28}},
+  title        = {{RDF and IRI Syntax}},
+  year         = {2020},
+}
+
+@Misc{Brickley2014,
+  author       = {D. Brickley, and R. V. Guha},
+  howpublished = {{Available at \url{https://www.w3.org/TR/rdf-schema/} 2022-11-28}},
+  title        = {{RDF Schema 1.1}},
+  year         = {2014},
+}
+
+@Misc{2011,
+  howpublished = {{Available at \url{https://www.w3.org/wiki/RdfSyntax} 2022-12-04}},
+  title        = {{RdfSyntax}},
+  year         = {2011},
+}
+
+@Misc{C.B.Aranda2013,
+  author       = {C. B. Aranda, O. Corby, S. Das, L. Feigenbaum, P. Gearon, B. Glimm, S. Harris, S. Hawke, I. Herman, N. humfrey, N. Michaelis, C. Ogbuji, M. Perry, A. Passant, A. Polleres, E. Prud'hommeaux, A. Seaborne and G. T. Williams},
+  howpublished = {{Available at \url{https://www.w3.org/TR/sparql11-overview/} 2022-12-04}},
+  title        = {{SPARQL 1.1 Overview}},
+  year         = {2013},
+}
+
+@Misc{E.Prudhommeaux2005,
+  author       = {E. Prud'hommeaux, A. Seaborne},
+  howpublished = {{Available at \url{https://www.w3.org/2001/sw/DataAccess/rq23/} 2022-12-04}},
+  title        = {{SPARQL Query Language for RDF}},
+  year         = {2005},
+}
+
+@Misc{Wikidata2019,
+  author       = {Wikidata},
+  howpublished = {{Available at \url{https://www.wikidata.org/wiki/Wikidata:Main_Page} 2022-12-04}},
+  title        = {{Welcome to Wikidata}},
+  year         = {2019},
+}
+
+@Misc{Carpentry2016,
+  author       = {Library Carpentry},
+  howpublished = {{Available at \url{https://librarycarpentry.org/lc-wikidata/01-introduction/index.html} 2022-12-04}},
+  title        = {{What is Wikidata?}},
+  year         = {2016},
+}
+
+@Misc{Wikidata2022,
+  author       = {Wikidata},
+  howpublished = {{Available at \url{https://www.wikidata.org/wiki/Wikidata:Data_access} 2022-12-04}},
+  title        = {Wikidata:Data access},
+  year         = {2022},
+}
+
+@Article{Ji2022,
+  author  = {Ji, Shaoxiong and Pan, Shirui and Cambria, Erik and Marttinen, Pekka and Yu, Philip S.},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  title   = {{A Survey on Knowledge Graphs: Representation, Acquisition, and Applications}},
+  year    = {2022},
+  number  = {2},
+  pages   = {494-514},
+  volume  = {33},
+  doi     = {10.1109/TNNLS.2021.3070843},
+}
+
+@InProceedings{Bordes2011,
+  author    = {Bordes, Antoine and Weston, Jason and Collobert, Ronan and Bengio, Yoshua},
+  booktitle = {Twenty-fifth AAAI conference on artificial intelligence},
+  title     = {Learning structured embeddings of knowledge bases},
+  year      = {2011},
+}
+
+@InProceedings{,
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

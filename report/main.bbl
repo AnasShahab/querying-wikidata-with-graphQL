@@ -1,0 +1,65 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{Kroetzsch2020}
+Krötzsch, M.: {Knowledge Graphs}. {Available at
+  \url{https://iccl.inf.tu-dresden.de/web/Knowledge_Graphs_(WS2020)/en}
+  2022-10-01} (2020)
+
+\bibitem{Nonaka1995}
+Nonaka, I.: Takeuchi.(1995) the knowledge creating company. New York  (1995)
+
+\bibitem{Hogan2021}
+Hogan, A., Blomqvist, E., Cochez, M., D’amato, C., Melo, G.D., Gutierrez, C.,
+  Kirrane, S., Gayo, J.E.L., Navigli, R., Neumaier, S., Ngomo, A.C.N.,
+  Polleres, A., Rashid, S.M., Rula, A., Schmelzeisen, L., Sequeda, J., Staab,
+  S., Zimmermann, A.: {Knowledge Graphs}. ACM Comput. Surv.  \textbf{54}(4)
+  (jul 2021). \doi{10.1145/3447772}, \url{https://doi.org/10.1145/3447772}
+
+\bibitem{R.Cyganiak2014}
+R.~Cyganiak, D.W., Lanthaler, M.: {RDF 1.1 Concepts and Abstract Syntax}.
+  {Available at \url{https://www.w3.org/TR/rdf11-concepts/} 2022-11-28} (2014)
+
+\bibitem{Tehnologies2022}
+Tehnologies, O.S.: {What is an IRI? (What does IRI mean?)}. {Available at
+  \url{https://www.oxfordsemantic.tech/fundamentals/what-is-an-iri-what-does-iri-mean}
+  2022-11-28} (2022)
+
+\bibitem{Seaborne2020}
+Seaborne, A.: {RDF and IRI Syntax}. {Available at
+  \url{https://afs.github.io/rdf-iri-syntax.html} 2022-11-28} (2020)
+
+\bibitem{Brickley2014}
+Brickley, D., Guha, R.V.: {RDF Schema 1.1}. {Available at
+  \url{https://www.w3.org/TR/rdf-schema/} 2022-11-28} (2014)
+
+\bibitem{2011}
+{RdfSyntax}. {Available at \url{https://www.w3.org/wiki/RdfSyntax} 2022-12-04}
+  (2011)
+
+\bibitem{E.Prudhommeaux2005}
+E.~Prud'hommeaux, A.S.: {SPARQL Query Language for RDF}. {Available at
+  \url{https://www.w3.org/2001/sw/DataAccess/rq23/} 2022-12-04} (2005)
+
+\bibitem{C.B.Aranda2013}
+C.~B.~Aranda, O.~Corby,
+  S.D.L.F.P.G.B.G.S.H.S.H.I.H.N.h.N.M.C.O.M.P.A.P.A.P.E.P.A.S., Williams, G.T.:
+  {SPARQL 1.1 Overview}. {Available at
+  \url{https://www.w3.org/TR/sparql11-overview/} 2022-12-04} (2013)
+
+\bibitem{Wikidata2019}
+Wikidata: {Welcome to Wikidata}. {Available at
+  \url{https://www.wikidata.org/wiki/Wikidata:Main_Page} 2022-12-04} (2019)
+
+\bibitem{Carpentry2016}
+Carpentry, L.: {What is Wikidata?} {Available at
+  \url{https://librarycarpentry.org/lc-wikidata/01-introduction/index.html}
+  2022-12-04} (2016)
+
+\bibitem{Wikidata2022}
+Wikidata: Wikidata:data access. {Available at
+  \url{https://www.wikidata.org/wiki/Wikidata:Data_access} 2022-12-04} (2022)
+
+\end{thebibliography}
