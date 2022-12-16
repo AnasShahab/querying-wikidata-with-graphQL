@@ -81,7 +81,9 @@
 %{
 %  \small	
 %  \textbf{\textit{Keywords---}} #1
-%}
+%
+
+\newcommand{\lukas}[1]{\todo[inline,color=green]{#1}}
 
 
 
@@ -159,6 +161,7 @@ To identify resources on the Web uniquely we use Uniform Resource Identifiers (U
 \subsubsection{RDF Literals}
 
 An RDF literal consists of three essential elements: a lexical value, a datatype IRI and an optional language tag. The lexical value is a string (footnote: RDF is based on Unicode strings) that corresponds to a particular literal value in the value space, where value space is the set of all possible values that a datatype can have. There are many datatypes in RDF some of which are string, Boolean, decimal and integer. A full list is available on the W3C's section on RDF datatypes: www.w3.org/TR/2014/REC-rdf11-concepts-20140225/\#section-Datatypes \textcolor{red}{should I give as footnote?}.
+\lukas{yes, put the sentence with the link as footnote :)}
 
 The datatype IRI refers to a datatype that defines which strings are valid (belong in the lexical space), the value space and the lexical-to-value mapping \cite{ Bonduel2019}. This mapping is essentially a function that maps each string from the lexical space to an element in the value space. The W3C  standard XML Schema defines the datatypes and their IRIs. For example, decimals are identified by the IRI http://www.w3.org/2001/XMLSchema\#decimal. W3C has a good documentation on the different XML Schema built-in datatypes \cite{ R.Cyganiak2014}.
 
@@ -212,10 +215,13 @@ Figure~\ref{fig:figure 2} shows what an RDF graph could look like taking our exa
 		\end{tabular}
 	\end{center}
 \end{table}
+\lukas{maybe table 1 could go into an appendix}
 
 From Table~\ref{tab: table 1} we can see that wd:Q560 is an abbreviation for the IRI http://www.wikidata.org/entity/Q560, where Q560 is the entity ID for Helium. The IRI helps is to identify the resource Helium on Wikidata. The rest of the nodes and edges in Figure~\ref{fig:figure 2} can be understood analogously. We can also see that for labelling we use rdfs:label which is used to give a human-readable version of a resource's name \cite{Brickley2014} . Also, geo:wktLiteral (http://www.opengis.net/ont/geosparql\#wjktLiteral) is a datatype for representing geographic coordinates.
 
-So far, we have shown an abstract syntax of RDF. For exchanging graphs, we need to have a concrete syntactic representation to encode RDF graphs \cite{Kroetzsch2020}. The most relevant formats are N-Triples, Turtle, JSON-LD, RDF/XML and RDFa. W3C has provided a comprehensive explanation for each format mentioned here, along with other formats \cite{2011}. The RDF graph in Figure~\ref{fig:figure 2} can be represented in N-Triples format as follows:
+So far, we have shown an abstract syntax of RDF. For exchanging graphs, we need to have a concrete syntactic representation to encode RDF graphs \cite{Kroetzsch2020}.
+\lukas{``RDF Graphs are often syntactically respresented in formats like...'' (leave away the introductory sentence; be more succinct)}
+The most relevant formats are N-Triples, Turtle, JSON-LD, RDF/XML and RDFa. W3C has provided a comprehensive explanation for each format mentioned here, along with other formats \cite{2011}. The RDF graph in Figure~\ref{fig:figure 2} can be represented in N-Triples format as follows:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}
@@ -252,7 +258,9 @@ So far, we have shown an abstract syntax of RDF. For exchanging graphs, we need 
 
 
 \subsection{SPARQL}
-SPARQL Protocol and RDF Query Language (SPARQL) is a query language for RDF. It is based on matching graph patterns {\cite{ E.Prudhommeaux2005}. There can be different types of queries such as SELECT, ASK, CONSTRUCT and DESCRIBE. We will be talking about SELECT queries in this report. W3C provides a comprehensive document on SPARQL \cite{C.B.Aranda2013}. SELECT queries consist of the following blocks:
+SPARQL Protocol and RDF Query Language (SPARQL) is a query language for RDF. It is based on matching graph patterns {\cite{ E.Prudhommeaux2005}. There can be different types of queries such as SELECT, ASK, CONSTRUCT and DESCRIBE. We will be talking about SELECT queries in this report.
+\lukas{``In our work, we only consider SELECT queries, which consist of the following blocks:'' leave away the next sentence and put the citation after the first sentence}
+W3C provides a comprehensive document on SPARQL \cite{C.B.Aranda2013}. SELECT queries consist of the following blocks:
 
 \begin{itemize}
 \item Prologue: for declaring PREFIX and BASE;
@@ -286,6 +294,9 @@ WHERE {
 We can run this query in Wikidata’s query service (insert footnote about not having to use Prefix for wd and wdt since wikidata recognizes the abbreviations). Among the results, there will be also our element Helium (Q560) that we have used as an example in Figure~\ref{fig:figure 1} and Figure~\ref{fig:figure 2}.
 
 \subsection{Wikidata}
+
+\lukas{I feel that this section should come ealier since you are using wikidate in some examples above already. I'm not totally sure what's the best way to go yet. For now, you can also leave it as is.}
+
 Wikidata is a free and publicly available open knowledge base.  Editable by anyone, it acts as a central storage for the structured data for a variety of Wiki projects like Wikipedia, Wikitionary, Wikisource, etc \cite{Wikidata2019}. It is more commonly known as the knowledge graph of Wikidata. Wikidata contains different data types like text, images, dates, etc., that can be queried using SPARQL \cite{Carpentry2016}. 
 There is a wide range of applications for Wikidata. We previously mentioned that Wikidata functions as a database for Wikimedia community like Wikipedia. According to the lecture given by Krötzsch \cite{Kroetzsch2020}, it also has external uses in many large organizations like Eurowings, Google, Apple and Amazon for tasks such as data integration, authority control, identity providing and data-driven journalism. The lecture also mentions that in the field of research, Wikidata is used for collecting test data for knowledge graph related algorithms and training data for machine learning projects.
 The easiest and most popular way to query Wikidata is through the Wikidata Query Service (WDQS). This is Wikidata’s SPARQL endpoint. We can use this service two ways. Firstly, we can write queries in SPARQL directly on the web user interface of the service (footnote https://query.wikidata.org/) and obtain the results in different formats like table, tree, graph, etc. Secondly, the service can also be used pragmatically by submitting GET or POST requests (footnote https://query.wikidata.org/sparql) \cite{Wikidata2022}. 
