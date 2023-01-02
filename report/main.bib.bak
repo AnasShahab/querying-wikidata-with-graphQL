@@ -80,11 +80,10 @@
   year         = {2005},
 }
 
-@Misc{Wikidata2019,
-  author       = {Wikidata},
-  howpublished = {{Available at \url{https://www.wikidata.org/wiki/Wikidata:Main_Page} 2022-12-04}},
+@Misc{Foundationa,
+  author       = {Wikimedia Foundation},
+  howpublished = {{Available at \url{https://www.wikidata.org/wiki/Wikidata:Main_Page} 2022-12-27}},
   title        = {{Welcome to Wikidata}},
-  year         = {2019},
 }
 
 @Misc{Carpentry2016,
@@ -119,7 +118,61 @@
   year      = {2011},
 }
 
-@InProceedings{,
+@InProceedings{Bonduel2019,
+  author    = {{Bonduel, Mathias and Wagner, Anna and Pauwels, Pieter and Vergauwen, Maarten and Klein, Ralf}},
+  booktitle = {{Proceedings of the 2019 European Conference for Computing in Construction}},
+  title     = {{Including widespread geometry formats in semantic graphs using RDF literals}},
+  year      = {{2019}},
+  pages     = {{341--350}},
+  publisher = {{European Council on Computing in Construction}},
+  abstract  = {{The exchange of building data involves both geometric and non-geometric data. A promising Linked Data approach is to embed data from existing geometry formats inside Resource Description Framework (RDF) literals. Based on a study of relevant specifications and related work, this toolset-independent approach was found suitable for the exchange of geometric construction data. To implement the approach in practice, the File Ontology for Geometry formats (FOG) and accompanying modelling method is developed. In a proof-of-concept web application that uses FOG, is demonstrated how geometry descriptions of different existing formats are automatically recognised and parsed.}},
+  isbn      = {{9781910963371}},
+  issn      = {{2684-1150}},
+  keywords  = {{BIM, linked data, linked building data, semantic web, geometry}},
+  language  = {{eng}},
+  location  = {{Chania, Crete, Greece}},
+  url       = {{http://dx.doi.org/10.35490/ec3.2019.166}},
+}
+
+@InProceedings{Erxleben2014,
+  author       = {Erxleben, Fredo and G{\"u}nther, Michael and Kr{\"o}tzsch, Markus and Mendez, Julian and Vrande{\v{c}}i{\'c}, Denny},
+  booktitle    = {International semantic web conference},
+  title        = {{Introducing Wikidata to the linked data web}},
+  year         = {2014},
+  organization = {Springer},
+  pages        = {50--65},
+}
+
+@Misc{Foundation,
+  author       = {Wikimedia Foundation},
+  howpublished = {{Available at \url{https://www.wikidata.org/wiki/Wikidata:Relation_between_properties_in_RDF_and_in_Wikidata} 2022-12-27}},
+  title        = {{Wikidata:Relation between properties in RDF and in Wikidata}},
+}
+
+@Article{Perez2009,
+  author     = {P\'{e}rez, Jorge and Arenas, Marcelo and Gutierrez, Claudio},
+  journal    = {ACM Trans. Database Syst.},
+  title      = {{Semantics and Complexity of SPARQL}},
+  year       = {2009},
+  issn       = {0362-5915},
+  month      = {sep},
+  number     = {3},
+  volume     = {34},
+  abstract   = {SPARQL is the standard language for querying RDF data. In this article, we address systematically the formal study of the database aspects of SPARQL, concentrating in its graph pattern matching facility. We provide a compositional semantics for the core part of SPARQL, and study the complexity of the evaluation of several fragments of the language. Among other complexity results, we show that the evaluation of general SPARQL patterns is PSPACE-complete. We identify a large class of SPARQL patterns, defined by imposing a simple and natural syntactic restriction, where the query evaluation problem can be solved more efficiently. This restriction gives rise to the class of well-designed patterns. We show that the evaluation problem is coNP-complete for well-designed patterns. Moreover, we provide several rewriting rules for well-designed patterns whose application may have a considerable impact in the cost of evaluating SPARQL queries.},
+  address    = {New York, NY, USA},
+  articleno  = {16},
+  doi        = {10.1145/1567274.1567278},
+  issue_date = {August 2009},
+  keywords   = {semantic Web, query language, Complexity, SPARQL, RDF},
+  numpages   = {45},
+  publisher  = {Association for Computing Machinery},
+  url        = {https://doi.org/10.1145/1567274.1567278},
+}
+
+@Misc{Seaborne,
+  author       = {A. Seaborne and S. Harris},
+  howpublished = {{Available at \url{https://www.w3.org/TR/2013/REC-sparql11-query-20130321/} 2022-12-27}},
+  title        = {{SPARQL 1.1 Query Language}},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
