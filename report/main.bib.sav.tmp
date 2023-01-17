@@ -33,7 +33,7 @@
 }
 
 @Misc{R.Cyganiak2014,
-  author       = {R. Cyganiak, D. Wood, and M. Lanthaler},
+  author       = {R. Cyganiak, D. Wood and M. Lanthaler},
   howpublished = {{Available at \url{https://www.w3.org/TR/rdf11-concepts/} 2022-11-28}},
   title        = {{RDF 1.1 Concepts and Abstract Syntax}},
   year         = {2014},
@@ -158,4 +158,16 @@
   month      = {sep},
   number     = {3},
   volume     = {34},
-  abstract   = {SPARQL is the standard language for querying RDF data. In this article, we address systematically the formal study of the database aspects of SPARQL, concentrating in its graph pattern matching facility. We provide a compositional semantics for the core part of SPARQL, and study the complexity of the evaluation of several fragments of the language. Among other complexity results, we show that the evaluation of ge
+  address    = {New York, NY, USA},
+  articleno  = {16},
+  doi        = {10.1145/1567274.1567278},
+  issue_date = {August 2009},
+  keywords   = {semantic Web, query language, Complexity, SPARQL, RDF},
+  numpages   = {45},
+  publisher  = {Association for Computing Machinery},
+  url        = {https://doi.org/10.1145/1567274.1567278},
+}
+
+@Misc{Seaborne,
+  author       = {A. Seaborne and S. Harris},
+  howpublished = {{Ava
