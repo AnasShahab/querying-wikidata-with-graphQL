@@ -1,9 +1,9 @@
 {
-  id(instance: cat){
-    id@single
-    sex@single
-    birthDate@single
-    name@single
-    birthPlace@single
+  id(instance: cat) @single(scope: all) {
+    id
+    name
+    sex
+    birthDate
+    birthPlace
   }
 }

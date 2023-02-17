@@ -1,0 +1,15 @@
+query {
+    id (instance: chemicalElement) @single(scope: all) {
+        id
+        chemicalFormula
+        boilingPoint
+        meltingPoint
+        density
+        discoverer {
+            placeBirth {
+                id
+                country
+            }
+        }
+    }
+}
