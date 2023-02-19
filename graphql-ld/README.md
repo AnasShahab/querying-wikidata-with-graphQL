@@ -2,7 +2,7 @@
 ## Example:
 ### We want to find all the cats that have a name, sex, birth date and birth place
 ##### query.graphql
-    {
+    query {
         id(instance: cat) @single(scope: all) {
             id
             name
