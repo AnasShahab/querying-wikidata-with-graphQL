@@ -1,0 +1,677 @@
+[
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q560",
+        "boilingPoint": -268.9,
+        "density": 0.1785,
+        "meltingPoint": -272.05,
+        "chemicalFormula": "He",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q90",
+            "country": "http://www.wikidata.org/entity/Q142"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1119",
+        "boilingPoint": 8316,
+        "density": 13,
+        "meltingPoint": 4041,
+        "chemicalFormula": "Hf",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q727",
+            "country": "http://www.wikidata.org/entity/Q55"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1094",
+        "boilingPoint": 3767,
+        "density": 7.31,
+        "meltingPoint": 314,
+        "chemicalFormula": "In",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1731",
+            "country": "http://www.wikidata.org/entity/Q183"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1100",
+        "boilingPoint": 1814,
+        "density": 6.24,
+        "meltingPoint": 842,
+        "chemicalFormula": "Te",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1741",
+            "country": "http://www.wikidata.org/entity/Q40"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1119",
+        "boilingPoint": 8316,
+        "density": 13,
+        "meltingPoint": 4041,
+        "chemicalFormula": "Hf",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1781",
+            "country": "http://www.wikidata.org/entity/Q28"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1053",
+        "boilingPoint": 8717,
+        "density": 10.28,
+        "meltingPoint": 4752,
+        "chemicalFormula": "Mo",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q4065",
+            "country": "http://www.wikidata.org/entity/Q183"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q560",
+        "boilingPoint": -268.9,
+        "density": 0.1785,
+        "meltingPoint": -272.05,
+        "chemicalFormula": "He",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q4093",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q743",
+        "boilingPoint": 5930,
+        "density": 19.3,
+        "meltingPoint": 3410,
+        "chemicalFormula": "W",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q14325",
+            "country": "http://www.wikidata.org/entity/Q29"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q743",
+        "boilingPoint": 10701,
+        "density": 19.3,
+        "meltingPoint": 3410,
+        "chemicalFormula": "W",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q14325",
+            "country": "http://www.wikidata.org/entity/Q29"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q743",
+        "boilingPoint": 5930,
+        "density": 19.3,
+        "meltingPoint": 6170,
+        "chemicalFormula": "W",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q14325",
+            "country": "http://www.wikidata.org/entity/Q29"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q743",
+        "boilingPoint": 10701,
+        "density": 19.3,
+        "meltingPoint": 6170,
+        "chemicalFormula": "W",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q14325",
+            "country": "http://www.wikidata.org/entity/Q29"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1094",
+        "boilingPoint": 3767,
+        "density": 7.31,
+        "meltingPoint": 314,
+        "chemicalFormula": "In",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q14938",
+            "country": "http://www.wikidata.org/entity/Q183"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1038",
+        "boilingPoint": 6471,
+        "density": 6.51,
+        "meltingPoint": 3375,
+        "chemicalFormula": "Zr",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q15982",
+            "country": "http://www.wikidata.org/entity/Q183"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1087",
+        "boilingPoint": 6741,
+        "density": 12.41,
+        "meltingPoint": 3571,
+        "chemicalFormula": "Rh",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q23109",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q569",
+        "boilingPoint": 4532,
+        "density": 1.85,
+        "meltingPoint": 2349,
+        "chemicalFormula": "Be",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q23482",
+            "country": "http://www.wikidata.org/entity/Q142"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1386",
+        "boilingPoint": 3403,
+        "density": 6.773,
+        "meltingPoint": 1208,
+        "chemicalFormula": "Pr",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q26345",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q941",
+        "boilingPoint": 5301,
+        "density": 4.47,
+        "meltingPoint": 2732,
+        "chemicalFormula": "Y",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q38511",
+            "country": "http://www.wikidata.org/entity/Q33"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1100",
+        "boilingPoint": 1814,
+        "density": 6.24,
+        "meltingPoint": 842,
+        "chemicalFormula": "Te",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q83324",
+            "country": "http://www.wikidata.org/entity/Q218"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q618",
+        "boilingPoint": 4000,
+        "density": 2.46,
+        "meltingPoint": 2077,
+        "chemicalFormula": "B",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q208209",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q618",
+        "boilingPoint": 4000,
+        "density": 2080,
+        "meltingPoint": 2077,
+        "chemicalFormula": "B",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q208209",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q703",
+        "boilingPoint": 774,
+        "density": 0.828,
+        "meltingPoint": 336.7,
+        "chemicalFormula": "K",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q208209",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q703",
+        "boilingPoint": 774,
+        "density": 0.862,
+        "meltingPoint": 336.7,
+        "chemicalFormula": "K",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q208209",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1112",
+        "boilingPoint": 1897,
+        "density": 3.338,
+        "meltingPoint": 727,
+        "chemicalFormula": "Ba",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q208209",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1038",
+        "boilingPoint": 6471,
+        "density": 6.51,
+        "meltingPoint": 3375,
+        "chemicalFormula": "Zr",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q425786",
+            "country": "http://www.wikidata.org/entity/Q55"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q569",
+        "boilingPoint": 4532,
+        "density": 1.85,
+        "meltingPoint": 2349,
+        "chemicalFormula": "Be",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q450028",
+            "country": "http://www.wikidata.org/entity/Q183"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q941",
+        "boilingPoint": 5301,
+        "density": 4.47,
+        "meltingPoint": 2732,
+        "chemicalFormula": "Y",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q450028",
+            "country": "http://www.wikidata.org/entity/Q183"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q560",
+        "boilingPoint": -268.9,
+        "density": 0.1785,
+        "meltingPoint": -272.05,
+        "chemicalFormula": "He",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q623765",
+            "country": "http://www.wikidata.org/entity/Q145"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1100",
+        "boilingPoint": 1814,
+        "density": 6.24,
+        "meltingPoint": 842,
+        "chemicalFormula": "Te",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q661260",
+            "country": "http://www.wikidata.org/entity/Q40"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q663",
+        "boilingPoint": 2327,
+        "density": 2.7,
+        "meltingPoint": 660,
+        "chemicalFormula": "Al",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q731023",
+            "country": "http://www.wikidata.org/entity/Q35"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q663",
+        "boilingPoint": 4221,
+        "density": 2.7,
+        "meltingPoint": 660,
+        "chemicalFormula": "Al",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q731023",
+            "country": "http://www.wikidata.org/entity/Q35"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q663",
+        "boilingPoint": 2327,
+        "density": 2.7,
+        "meltingPoint": 1220,
+        "chemicalFormula": "Al",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q731023",
+            "country": "http://www.wikidata.org/entity/Q35"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q663",
+        "boilingPoint": 4221,
+        "density": 2.7,
+        "meltingPoint": 1220,
+        "chemicalFormula": "Al",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q731023",
+            "country": "http://www.wikidata.org/entity/Q35"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q569",
+        "boilingPoint": 4532,
+        "density": 1.85,
+        "meltingPoint": 2349,
+        "chemicalFormula": "Be",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q862545",
+            "country": "http://www.wikidata.org/entity/Q142"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q725",
+        "boilingPoint": 4788,
+        "density": 7.14,
+        "meltingPoint": 3452,
+        "chemicalFormula": "Cr",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q862545",
+            "country": "http://www.wikidata.org/entity/Q142"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1038",
+        "boilingPoint": 6471,
+        "density": 6.51,
+        "meltingPoint": 3375,
+        "chemicalFormula": "Zr",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1007156",
+            "country": "http://www.wikidata.org/entity/Q55"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q670",
+        "boilingPoint": 4271,
+        "density": 2.329,
+        "meltingPoint": 2570,
+        "chemicalFormula": "Si",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1451001",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q876",
+        "boilingPoint": 1265,
+        "density": 4.28,
+        "meltingPoint": 392,
+        "chemicalFormula": "Se",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1451001",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1038",
+        "boilingPoint": 6471,
+        "density": 6.51,
+        "meltingPoint": 3375,
+        "chemicalFormula": "Zr",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q1451001",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q568",
+        "boilingPoint": 1317,
+        "density": 0.534,
+        "meltingPoint": 180.5,
+        "chemicalFormula": "Li",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10495519",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q568",
+        "boilingPoint": 1317,
+        "density": 0.534,
+        "meltingPoint": 357.3,
+        "chemicalFormula": "Li",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10495519",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q568",
+        "boilingPoint": 1317,
+        "density": 0.534,
+        "meltingPoint": 453.7,
+        "chemicalFormula": "Li",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10495519",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q1123",
+        "boilingPoint": 9797,
+        "density": 16.65,
+        "meltingPoint": 5425,
+        "chemicalFormula": "Ta",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10519255",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q731",
+        "boilingPoint": 3564,
+        "density": 7.2,
+        "meltingPoint": 2271,
+        "chemicalFormula": "Mn",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10613561",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q876",
+        "boilingPoint": 1265,
+        "density": 4.28,
+        "meltingPoint": 392,
+        "chemicalFormula": "Se",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10613561",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q744",
+        "boilingPoint": 5139,
+        "density": 8.9,
+        "meltingPoint": 2831,
+        "chemicalFormula": "Ni",
+        "discoverer": {
+          "placeBirth": {
+            "id": "http://www.wikidata.org/entity/Q10706545",
+            "country": "http://www.wikidata.org/entity/Q34"
+          }
+        }
+      }
+    }
+  ]

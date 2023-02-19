@@ -1,4 +1,4 @@
-{
+query {
   id(instance: cat) @single(scope: all) {
     id
     name

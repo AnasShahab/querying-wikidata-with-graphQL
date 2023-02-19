@@ -1,0 +1,29 @@
+[
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q677525",
+        "birthPlace": "http://www.wikidata.org/entity/Q30",
+        "birthDate": "1950-01-01T00:00:00.000Z",
+        "name": "http://www.wikidata.org/entity/Q37564734",
+        "sex": "http://www.wikidata.org/entity/Q44148"
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q893453",
+        "birthPlace": "http://www.wikidata.org/entity/Q183",
+        "birthDate": "1940-01-01T00:00:00.000Z",
+        "name": "http://www.wikidata.org/entity/Q1951683",
+        "sex": "http://www.wikidata.org/entity/Q44148"
+      }
+    },
+    {
+      "id": {
+        "id": "http://www.wikidata.org/entity/Q14916910",
+        "birthPlace": "http://www.wikidata.org/entity/Q55",
+        "birthDate": "2011-01-01T00:00:00.000Z",
+        "name": "http://www.wikidata.org/entity/Q18048119",
+        "sex": "http://www.wikidata.org/entity/Q44148"
+      }
+    }
+  ]

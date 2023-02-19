@@ -1,21 +1,21 @@
 {
-    "@context": {
-      "@vocab":"http://www.wikidata.org/entity/",
-      "wd": "http://www.wikidata.org/entity/",
-      "wdt" :"http://www.wikidata.org/prop/direct/",
-      "name": "wdt:P735",
-      "cat": "wd:Q146",
-      "instance": "wdt:P31",
-      "sex": "wdt:P21",
-      "birthDate":{"@id":"wdt:P569", "@type":"xsd:dateTime"},
-      "birthPlace":"wdt:P19",
-      "chemicalElement": "wd:Q11344",
-      "chemicalFormula": "wdt:P274",
-      "boilingPoint": "wdt:P2102",
-      "meltingPoint": "wdt:P2101",
-      "density": "wdt:P2054",
-      "discoverer": "wdt:P61",
-      "placeBirth": "wdt:P19",
-      "country": "wdt:P17"
+  "@context": {
+    "@vocab":"http://www.wikidata.org/entity/",
+    "wd": "http://www.wikidata.org/entity/",
+    "wdt" :"http://www.wikidata.org/prop/direct/",
+    "name": "wdt:P735",
+    "cat": "wd:Q146",
+    "instance": "wdt:P31",
+    "sex": "wdt:P21",
+    "birthDate": "wdt:P569",
+    "birthPlace":"wdt:P19",
+    "chemicalElement": "wd:Q11344",
+    "chemicalFormula": "wdt:P274",
+    "boilingPoint": "wdt:P2102",
+    "meltingPoint": "wdt:P2101",
+    "density": "wdt:P2054",
+    "discoverer": "wdt:P61",
+    "placeBirth": "wdt:P19",
+    "country": "wdt:P17"
     }
   }

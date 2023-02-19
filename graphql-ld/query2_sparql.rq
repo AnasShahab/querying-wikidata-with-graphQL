@@ -1,0 +1,10 @@
+SELECT ?id ?id_id ?id_chemicalFormula ?id_boilingPoint ?id_meltingPoint ?id_density ?id_discoverer_placeBirth_id ?id_discoverer_placeBirth_country WHERE {
+  ?id_id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11344>;
+    <http://www.wikidata.org/prop/direct/P274> ?id_chemicalFormula;
+    <http://www.wikidata.org/prop/direct/P2102> ?id_boilingPoint;
+    <http://www.wikidata.org/prop/direct/P2101> ?id_meltingPoint;
+    <http://www.wikidata.org/prop/direct/P2054> ?id_density;
+    <http://www.wikidata.org/prop/direct/P61> ?id_discoverer.
+  ?id_discoverer <http://www.wikidata.org/prop/direct/P19> ?id_discoverer_placeBirth_id.
+  ?id_discoverer_placeBirth_id <http://www.wikidata.org/prop/direct/P17> ?id_discoverer_placeBirth_country.
+}
