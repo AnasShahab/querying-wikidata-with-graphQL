@@ -22,7 +22,7 @@
         "cat": "wd:Q146",
         "instance": "wdt:P31",
         "sex": "wdt:P21",
-        "birthDate":{"@id":"wdt:P569", "@type":"xsd:dateTime"},
+        "birthDate":"wdt:P569",
         "birthPlace":"wdt:P19",
         "chemicalElement": "wd:Q11344",
         "chemicalFormula": "wdt:P274",
