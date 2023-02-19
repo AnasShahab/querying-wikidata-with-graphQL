@@ -64,6 +64,7 @@
 \lstset{style=mystyle}
 
 \newcommand{\lukas}[1]{\todo[color=green,inline]{#1}}
+\newcommand{\anas}[1]{\todo[color=red,inline]{#1}}
 
 \newcommand{\blankpage}{
 \newpage
@@ -94,13 +95,13 @@
 
 \makeglossaries
 
-\input{glossary.tex}
+\input{chapters/glossary.tex}
 
 \onehalfspacing
 \begin{document}
 %\maketitle
 \sloppy
-\input{title.tex}
+\input{chapters/title.tex}
 \blankpage
 %\afterpage{\blankpage}
 
@@ -110,16 +111,16 @@
 %\section*{Declaration of originality}
 I hereby declare that I have written this Thesis on my own accord and any participation of others has been acknowledged. I have clearly marked all references to existing work. I have not submitted this work partly or as a whole anywhere else. \\
 
-Dresden, XX.XX.XXXX \\
+Dresden, \textcolor{red}{XX.XX.2023} \\
 \rule{150 px}{0.5 px} \\
-(signature)
+\textcolor{red}{(signature)}
 \blankpage
 %\afterpage{\blankpage}
 
 %\thispagestyle{empty}
 \chapter*{Acknowledgements}
 %\section*{Acknowledgements}
-\lipsum[1]
+\textcolor{red}{\lipsum[1]}
 \blankpage
 
 %\begin{abstract}
@@ -131,7 +132,7 @@ Dresden, XX.XX.XXXX \\
 
 \chapter*{Abstract}
 %\section*{Abstract}
-\lipsum[1]
+\textcolor{red}{\lipsum[1]}
 
 %\pagenumbering{roman}
 \tableofcontents
@@ -152,7 +153,17 @@ Dresden, XX.XX.XXXX \\
 
 \input{chapters/3-approaches}
 
+\pagebreak
 
+\input{chapters/4-implementation}
+
+\pagebreak
+
+\input{chapters/5-setup}
+
+\pagebreak
+
+\input{chapters/6-conclusion}
 %\appendix
 \singlespacing
 \bibliographystyle{splncs04}

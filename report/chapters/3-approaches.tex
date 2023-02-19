@@ -1,6 +1,8 @@
 \chapter{Approaches for Querying RDF Graphs with GraphQL}
 
-In this chapter, we focus on ways of queries RDF Graphs using GraphQL. In section XYZ of the previous chapter, we highlighted the differences between GraphQL and SPARQL. This gives rise to the idea of using GraphQL to query RDF graphs, thereby overcoming the limitations of using SPARQL directly.
+In this chapter, we focus on ways of querying RDF Graphs using GraphQL. A GraphQL query has a tree-like structure. To traverse the query we can follow this tree structure, i.e., we can go up to a parent node, down to a child node or left/right to a sibling node \cite{Perez2009}. This imitates the graph structure of by RDF data.
+
+In section XYZ of the previous chapter, we highlighted the differences between GraphQL and SPARQL. Considering the limitations of SPARQL, and the advantages that GraphQL has over it, GraphQL seems to be a prospective choice to querying RDF Graphs. For instance, the verbosity and the steep learning curve of SPARQL pose a challenge to developers in working with SPARQL. Also, the limited availability of libraries and frameworks for implementing SPARQL in applications creates a significant obstacle. 
 
 In recent years, there have been attempts at providing approaches to querying linked data represented by RDF via GraphQL. This gave rise to several commercial and open-source solutions. Most notable ones include:
 
@@ -8,24 +10,31 @@ In recent years, there have been attempts at providing approaches to querying li
 	\item Stardog
 	\item TopBraid EDG
 	\item Ontotext Platform
+	\item \textcolor{red}{GraphQLSPARQL} \anas{also include this later if possible}
 	\item GraphQL-LD
 	\item HyperGraphQL
 
 \end{itemize}
 
-Stardog\footnote{https://www.stardog.com/} is a commercial solution that offers a graph database called "Enterprise Knowledge Graph platform"\cite{Angele2022}. The initial versions only allowed querying their stored data using SPARQL. The support for querying using GraphQL was later added with the release of version 5.1. This solution allows users to provide a GraphQL schema. However, this is optional. When provided it can be used for translating GraphQL terms to RDF. The schema also helps in introspection purposes and for validating queries with the given typing information \cite{Gleim2020}. Introspection refers to querying GraphQL schema to find out the queries it supports. Moreover, schema also helps to limit the parts in the graph available to users, i.e., the user is only allowed to query some sections of the data available in the graph. If no schema is provided, then the conversion from GraphQL terms to RDF is done using the default namespace in that graph and can be overridden using the @prefix declarative inside the GraphQL queries \cite{Taelman2019}. However, this optional requires the user to have a good knowledge about the way data is structured in the graph database. Introspection, data validation and access control is not possible when there is no schema \cite{Gleim2020}. In Stardog the top level node, also known as parent node, is considered to refer to a type. Any subsequent child nodes refer to the predicate links from the parent node \cite{Taelman2019}. This is an important distinction not necessarily shared by the other approaches.
+Stardog\footnote{https://www.stardog.com/} is a commercial solution that offers a graph database called "Enterprise Knowledge Graph platform"\cite{Angele2022}. The initial versions only allowed querying their stored data using SPARQL. The support for querying using GraphQL was later added with the release of version 5.1. This solution allows users to provide a GraphQL schema. However, this is optional. When provided it can be used for translating GraphQL terms to RDF. The schema also helps in introspection purposes and for validating queries with the given typing information \cite{Gleim2020}. Introspection refers to querying GraphQL schema to find out the queries it supports. Moreover, schema also helps to limit the parts in the graph available to users, i.e., the user is only allowed to query some sections of the data available in the graph. If no schema is provided, then the conversion from GraphQL terms to RDF is done using the default namespace in that graph and can be overridden using the @prefix declarative inside the GraphQL queries \cite{Taelman2019}. However, this option requires the user to have a good knowledge about the way data is structured in the graph database. Introspection, data validation and access control is not possible when there is no schema \cite{Gleim2020}. In Stardog the top level node, also known as parent node, is considered to refer to a type. Any subsequent child nodes refer to the predicate links from the parent node \cite{Taelman2019}. This is an important distinction not necessarily shared by the other approaches.
 
-TopBraid Enterprise Data Governance (TopBraid DG) is also a commercial solution created by TopQuadrant\footnote{https://www.topquadrant.com/} to query RDF graphs using GraphQL. It uses GraphQL schemas that are automatically generated based on data shape definitions defined using SHACL\footnote{https://www.w3.org/TR/2017/REC-shacl-20170720/}, thereby exposing a GraphQL interface to RDF sources {Taelman2019}. With the generation of schema, introspection also becomes possible. One important feature of TopBraid EDG is the functionality of query mutation. This allows the users to modify existing data in the graph.
+TopBraid Enterprise Data Governance (TopBraid DG) is also a commercial solution created by TopQuadrant\footnote{https://www.topquadrant.com/} to query RDF graphs using GraphQL. It uses GraphQL schemas that can be automatically generated based on SHACL\footnote{https://www.w3.org/TR/2017/REC-shacl-20170720/} \cite{Taelman2019}. With the generation of schema, introspection also becomes possible. One important feature of TopBraid EDG is the functionality of query mutation. This allows the users to modify existing data in the graph.
 
 Ontotext Platform\footnote{https://www.ontotext.com/products/ontotext-platform/} is a commercial solution offered by Ontotext. Users are provided with a GraphQL interface that they can to query the underlying graph database called "GraphDB" \cite{Angele2022}. 
 
 The above mentioned proprietary solutions are not open source and only allow querying their corresponding graph databases. This implies they cannot be used to query arbitrary knowledge graphs such as Wikidata, which is the focus of this report.
 
-GraphQL-LD and HyperGraphQL are two open source solutions that can be used to query knowledge graphs that provide a SPARQL endpoint. We talk in details about them in the following sections.
+GraphQL-LD and HyperGraphQL are two open source solutions that can be used to query knowledge graphs that provide a SPARQL endpoint. We present in details about them in the following sections.
 
 \section{GraphQL-LD}
 
-GraphQL-LD is an academic approach introduced by Taelman et al. to query knowledge graphs via GraphQL \cite{Taelman2018}. The main working process behind this is to extend the GraphQL queries with JSON-LD context \cite{Sporny2014}. This helps to provide a link between the items in the nodes of the queries and the actual resources that exist in the respective knowledge graph. Listing XYZ and Listing XYZ shows an example where a query coupled with JSON-LD context can be used to fetch RDF data from a RDF data source - http://example.org\footnote{This domain is for use in illustrative examples in documents}. The JSON-LD context helps to identify the resources - chemicalElement, name, chemicalFormula and boilingPoint – by providing an unique IRI specific to those resources in the RDF data source.
+GraphQL-LD is an \textcolor{red}{academic approach} introduced by \citeauthor{Taelman2018} to query knowledge graphs via GraphQL \cite{Taelman2018}. The main working process behind this is to extend the GraphQL queries with JSON-LD context. 
+\anas{How can I explain academic approach?}
+JSON (Java Script Object Notation) is a widely popular data exchange format used for storing and sending information over the internet. JSON-LD (JavaScript Object Notation for Linked Data) is a syntax used to serialize Linked Data in JSON. It is also a W3C Standard. JSON-LD provides features such as identifying JSON objects by IRIs and annotating strings with their language. The official documentation for JSON-LD provided by W3C gives a detailed explanation of its features \cite{Sporny2014}. JSON-LD context is used to map terms into IRIs. It allows the data exchanged to be unambiguous globally in the sense that it can be meaningful to anyone receiving it on the web.   
+
+The GraphQL query selects the data (nested in fields) that we want to fetch. The JSON-LD context maps the query fields to URIs. In other words, it helps to provide a link between the items in the nodes of the queries and the actual resources that exist in the respective Linked Data source. The GraphQL queries are then converted into SPARQL queries that can be used to query any source consisting of Linked Data and a SPARQL endpoint.
+
+Listing XYZ and Listing XYZ shows an example where a query coupled with JSON-LD context can be used to fetch RDF data from a RDF data source - http://example.org\footnote{This domain is for use in illustrative examples in documents}. The JSON-LD context helps to identify the resources - chemicalElement, name, chemicalFormula and boilingPoint – by providing an unique IRI specific to those resources in the RDF data source.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=listing:listing6, caption={GraphQL query}]
@@ -41,7 +50,7 @@ GraphQL-LD is an academic approach introduced by Taelman et al. to query knowled
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=listing:listing7, caption={JSON-LD context}]
-{
+"@context": {
 	"chemicalElement": "http://example.org/chemicalElement",
 	"name": "http://example.org/name",
 	"chemicalFormula": "http://example.org/chemicalFormula",
@@ -59,7 +68,9 @@ The approach taken by GraphQL-LD consists primarily of two standalone modules:
 
 \subsection{GraphQL to SPARQL algebra}
 
-The GraphQL to SPARQL module is used for parsing a GraphQL query into SPARQL algebra (footnote: https://www.w3.org/TR/sparql11-query/\#sparqlQuery) with the help of a JSON-LD context. The algorithm for this conversion is based on translating the tree-like structure of GraphQL to links of triple patterns or statements  in SPARQL \cite{Taelman2018}. Listing XYZ shows the SPARQL algebra obtained by parsing the GraphQL query in Listing XYZ.
+The "GraphQL to SPARQL algebra" module is used for parsing a GraphQL query into SPARQL algebra\footnote{https://www.w3.org/TR/sparql11-query/\#sparqlQuery.} with the help of a JSON-LD context. SPARQL algebra is an expression formed from parsing the strings in SPARQL query followed by some transformations. It is basically used to provide semantics to the syntax in SPARQL query.
+
+The algorithm for the conversion of GraphQL query to SAPRQL algebra is based on translating the tree-like structure of GraphQL to links of triple patterns or statements  in SPARQL \cite{Taelman2018}. Listing XYZ shows the SPARQL algebra obtained by parsing the GraphQL query in Listing XYZ.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=listing:listing8, caption={Generated SPARQL Algebra}]
@@ -82,10 +93,73 @@ The GraphQL to SPARQL module is used for parsing a GraphQL query into SPARQL alg
 \end{lstlisting}
 \end{minipage}
 
-It is also possible to view the generated SPARQL queries. This can be done from either the command line using the tool "graphql-to-sparql" or by invoking the programmatic API and calling the toSparql (or toSparqlJs) function on the SPARQL algebra. The generated SPARQL query for our example is shown in Listing XYZ.
+The Quads are listed in Listing XYZ:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[label=listing:listing9, caption={Genertaed SPARQL query}]
+\begin{lstlisting}[label=listing:listing9, caption={The expansion of Quads}]
+[
+  Quad {
+    termType: 'Quad',
+    value: '',
+    subject: Variable { termType: 'Variable', value: 'df_3_0' },
+    predicate: NamedNode {
+      termType: 'NamedNode',
+      value: 'http://example.org/chemicalElement'
+    },
+    object: Variable { termType: 'Variable', value: 'chemicalElement' },
+    graph: DefaultGraph { termType: 'DefaultGraph', value: '' },
+    type: 'pattern'
+  },
+  Quad {
+    termType: 'Quad',
+    value: '',
+    subject: Variable { termType: 'Variable', value: 'chemicalElement' },
+    predicate: NamedNode {
+      termType: 'NamedNode',
+      value: 'http://example.org/name'
+    },
+    object: Variable { termType: 'Variable', value: 'chemicalElement_name' },
+    graph: DefaultGraph { termType: 'DefaultGraph', value: '' },
+    type: 'pattern'
+  },
+  Quad {
+    termType: 'Quad',
+    value: '',
+    subject: Variable { termType: 'Variable', value: 'chemicalElement' },
+    predicate: NamedNode {
+      termType: 'NamedNode',
+      value: 'http://example.org/chemicalFormula'
+    },
+    object: Variable {
+      termType: 'Variable',
+      value: 'chemicalElement_chemicalFormula'
+    },
+    graph: DefaultGraph { termType: 'DefaultGraph', value: '' },
+    type: 'pattern'
+  },
+  Quad {
+    termType: 'Quad',
+    value: '',
+    subject: Variable { termType: 'Variable', value: 'chemicalElement' },
+    predicate: NamedNode {
+      termType: 'NamedNode',
+      value: 'http://example.org/boilingPoint'
+    },
+    object: Variable {
+      termType: 'Variable',
+      value: 'chemicalElement_boilingPoint'
+    },
+    graph: DefaultGraph { termType: 'DefaultGraph', value: '' },
+    type: 'pattern'
+  }
+]
+\end{lstlisting}
+\end{minipage}
+
+It is also possible to view the generated SPARQL queries using a CLI tool - "graphql-to-sparql". The generated SPARQL query for our example is shown in Listing XYZ.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing10, caption={Genertaed SPARQL query}]
 SELECT ?chemicalElement_name ?chemicalElement_chemicalFormula ?chemicalElement_boilingPoint WHERE {
   ?df_3_0 <http://example.org/chemicalElement> ?chemicalElement.
   ?chemicalElement <http://example.org/name> ?chemicalElement_name;
@@ -95,9 +169,166 @@ SELECT ?chemicalElement_name ?chemicalElement_chemicalFormula ?chemicalElement_b
 \end{lstlisting}
 \end{minipage}
 
-GraphQL offers a lot of features like fragments, pagination and aliases. The official documentation of GraphQL has a comprehensive list of these features \cite{GraphQL}. All these features can be used in GraphQL-LD to increase the expressivity of the queries. Additionally, GraphQL has some custom directives\footnote{https://graphql.org/learn/queries/\#directives} that can be used to further enrich the queries. For instance, it allows the users to specify the fields that are optional using the "@optional" custom directive. This in turn converts to the OPTIONAL operator in SPARQL. 
+GraphQL-LD offers many of the functionalities that are listed in the official documentation of GraphQL\footnote{https://graphql.org/learn/queries/ .} such as fragments, directives and aliases. However, triple patterns are not sufficient to express all of these features\cite{Taelman2018}. For example, for the fragments feature in GraphQL, GraphQL-LD uses the left-join semantics. This translates to the OPTIONAL keyword in SPARQL.
+
+Along with the "@include" and "@skip" directives\footnote{https://graphql.org/learn/queries/\#directives.} included in the core GraphQL specification, GraphQL-LD offers three custom directives as well to further enrich the queries - "@optional", "@single" and "plural". In GraphQL-LD all fields in the query are required to have results. In the event that any of the fields does not return a result, the entire result set will return as empty. When we are uncertain about a field returning a result we can use the "@optional" custom directive with that field. Basically, this custom directive allows the users to specify the fields that are optional. The module converts the directive to the OPTIONAL operator in SPARQL. We will discuss about the "@singular" and "plural" custom directive in the next section.
+
+A comprehensive information on the conversion from GraphQL queries to SPARQL queries is available under the "graphql-to sparql.js" GitGub repository.\footnote{https://github.com/rubensworks/graphql-to-sparql.js}
 
 \subsection{SPARQL results to tree}
 
+The "SPARQL results to tree" module converts the SPARQL query results into a tree-based structure constituting of plain JSON objects. This is convenient since the user writes the queries in a tree-like fashion in GraphQL and expects the results to be in the same structure.
+
+After a generated SPARQL query is sent to the Linked Data interface, such as a SPARQL endpoint, the results are returned as SPARQL JSON. This is what is meant by the SPARQL query results. This "SPARQL results to tree" module converts these results into a tree-based structure based by splitting the variable names based on a certain delimiter value. The default delimiter value used in GraphQL-LD is an underscore. This gives rise to paths inside the tree structure.
+
+Listings XYZ and XYZ show an example SPARQL result and its conversion to the tree-based structure respectively.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing11, caption={SPARQL Algebra result}]
+{
+  "results": {
+    "bindings": [
+      { "chemicalElement_name": { "type": "literal", "value": "Helium" }, "chemicalElement_chemicalFormula": { "type": "literal", "value": "He" }, "chemicalElement_boilingPoint": { "type": "literal", "value": "-268.9" } },
+      { "chemicalElement_name": { "type": "literal", "value": "Silicon" }, "chemicalElement_chemicalFormula": { "type": "literal", "value": "Si" }, "chemicalElement_boilingPoint": { "type": "literal", "value": "4271" } }
+    ]
+  }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing12, caption={Tree-based JSON result}]
+
+{
+"chemicalElement":[
+	{ "name": "Helium", "chemicalFormula": "He", "boilingPoint": "-268.9" },
+	{ "name": "Silicon", "chemicalFormula": "Si" , "boilingPoint": "-4271"  }
+	]
+}
+
+\end{lstlisting}
+\end{minipage}
+
+When writing a GraphQL query, we can decide whether the values obtained from querying should be wrapped in array or not, using the custom directives "@singluar" and "@plural" respectively on the fields. GraphQL-LD assigns all fields to be plural by default. This is a convenient feature\footnote{https://github.com/rubensworks/graphql-to-sparql.js/\#converting-to-tree-based-results.} that allows the results to be compacted.
+
+A comprehensive information on the conversion from SPARQL results to tree-strcuture is available under the "sparqljson-to-tree.js" GitGub repository.\footnote{https://github.com/rubensworks/sparqljson-to-tree.js}
+
+The basic overview is that GraphQL-LD takes a GraphQL query and a JSON-LD context from the user and converts the query into a SPARQL query. This generated SPARQL query is sent to a Linked Data interface such as a SPARQL endpoint for execution. We can also use this to query our own own local Linked Data files instead of a remote endpoint. Finally, the obtained query results from the endpoint are then converted into a tree-based structure corresponding to the original GraphQL query. Figure XYZ shows an overview of this approach. Here we show the SPARQL endpoint as the interface being queried. The modules in GraphQL-LD are implemented in TyperScript and JavaScript, and thus can be used in Javascript applications.
+
+GraphQL-LD is predicate-oriented. This means that it focuses on querying the relationships between the subject and object \cite{Werbrouck2019a}. This imposes a problem for implementing subject-based queries when we want to query for a specific class. An example for this would be querying for an item that is of type chemical element. To overcome this problem we would need a workaround. However, this makes the query complicated to write. In the next chapter where we implement querying Wikidata using GraphQL-LD, we discuss three workarounds that can used when we want to implement subject-based queries. 
+
+Since GraphQL-LD is schema-less, it not possible to perform introspection\footnote{https://graphql.org/learn/introspection/ .} -  querying a GraphQL schema for information about the supported queries - since the user is not aware of the data's schema \cite{Gleim2020}. However, this is not necessary since all exposed Linked Data can be queried with GraphQL-LD \cite{Werbrouck2019a}. When writing queries, GraphQL-LD users would need to have a good understanding of the data scheme of the queried RDF data.  
+
+
 \section{HyperGraphQL}
 
+HyperGraphQL is open source GraphQL interface for querying Linked Data on the Web. It is developed and maintained by Semantics integration Ltd. The project is written in Java, with the initial release being in 2018. At the time of this writing, the latest version, 3.0.1, was released in 2021.
+
+In addition to querying RDF data, HyperGraphQL is designed to support federated querying over multiple RDF stores via a single GraphQL query interface \cite{Taelman2019}. Federated queries refer to querying multiple data sources and combining the data. This enriches the results with interesting information as the data is obtained from various sources rather than just one. However, federated querying is challenging. Retrieving and combining data from different services requires deep understanding of the involved datasets, and different configuration parameters such as authentication need to be considered. 
+
+A service need to be set up that acts as an intermediary server between the client side, where the GraphQL query is written, and the RDF datastore, from where Linked Data is fetched \cite{Taelman2018} . We can create multiple instances of HyperGraphQL where each instance can query one or more RDF sources, depending on the type of Linked Data services selected. In the next section we discuss these services in detail. To set up a HyperGraphQL instance two input files need to be provided - a configuration JSON file and an annotated GraphQL schema.
+
+\subsection{Configuration File}
+
+The configuration file contains the specifications of the RDF services from there data needs to be fetched. It includes the name of the instance, path of the GraphQL schema, HTTP settings of the instance and the specifications of the Linked Data services needed to fetch data. HyperGraphQL currently offers three types of Linked Data services: SPARQLEndpointService, LocalModeSPARQLService and HGraphQLService. 
+
+The SPARQLEndpointService refers to the SPARQL endpoint service where data is fetched from remote RDF sources, like Wikidata and DBpedia. LocalModeSPARQLService allows to fetch data from RDF files that exists on the local system or in a remote location. \textcolor{red}{These are loaded into local memory to be used once the HyperGraphQL instance runs}. These files contain data stored as RDF triples and follow the RDF serialization format of RDF/XML, Turle or N-Triples. Lastly, the HGraphQLService allows to query data from other HyperGraphQL instances running on a server.
+
+Listing XYZ shows a configuration file for fetching data from example.org through the SPARQLEndpointService.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing13, caption={An example configuration file}]
+{
+    "name": "example-hgql",
+    "schema": "schema/schema_example.graphql",
+    "server": {
+        "port": 8081,
+        "graphql": "/graphql",
+        "graphiql": "/graphiql"
+    },
+    "services": [
+        {
+            "id": "example-sparql",
+            "type": "SPARQLEndpointService",
+            "url": "http://example.org/sparql/",
+            "graph": "",
+            "user": "",
+            "password": ""
+        }
+    ]
+}
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Annotated Schema}
+
+HyperGraphQL works with a GraphQL schema that needs to be defined to set up an instance. This is different from GraphQL-LD, where no schema is required. A schema gives control to the data that be queried. The user can only fetch data for the types and queries defined in the GraphQL schema \cite{Gleim2020}.
+
+The schema contains a designated type called "\_Context". This contains the annotations that encode the mappings from every type and field in the schema to the corresponding IRI in the RDF source. The IRI should be unique and will be used to fetch data from the source. 
+
+Each type and field in the schema is annotated with GraphQL directives that tell the instance about the service from where data for the type and filed should be fetched. These are essentially pointers or service ids that correspond to the RDF services defined in the configuration file.
+
+Only the types annotated with a service id can be queried. Non-annotated typed will not be queryable. However, all fields need be annotated with a service id. For every annotated type, two query fields are automatically exposed - TypeName\_GET, parametrized with the "limit:Int" and "offset:Int" argument, and TypeName\_GET\_BY\_ID, parameterized with "uris:[String]" argument. Two additional fields are also introduced automatically for each type in the schema - "\_id:String" field which returns the IRI of the resource and "\_type:String" field which returns the "rdf:type" of the parent type of the resource in the schema. Moreover, every field in the schema with the value type String is provided with a "lang:String" argument by default. This allows the user to specify the language of the fetched literal.
+
+Listing XYZ shows a GraphQL schema that can be used to query data from example.org, using the configuration file in Listing XYZ. The id:"example-sparql" in the @service directory is the same as the id in the services block of the configuration file.
+
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing14, caption={An example schema}]
+type __Context {
+    ChemicalElement:    _@href(iri: "http://example.org/chemicalElement")
+    name:               _@href(iri: "http://example.org/name")
+    chemicalFormula:   _@href(iri: "http://example.org/chemicalFormula")
+    boilingPoint:       _@href(iri: "http://example.org/boilingPoint")
+}
+
+type ChemicalElement @service(id:"example-sparql") {
+    name: String @service(id:"example-sparql")
+    chemicalFormula: String @service(id:"example-sparql")
+    boilingPoint: String @service(id:"example-sparql")
+}
+\end{lstlisting}
+\end{minipage}
+
+Like GraphQL-LD, HyperGraphQL also converts GraphQL queries into SPARQL. However, unlike GraphQL-LD where the conversion takes place on the client side, in HyperGraphQL the conversion takes place on the server side, thereby decreasing the computation overhead on the client side. Also, the generated SPARQL queries are not necessarily part of the user interaction, and are not displayed. We discuss in the next chapter when we implement HyperGraphQL to query Wikidata, the method we used to observe the generated SPARQL queries whenever an instance is set up.
+
+Listing XYZ shows the GraphQL query we used in the section for GraphQL-LD. This query combined the schema in Listing XYZ generates the following SPARQL query in Listing XYZ.
+
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing15, caption={An example query}]
+{
+	chemicalElement {
+		name
+		chemicalFormula
+		boilingPoint
+	}
+}
+\end{lstlisting}
+\end{minipage}
+
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing16, caption={The generated SPARQL query}]
+SELECT * WHERE { 
+	{ 
+   		SELECT ?x_1 WHERE { 
+    		?x_1 http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://example.org/chemicalElement . 
+		}  
+ 	}  
+ 	OPTIONAL { 
+ 		?x_1 <http://example.org/name> ?x_1_1 . 
+ 	}  
+	OPTIONAL { 
+		?x_1 <http://example.org/chemicalFormula> ?x_1_2 . 
+	}  
+	OPTIONAL { 
+		?x_1 <http://example.org/boilingPoint> ?x_1_3 . 
+	}  
+}
+\end{lstlisting}
+\end{minipage}
+
+We discussed in the previous section we discussed that in GraphQL-LD implementation, the result set is empty if any of the fields does not fetch a result (if the optional tag is not given to the field in the GraphQL query). With HyperGraphQL this is relaxed since the fields are translated into optional SPARQL triple patterns. We will discuss the differences between the queries generated with GraphQL-LD and HyperGraphQL in detail in chapter XYZ.
+
+Once the instance runs on the local server, a GraphiQL\footnote{https://github.com/graphql/graphiql.} interface is created. This is the basically a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like json+rdf+xml and json+turtle. 

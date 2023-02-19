@@ -177,7 +177,7 @@
 @Book{Ruth2013,
   author    = {Ruth, L. and Wood, D. and Zaidman, M. and Hausenblas, M.},
   publisher = {Manning},
-  title     = {Linked Data: Structured data on the Web},
+  title     = {{Linked Data: Structured data on the Web}},
   year      = {2013},
   isbn      = {9781638352167},
   lccn      = {2012276682},
@@ -264,6 +264,69 @@
   doi      = {https://doi.org/10.1016/j.acalib.2021.102326},
   keywords = {Wikidata, Structured data repository, Linked data, Semantic web},
   url      = {https://www.sciencedirect.com/science/article/pii/S0099133321000173},
+}
+
+@InProceedings{Taelman2019,
+  author    = {Taelman, Ruben and Vander Sande, Miel and Verborgh, Ruben},
+  booktitle = {W3C Workshop on Web Standardization for Graph Data. W3C},
+  title     = {{Bridges between GraphQL and RDF}},
+  year      = {2019},
+}
+
+@InProceedings{Gleim2020,
+  author    = {Gleim, Lars Christoph and Holzheim, Tim and Koren, Istv{\'a}n and Decker, Stefan},
+  booktitle = {ASLD@ ISWC},
+  title     = {{Automatic Bootstrapping of GraphQL Endpoints for RDF Triple Stores}},
+  year      = {2020},
+  pages     = {119--134},
+}
+
+@Article{Sporny2014,
+  author  = {Sporny, Manu and Kellogg, Gregg and Lanthaler, Markus},
+  journal = {W3C Recommendation},
+  title   = {{JSON-LD 1.0 - A JSON-based Serialization for Linked Data}},
+  year    = {2014},
+  month   = {01},
+}
+
+@Book{Harris2013,
+  editor    = {S. Harris and A. Seaborne},
+  publisher = {W3C Recommendation},
+  title     = {{SPARQL 1.1 Query Language}},
+  year      = {2013},
+  month     = mar,
+  note      = {Available at \url{https://www.w3.org/TR/sparql11-query/#sparqlQuery}},
+}
+
+@Misc{GraphQL,
+  author = {GraphQL},
+  note   = {Last accessed 22 January 2022},
+  title  = {{Queries and Mutations}},
+  url    = {https://graphql.org/learn/queries/},
+}
+
+@Misc{Wikipedia2017,
+  author = {Wikipedia},
+  note   = {Last accessed 31 January 2023},
+  title  = {Wikidata},
+  year   = {2017},
+  url    = {https://en.wikipedia.org/wiki/Wikidata#Reception},
+}
+
+@Misc{Wikidata2014,
+  author = {Wikidata},
+  note   = {Last accessed 31 January 2023},
+  title  = {Help:About data},
+  year   = {2014},
+  url    = {https://www.wikidata.org/wiki/Help:About_data},
+}
+
+@InProceedings{Werbrouck2019a,
+  author    = {Werbrouck, Jeroen and Senthilvel, Madhumitha and Beetz, Jakob and Bourreau, Pierre and Van Berlo, L{\'e}on},
+  booktitle = {26th International Workshop on Intelligent Computing in Engineering, EG-ICE 2019},
+  title     = {Semantic query languages for knowledge-based web services in a construction context},
+  year      = {2019},
+  volume    = {2394},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

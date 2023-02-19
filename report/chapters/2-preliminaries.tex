@@ -1,6 +1,6 @@
 \chapter{Preliminaries}
 %\section{Preliminaries}
-In this chapter, we first introduce some basic concepts of RDF, Wikidata, SPARQL and GraphQL. Then, we compare SPARQL to GraphQL in terms of ease of use by developers in their applications and expressibility.
+In this chapter, we introduce some basic concepts of RDF, Wikidata, SPARQL, and GraphQL. Then, we discuss the differences between SPARQL and GraphQL in terms of ease of use by developers in their applications and expressibility.
 
 %\stepcounter{section}
 %\setcounter{secnumdepth}{2}
@@ -18,12 +18,13 @@ The World Wide Web consists of data published in various formats such as PDF, CS
 RDF Schema (RDFS) is the Vocabulary Description Language for RDF. Basically, it defines the vocabulary for RDF data. This means that it describes:
 
 \begin{itemize}
-	\item the basic concepts and abstract syntax of RDF such as resources and classes(footnote: https://www.w3.org/TR/rdf-concepts/ .)
-	\item the formal semantics of RDF(footnote: https://www.w3.org/TR/2014/REC-rdf11-mt-20140225/ .)\lukas{why do you put the dot at the end of the footnote? (pretty much concern all footnotes)}
+	\item the basic concepts and abstract syntax of RDF such as resources and classes\footnote{https://www.w3.org/TR/rdf-concepts/ .}
+	\item the formal semantics of RDF\footnote{https://www.w3.org/TR/2014/REC-rdf11-mt-20140225/ .}
 	\item the different concrete syntaxes such as Triples, which is shown in section XYZ
 \end{itemize}
 
 According to RDFS, resources are divided into groups known as classes. Each member of a class is called an instance of that class, and is itself also a resource. The relationship between subject and object resources is described via RDF properties Essentially, the predicate of an RDF statement is an instance of RDF property. For instance, to identify that a resources is an instance of a class we use the predicate rdf:type which is in turn an instance of RDF property. W3cC provides a thorough documentation on RDF Schema.\footnote{w3.org/TR/2014/REC-rdf-schema-20140225/ .} In Figure 1 we see that Helium is an instance of the class chemical element. The property instance of describes the relation between the subject Helium and object chemical element.
+\anas{Is the concept of property and predicate clear?}
 
 In order to exchange graphs across the web we need to identify the resources uniquely. For this we use IRIs which are basically identifiers in RDF. The graph shown in Figure~\ref{fig:figure 1} can be represented using an RDF graph. Formally, the building blocks of RDF graphs are IRIs, literals and blank nodes. These are defined as follows.
 
@@ -178,13 +179,13 @@ wd:Q90 wdt:P17 wd:Q142 .
 
 \section{Wikidata}
 %\subsection{Wikidata}
-Wikidata is a free and publicly available knowledge base that can be read and edited by both humans and machines. It is one of the many projects by Wikimedia Foundations such as Wikipedia, Wikibooks, Wikimedia Commons and Wikitionary among others.\lukas{I feel that ``among others'' is redundant if you already say ``such as''. Instead of ``such as'' you could also say ``alongside''.}  Wikidata was created in 2012 at Wikimedia Deutschland by a community of volunteers. These volunteers edit and control all content. As of December 2022, Wikidata has more 23000 active editors.\footnote{https://wikidata.wikiscan.org/ .} Wikidata provides a website where data can be viewed and also edited \cite{Foundationa}.
+Wikidata is a free and publicly available knowledge base that can be read and edited by both humans and machines. It is one of the many projects by Wikimedia Foundations such as Wikipedia, Wikibooks, Wikimedia Commons and Wikitionary.  Wikidata was created in 2012 at Wikimedia Deutschland by a community of volunteers. These volunteers edit and control all content. As of December 2022, Wikidata has more 23000 active editors.\footnote{https://wikidata.wikiscan.org/ .} Wikidata provides a website where data can be viewed and also edited \cite{Foundationa}.
 
-One of the original purposed\lukas{purposes?} behind the creation of Wikidata was to help its sister projects. Initially, Wikipedia and its sister projects used to maintain their own lists of interlanguage links. This refers to links between Wikipedia articles about the same topic but in different languages. After 2012, these interlanguage links were provisioned via Wikidata. Wikidata is also used to display data shown inside the pages in Wikipedia. The usage of this mainly depends on the language of the Wiki. For instance, some Wikipedias\lukas{isn't there only one wikipedia which might be displayed in different languages?} create parts of their pages automatically from the data in Wikidata. Others, especially those of smaller languages that are not widely used, use it\lukas{general comment: too many pronouns make things hard to understand. it's not immediately clear what this ``it'' refers to for example; often it's better to state things clearly again even if it feels repetitive} to create placeholder pages when an article may not be in their respective language. In 2018, around 59\% of Wikidata information was used in English Wikipedia articles, although mostly for external identifiers and coordinate locations \cite{Wikipedia2017}.
+One of the original purposed behind the creation of Wikidata was to help its sister projects. Initially, Wikipedia and its sister projects used to maintain their own lists of interlanguage links. This refers to links between Wikipedia articles about the same topic but in different languages. After 2012, these interlanguage links were provisioned via Wikidata. Wikidata is also used to display data shown inside the pages in Wikipedia. The usage of this mainly depends on the language of the Wiki. For instance, in the case of some languages, parts of the Wikipedia pages are created automatically from the data in Wikidata. Others, especially those of smaller languages that are not widely used, use Wikidata to create placeholder pages when an article may not be in their respective language. In 2018, around 59\% of Wikidata information was used in English Wikipedia articles, although mostly for external identifiers and coordinate locations \cite{Wikipedia2017}. 
 
 Wikidata stores information in the form of structured data in a database \cite{Tharani2021}. This is not the case for its sister projects as they contain unstructured data stored. The information on their web pages is not directly given a structure in the form of tables or lists. Wikidata acts as a central storage for these projects and focuses on providing a structure for their data \cite{Wikidata2014}. Addtionally, Wikidata also supports linked data. This means that the data stored can be linked to datasets and databases like Google Books and OmegaWiki. Wikidata can also be used for quality checks against Wikipedia articles. This is useful when information about a specific topic needs to be known and the solution is easily found by querying the knowledge graph, in this case Wikidata.
 
-Moreover, there is also a wide range of commercial applications for Wikidata. It has external uses in many large organizations like Eurowings, Google, Apple and Amazon for tasks such as data integration, authority control, identity providing and data-driven journalism. In the field of research, Wikidata is used for collecting test data for knowledge graph related algorithms and training data for machine learning projects.\lukas{yes; also name the reason why it is used in industry and in research, namely because it's a large amount of real world data}
+Moreover, there is also a wide range of commercial and research oriented applications for Wikidata. This is due to the fact that it has a large amount of real world data. For instance, Wikidata has external usages in many large organizations such as Eurowings, Google, Apple and Amazon. This includes tasks such as data integration, authority control, identity providing and data-driven journalism. In the field of research, Wikidata is used for collecting test data for knowledge graph related algorithms and training data for machine learning projects.
 
 Wikidata is built on the RDF framework. However, it does not define its resources in terms of RDF. Instead, it has its own model known as Wikibase data model.\footnote{https://www.mediawiki.org/wiki/Wikibase/DataModel.} This distinction creates an abstract layer between its model and RDF. Consequently, there are similarities with RDF’s W3C standards but there are also some important differences. For instance, the Wikidata property \textit{instance of} (\texttt{P31}) is semantically equivalent to the property \textit{rdf:type} in RDF. The value of \texttt{P31} is a class that is itself an item. Wikidata offers an explanation for some of the standards properties in Wikidata that correspond to the ones in RDF \cite{Foundation}. Statements (triples) in Wikidata can have annotations (qualifiers) and references.
 
@@ -221,7 +222,7 @@ Figure~\ref{fig:figure 5} shows an excerpt of the property instance of page on W
 
 \subsection{Querying Wikidata}
 
-The easiest and most popular way to query Wikidata is through the Wikidata Query Service (WDQS). This is Wikidata's SPARQL endpoint. We can use this service two ways. Firstly, we can write queries in SPARQL directly on the web user interface of the service (footnote https://query.wikidata.org/ .) and obtain the results in different formats like table, tree, graph, etc. Secondly, the service can also be used progmatically by submitting GET or POST requests.\footnote{https://query.wikidata.org/sparql.}
+The easiest and most popular way to query Wikidata is through the Wikidata Query Service (WDQS). This is Wikidata's SPARQL endpoint. We can use this service two ways. Firstly, we can write queries in SPARQL directly on the web user interface of the service\footnote{https://query.wikidata.org/ .} and obtain the results in different formats like table, tree, graph, etc. Secondly, the service can also be used progmatically by submitting GET or POST requests.\footnote{https://query.wikidata.org/sparql.}
 
 Another popular way to query Wikidata is by using the Wikidata API.\footnote{https://www.wikidata.org/wiki/Special:ApiSandbox.} However, this API should mainly be used when we want to edit the contents of Wikidata or get data about entities like revision history.
 
@@ -308,13 +309,13 @@ Table 1 shows the results obtained in a tabular form. Among the results, there i
 
 \section{GraphQL}
 
-GraphQL (Graph Query Language) is an open source query language for APIs (Application Programming Interfaces) and a runtime for executing those queries against existing data. It describes data structured in a graph format – a collection of objects (nodes) connected to each other by some kind of relationships (edges). \textcolor{red}{Runtime is implemented by the server.}\lukas{... usually implemented by a server (or something like that); ``the server'' sounds like you already mentioned some server before...}
+GraphQL (Graph Query Language) is an open source query language for APIs (Application Programming Interfaces) and a runtime for executing those queries against existing data. It describes data structured in a graph format – a collection of objects (nodes) connected to each other by some kind of relationships (edges). Runtime is usually implemented by a server.
 
 GraphQL is usually served over HTTP through a GraphQL server. A GraphQl server consists of two main parts – schema and resolver. The API developers create a schema that is strictly typed and describes all the possible data a client can query using the service. The schema specifies object types and fields along with operations on those types. The object type represents the kind of object that can be requested by a client. 
 
 There are three operations types – query, mutation and subscription.  We look at the query operation in this chapter; the other two are outside the scope of this report. Queries are used to fetch or read data. When compared to REST (Representational State Transfer),  queries operations in GraphQL are similar to GET requests. A resolver in GraphQL server is a function that is associated with every field and contains instructions on how to process that particular field. In other words, the resolver is responsible for retrieving a value from the data source. 
 
-GraphQL is data agnostic, i.e., it is not concerned where the data source is located. The data could be stored in any source such as a database or a micro-service as shown in Figure XYZ. \textcolor{red}{With a single API call, GraphQL can fetch data from various data sources. This is one of the advantages GraphQL has over REST API; the latter requires multiple HTTP calls to access data from multiple sources.} Apart from being data agnostic, GraphQL is also language agnostic. This means that GraphQL services, such as the schema and resolvers, can be written in any programming language such as JavaScript or Python. 
+GraphQL is data agnostic, i.e., it is not concerned where the data source is located. The data could be stored in any source such as a database or a micro-service as shown in Figure XYZ. With a single API call, GraphQL can aggregate data from multiple sources and resolve the data to the client. This is one of the advantages GraphQL has over REST API where the latter would require several HTTP calls to access data from multiple sources. Apart from being data agnostic, GraphQL is also language agnostic. This means that GraphQL services, such as the schema and resolvers, can be written in any programming language such as JavaScript or Python. 
 
 For the sake of human readability, GraphQL specification has its own Schema Definition Language (SDL). It is simple to write and understand schemas in SDL, and is similar to the language that we use to write queries. Listing XYZ shows a schema written in SDL. This schema can be in the GraphQL server against which clients can send queries for instances of chemical elements that have a name, chemical formula and boiling point. The exclamation mark means that the corresponding field is non-nullable and it is expected that GraphQL will give a value when the field is queried. A complete guide on schemas and types can be found on the official documentation from GraphQL.\footnote{https://graphql.org/learn/schema/ .} 
 
@@ -326,8 +327,8 @@ type Query{
 
 type ChemicalElement{
 	name: String!
-	chemical formula: String!
-	boiling point: Float!
+	chemicalFormula: String!
+	boilingPoint: Float!
 }
 
 \end{lstlisting}
@@ -341,7 +342,7 @@ query QueryChemicalElement (limit 2){
     chemicalElement{
 		name
 		chemicalFormula
-		boiling point
+		boilingPoint
 	}
 }
 \end{lstlisting}
@@ -354,12 +355,12 @@ query QueryChemicalElement (limit 2){
 		"chemicalElement":{
 			"name": "helium",
 			"chemicalFormula": "He",
-			"boiling point": -268.9
+			"boilingPoint": -268.9
 		},
 		{	
 			"name": "silicon",
 			"chemicalFormula": "Si",
-			"boiling point": 4271
+			"boilingPoint": 4271
 		}
 	}
 }
@@ -369,7 +370,7 @@ query QueryChemicalElement (limit 2){
 
 \section{GraphQL vs SPARQL}
 
-GraphQL and SPARQL are query languages developed with different goals in mind. GraphQL was designed mainly to wrap REST APIs in a graph like shape that would be able\lukas{allow?} to fetch related data in a single request with the aid of schemas. In REST API, the same would require calling multiple endpoints. SPARQL, on the other hand, was developed mainly as a query language for RDF graphs.
+GraphQL and SPARQL are query languages developed with different goals in mind. GraphQL was designed mainly to wrap REST APIs in a graph like shape. This would allow fetching related data in a single request with the aid of schemas. In REST API, the same would require calling multiple endpoints. SPARQL, on the other hand, was developed mainly as a query language for RDF graphs.
 
 SPARQL is immensely popular in the field of research and academia. However, it has not seen much growth in commercial applications. GraphQL, on the other hand, is more popular among software and web developers. There are some valid reasons for this.  
 

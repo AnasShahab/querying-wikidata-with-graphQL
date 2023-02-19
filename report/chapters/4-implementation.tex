@@ -1,0 +1,611 @@
+\chapter{Implementing the approaches on Wikidata}
+
+In this chapter we discuss and demonstrate the implementation of querying the knowledge graph Wikidata using both GraphQL-LD and HyperGraphQL. This is followed by the technical details and the setup of both the tools. Then, we conclude the chapter by discussing the differences between both the approaches and their limitations respectively.
+
+\section{GraphQL-LD on Wikidata}
+
+Wikidata offers a SPARQL endpoint https://query.wikidata.org/sparql against which requests can be sent to query its data. In GraphQL-LD, we require a GraphQL query and a JSON-LD context as input files. To demonstrate the implementation we use a practical example where we use the query and JSON-LD context shown in Listings XYZ and XYZ respectively. 
+
+Basically, we want to fetch all the chemical elements from Wikidata and some of their properties. These properties are the chemical formula, boiling point, melting point and density of the elements, along with the person who discovered or invented the elements, and that person’s place of birth and country to which the place belongs. This example was used in Listing 2 where we demonstrated the querying of Wikidata using SPARQL. The only difference is that we do not query for the labels of the chemical elements.
+
+GraphQL-LD does not support the feature of filtering the labels in a specific language. Querying for them would fetch the label for each element in all the available languages in Wikidata for that element. This would unnecessary populate the results without much benefit. Hence, we remove the label field.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing17, caption={Query}]
+query {
+    checimcalElement @single(scope: all) {
+        id 
+        chemicalFormula
+        boilingPoint
+        meltingPoint
+        density
+        discoverer {
+            id
+            placeBirth {
+               id
+                country {
+					id
+				}
+            }
+        }
+    }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing18, caption={JSON-LD Context}]
+{
+  "@context": {
+    "wd": "http://www.wikidata.org/entity/",
+    "wdt":"http://www.wikidata.org/prop/direct/",
+    "instance": "wdt:P31",
+    "chemicalFormula": "wdt:P274",
+    "boilingPoint": "wdt:P2102",
+    "meltingPoint": "wdt:P2101",
+    "density": "wdt:P2054",
+    "discoverer": "wdt:P61",
+    "placeBirth": "wdt:P19",
+    "country": "wdt:P17"
+  }
+}
+\end{lstlisting}
+\end{minipage}
+
+The generated SPARQL query is shown in Listing XYZ. 
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing19, caption={Generated SPARQL Query}]
+SELECT ?checimcalElement_id ?checimcalElement_chemicalFormula ?checimcalElement_boilingPoint ?checimcalElement_meltingPoint ?checimcalElement_density ?checimcalElement_discoverer_id 
+?checimcalElement_discoverer_placeBirth_id ?checimcalElement_discoverer_placeBirth_country WHERE {
+  ?df_3_0 undefined:checimcalElement ?checimcalElement_id.
+  ?checimcalElement_id <http://www.wikidata.org/prop/direct/P274> ?checimcalElement_chemicalFormula;
+    <http://www.wikidata.org/prop/direct/P2102> ?checimcalElement_boilingPoint;
+    <http://www.wikidata.org/prop/direct/P2101> ?checimcalElement_meltingPoint;
+    <http://www.wikidata.org/prop/direct/P2054> ?checimcalElement_density;
+    <http://www.wikidata.org/prop/direct/P61> ?checimcalElement_discoverer_id.
+  ?checimcalElement_discoverer_id <http://www.wikidata.org/prop/direct/P19> ?checimcalElement_discoverer_placeBirth_id.
+  ?checimcalElement_discoverer_placeBirth_id <http://www.wikidata.org/prop/direct/P17> ?checimcalElement_discoverer_placeBirth_country.
+}
+\end{lstlisting}
+\end{minipage}
+
+The above SPARQL query does not produce any results in Wikidata. As we mentioned in chapter XYZ, GraphQL-LD is predicate-oriented. It queries the relationships between nodes. This creates a problem when we want to say that some subject is an instance or type of some object. GraphQL-LD does not recognize the root node to be an instance or type of a node. Instead it treats the root node to be a property. Hence, some workaround needs to be done to achieve the desired results.
+
+We propose three solutions that can be potentially use as a workaround. 
+
+\subsection{Solution 1}
+
+This solution is inspired by the "Setting an inline id"\footnote{https://github.com/rubensworks/graphql-to-sparql.js\#setting-an-inline-id.} section provided in the documentation of GraphQL-LD. Although it is intended to be used for defining or looking up the id of entities as per the documentation, we realized this option come help overcome the issue we were having when defining an item to be an instance of another item. Listings XYZ and XYZ show the GraphQL query and the corresponding generated SPARQL query generated using the JSON-LD context in Listing XYZ respectively. 
+
+To query against Wikidata, we can provide the available SPARQL endpoint – https://query.wikidata.org/sparql. This generates the results in JSON shown in Listing XYZ. We show only the first three results. The LIMIT solution modifier could have been implemented for this by using "first: 3" in our GraphQL queries. However, GraphQL-LD would have generated a nested SPARQL query, and we decided that the comparison between the proposed solutions would be more prominent and easier to understand using a simpler SPARQL query.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing20, caption={Query}]
+query {
+    instance(_: chemicalElement) @single(scope: all)
+        id
+        chemicalFormula
+        boilingPoint
+        meltingPoint
+        density
+        discoverer {
+            id
+            placeBirth {
+                id
+                country
+            }
+        }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing21, caption={Generated SPARQL Query}]
+SELECT ?id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discoverer_id ?discoverer_placeBirth_id ?discoverer_placeBirth_country WHERE {
+  ?id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11344>;
+    <http://www.wikidata.org/prop/direct/P274> ?chemicalFormula;
+    <http://www.wikidata.org/prop/direct/P2102> ?boilingPoint;
+    <http://www.wikidata.org/prop/direct/P2101> ?meltingPoint;
+    <http://www.wikidata.org/prop/direct/P2054> ?density;
+    <http://www.wikidata.org/prop/direct/P61> ?discoverer_id.
+  ?discoverer_id <http://www.wikidata.org/prop/direct/P19> ?discoverer_placeBirth_id.
+  ?discoverer_placeBirth_id <http://www.wikidata.org/prop/direct/P17> ?discoverer_placeBirth_country.
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing22, caption={Output}]
+[
+  {
+    "id": "http://www.wikidata.org/entity/Q560",        
+    "boilingPoint": -268.9,
+    "density": 0.1785,
+    "meltingPoint": -272.05,
+    "discoverer": {
+      "id": "http://www.wikidata.org/entity/Q298581",   
+      "placeBirth": {
+        "id": "http://www.wikidata.org/entity/Q90",     
+        "country": "http://www.wikidata.org/entity/Q142"
+      }
+    },
+    "chemicalFormula": "He"
+  },
+  {
+    "id": "http://www.wikidata.org/entity/Q1119",       
+    "boilingPoint": 8316,
+    "density": 13,
+    "meltingPoint": 4041,
+    "discoverer": {
+      "id": "http://www.wikidata.org/entity/Q775969",
+      "placeBirth": {
+        "id": "http://www.wikidata.org/entity/Q727",
+        "country": "http://www.wikidata.org/entity/Q55"
+      }
+    },
+    "chemicalFormula": "Hf"
+  },
+  {
+    "id": "http://www.wikidata.org/entity/Q1094",
+    "boilingPoint": 3767,
+    "density": 7.31,
+    "meltingPoint": 314,
+    "discoverer": {
+      "id": "http://www.wikidata.org/entity/Q77308",
+      "placeBirth": {
+        "id": "http://www.wikidata.org/entity/Q1731",
+        "country": "http://www.wikidata.org/entity/Q183"
+      }
+    },
+    "chemicalFormula": "In"
+  },
+  ...
+]
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Solution 2}
+
+This solution is proposed after doing some experiments with the source code. The documentation from GraphQL-LD does not provide any reference to this but we consider this to be a potential solution. Initially, when no id was provided as a field in the GraphQL query, the fetched result only contained ids of the queried item, and ignored the rest of the properties. We had to update the source code to overcome this issue.
+
+Listings XYZ, XYZ and XYZ show the GraphQL query, generated SPARQL query and the corresponding first three JSON results after querying Wikidata. The only issue is that the generated SPARQL query includes the id in the SELECT clause even if no id is provided in the SPARQL query, although this does not affect the results and we get them as expected. We can try to correct this issue in future works by updating the source code further.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing23, caption={Query}]
+query {
+    id (instance: chemicalElement) @single(scope: all) {
+        id
+        chemicalFormula
+        boilingPoint
+        meltingPoint
+        density
+        discoverer {
+            placeBirth {
+                id
+                country
+            }
+        }
+    }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing24, caption={Generated SPARQL Query}]
+SELECT ?id ?id_id ?id_chemicalFormula ?id_boilingPoint ?id_meltingPoint ?id_density ?id_discoverer_placeBirth_id ?id_discoverer_placeBirth_country WHERE {
+  ?id_id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11344>;
+    <http://www.wikidata.org/prop/direct/P274> ?id_chemicalFormula;
+    <http://www.wikidata.org/prop/direct/P2102> ?id_boilingPoint;
+    <http://www.wikidata.org/prop/direct/P2101> ?id_meltingPoint;
+    <http://www.wikidata.org/prop/direct/P2054> ?id_density;
+    <http://www.wikidata.org/prop/direct/P61> ?id_discoverer.
+  ?id_discoverer <http://www.wikidata.org/prop/direct/P19> ?id_discoverer_placeBirth_id.
+  ?id_discoverer_placeBirth_id <http://www.wikidata.org/prop/direct/P17> ?id_discoverer_placeBirth_country.
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing25, caption={Output}]
+[
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q560",        
+      "boilingPoint": -268.9,
+      "density": 0.1785,
+      "meltingPoint": -272.05,
+      "chemicalFormula": "He",
+      "discoverer": {
+        "placeBirth": {
+          "id": "http://www.wikidata.org/entity/Q90",     
+          "country": "http://www.wikidata.org/entity/Q142"
+        }
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q1119",
+      "boilingPoint": 8316,
+      "density": 13,
+      "meltingPoint": 4041,
+      "chemicalFormula": "Hf",
+      "discoverer": {
+        "placeBirth": {
+          "id": "http://www.wikidata.org/entity/Q727",
+          "country": "http://www.wikidata.org/entity/Q55"
+        }
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q1094",
+      "boilingPoint": 3767,
+      "density": 7.31,
+      "meltingPoint": 314,
+      "chemicalFormula": "In",
+      "discoverer": {
+        "placeBirth": {
+          "id": "http://www.wikidata.org/entity/Q1731",
+          "country": "http://www.wikidata.org/entity/Q183"
+        }
+      }
+    }
+  },
+  ...
+]
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Solution 3}
+
+This last solution is inspired by the inline fragment\footnote{https://github.com/rubensworks/graphql-to-sparql.js\#inline-fragments.} usage of GraphQL-LD. Initially, GraphQL-LD translated the "id ... on chemicalElement" part as "?id rdf:type <IRI of chemicalElement>".\footnote{For our query this would be "?id <http://www.w3.org/1999/02/22-rdf-syntax-ns\#type> <http://www.wikidata.org/entity/Q11344>"} This triple pattern does not correspond to the data model in Wikidata as it uses the "instance of" property instead of "rdf:type" when describing that an item is a type of a class. To overcome this issue we had to modify the source code so that it used "http://www.wikidata.org/prop/direct/P31" instead of "<http://www.w3.org/1999/02/22-rdf-syntax-ns\#type>" when translating GraphQL queries to SPARQL queries when fragments are used. Unlike the other two proposed solutions where the "instance" property must be used in the queries, this solution does not require it. Consequently, no entries for the mapping of "instance" of to its IRI, http://www.wikidata.org/entity/Q11344), is needed in the JSON-LD context.
+
+Listings XYZ, XYZ and XYZ show the GraphQL query, generated SPARQL query and the corresponding first three JSON results fetched from Wikidata. This solution treats the fragments as OPTIONAL patterns in SPARQL. Since it is based on fragmentation, the id is always fetched.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing26, caption={Query}]
+query {
+    id
+    ... on chemicalElement @single(scope: all) {
+        id
+        chemicalFormula
+        boilingPoint
+        meltingPoint
+        density
+        discoverer {
+            placeBirth {
+                id
+                country
+            }
+        }
+    }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing27, caption={Generated SPARQL Query}]
+SELECT ?id ?id_id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discoverer_placeBirth_id ?discoverer_placeBirth_country WHERE {
+  OPTIONAL {
+    ?id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11344>;
+      <http://www.wikidata.org/prop/direct/P274> ?chemicalFormula;
+      <http://www.wikidata.org/prop/direct/P2102> ?boilingPoint;
+      <http://www.wikidata.org/prop/direct/P2101> ?meltingPoint;
+      <http://www.wikidata.org/prop/direct/P2054> ?density;
+      <http://www.wikidata.org/prop/direct/P61> ?discoverer.
+    ?discoverer <http://www.wikidata.org/prop/direct/P19> ?discoverer_placeBirth_id.
+    ?discoverer_placeBirth_id <http://www.wikidata.org/prop/direct/P17> ?discoverer_placeBirth_country.
+  }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing28, caption={Output}]
+[
+  {
+    "id": "http://www.wikidata.org/entity/Q560",        
+    "boilingPoint": -268.9,
+    "density": 0.1785,
+    "meltingPoint": -272.05,
+    "chemicalFormula": "He",
+    "discoverer": {
+      "placeBirth": {
+        "id": "http://www.wikidata.org/entity/Q90",     
+        "country": "http://www.wikidata.org/entity/Q142"
+      }
+    }
+  },
+  {
+    "id": "http://www.wikidata.org/entity/Q1119",       
+    "boilingPoint": 8316,
+    "density": 13,
+    "meltingPoint": 4041,
+    "chemicalFormula": "Hf",
+    "discoverer": {
+      "placeBirth": {
+        "id": "http://www.wikidata.org/entity/Q727",
+        "country": "http://www.wikidata.org/entity/Q55"
+      }
+    }
+  },
+  {
+    "id": "http://www.wikidata.org/entity/Q1094",
+    "boilingPoint": 3767,
+    "density": 7.31,
+    "meltingPoint": 314,
+    "chemicalFormula": "In",
+    "discoverer": {
+      "placeBirth": {
+        "id": "http://www.wikidata.org/entity/Q1731",
+        "country": "http://www.wikidata.org/entity/Q183"
+      }
+    }
+  },
+  ...
+]
+\end{lstlisting}
+\end{minipage}
+
+The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. Solutions 1 and 2 are more feasible then Solution 3. This way of describing the "instance of" relationship using inline fragments is not intuitive, as they are primarily used to query a field that returns an interface or a union type.\footnote{https://graphql.org/learn/queries/\#inline-fragments.}
+
+\subsection{Default JSON-LD context}
+
+Working with GraphQL-LD requires creating a JSON-LD context that requires some significant effort to create. The IRIs of the items used in the GraphQL query need to be looked up and then inserted into the context. To overcome this constraint we created a default JSON-LD context. This contains a list of all items and properties along with their IRIs available in Wikidata as of 12.10.2022. Also, the source code of GraphQL-LD was modified such that the tool takes the default context as input when no context is provided by the user. This default context was stored in a local directory.
+
+For the creation of such a default context, we needed to extract all the items and properties in Wikidata along with their labels to identify them. For the items, we downloaded the file consisting of all truthy statements\footnote{https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF\_Dump\_Format\#Truthy\_statements.} from the RDF dumps provided by Wikidata.\footnote{https://dumps.wikimedia.org/wikidatawiki/entities/ .} We extracted all the items with their labels from this file and removed duplicates. Since many items can have the same labels, there would be ambiguity when the query involved one of these items. Hence, we remove all instances of items where the duplicates occurred. For the properties, we used a SPARQL query to fetch all the properties in Wikidata along with their labels. Finally, a JSON-LD context was created consisting of all the items, properties and their labels. In total there are 84,535,915 items and 10,317 properties in our default context. For the entire process, we used Python and shell scripts.
+
+\section{HyperGraphQL on Wikidata}
+
+To query RDF data using HyperGraphQL we need to set up a HyperGraphQL instance. This requires a configuration file and an annotated schema. We want to query Wikidata for the same data as we did in Listing XYZ when using GraphQL-LD, except now we can query for labels too as HyperGraphQL support it. Listings XYZ, XYZ and XYZ show the GraphQL query, configuration file and schema. We use the same SPARQL endpoint for Wikidata as we did in GraphQl-LD.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing29, caption={Query}]
+{
+  ChemicalElement_GET {
+    _id
+    label(lang: "en")
+    chemicalFormula
+    boilingPoint
+    meltingPoint
+    density
+    discoverer {
+      _id
+      label(lang: "en")
+      placeBirth {
+        _id
+        label(lang: "en")
+        country {
+          _id
+          label(lang: "en")
+        }
+      }
+    }
+  }
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing30, caption={Configuration}]
+{
+    "name": "wikidata-hgql",
+    "schema": "schema/schema_wikidata.graphql",
+    "server": {
+        "port": 8081,
+        "graphql": "/graphql",
+        "graphiql": "/graphiql"
+    },
+    "services": [
+        {
+            "id": "wikidata-sparql",
+            "type": "SPARQLEndpointService",
+            "url": "https://query.wikidata.org/sparql",
+            "graph": "",
+            "user": "",
+            "password": ""
+        }
+    ]
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing31, caption={Schema}]
+type __Context {
+    ChemicalElement:   _@href(iri: "http://www.wikidata.org/entity/Q11344")
+    label:  _@href(iri: "http://www.w3.org/2000/01/rdf-schema#label")
+    chemicalFormula:  _@href(iri: "http://www.wikidata.org/prop/direct/P274")
+    boilingPoint:    _@href(iri: "http://www.wikidata.org/prop/direct/P2102")
+    meltingPoint:  _@href(iri: "http://www.wikidata.org/prop/direct/P2101")
+    density:  _@href(iri: "http://www.wikidata.org/prop/direct/P2054")
+    discoverer:    _@href(iri: "http://www.wikidata.org/prop/direct/P61")
+    Human:  _@href(iri: "http://www.wikidata.org/entity/Q5")
+    placeBirth:    _@href(iri: "http://www.wikidata.org/prop/direct/P19")
+    City: _@href(iri: "http://www.wikidata.org/entity/Q515")
+    country:    _@href(iri: "http://www.wikidata.org/prop/direct/P17")
+    SovereignState:    _@href(iri: "http://www.wikidata.org/entity/Q3624078")
+}
+
+type ChemicalElement @service(id:"wikidata-sparql") {
+    chemicalFormula: String! @service(id:"wikidata-sparql")
+    label: [String] @service(id:"wikidata-sparql")
+    boilingPoint: String @service(id:"wikidata-sparql")
+    meltingPoint: String @service(id:"wikidata-sparql")
+    density: String @service(id:"wikidata-sparql")
+    discoverer: [Human] @service(id:"wikidata-sparql")
+}
+
+type Human @service(id:"wikidata-sparql"){
+    placeBirth: [City] @service(id:"wikidata-sparql")
+    label: [String] @service(id:"wikidata-sparql")
+}
+
+type City @service(id:"wikidata-sparql"){
+    country: [SovereignState] @service(id:"wikidata-sparql")
+    label: String @service(id:"wikidata-sparql")
+}
+
+type SovereignState @service(id:"wikidata-sparql"){
+    label: [String] @service(id:"wikidata-sparql")
+}
+\end{lstlisting}
+\end{minipage}
+
+Once an HyperGraphQL instance is set up, we can write the GraphQL query in the provided graphiql interface that can simply be run in a browser. After the query is executed, the instance fetches the results from Wikidata and displays them in the interface. 
+
+HyperGraphQL translates the root node to be an rdf:type of some subject. Since this does not comply with the Wikidata data model, we had a similar issue like the one we discussed in Solution 3 of the previous section regarding inline fragments in GraphQL-LD. To overcome this issue we had to update the source code so that the generated SAPRQL queries use instance of property instead of rdf:type.
+
+The generated SPARQL queries are not viewable by default. We had to modify the logging option in the source code to log SPARQL queries on the command line. Listings XYZ and XYZ show the generated SPARQL query and the results fetched. As before we show only the first 3 results. 
+
+In HyperGraphQL, the fields are converted into optional SPARQL triple patterns. Hence, it might be possible to have an empty array in the results.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing32, caption={Generated SPARQL Query}]
+SELECT * WHERE { 
+	{ 
+		SELECT ?x_1 WHERE { 
+			?x_1 <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11344> . 
+		}  
+	}  
+	OPTIONAL { 
+		?x_1 <http://www.w3.org/2000/01/rdf-schema#label> ?x_1_1 .
+		FILTER (lang(?x_1_1) = "en") .  
+	}  
+	OPTIONAL { 
+		?x_1 <http://www.wikidata.org/prop/direct/P2101> ?x_1_2 . 
+	}  
+	OPTIONAL { 
+		?x_1 <http://www.wikidata.org/prop/direct/P2054> ?x_1_3 . 
+	}  
+	OPTIONAL { 
+		?x_1 <http://www.wikidata.org/prop/direct/P2102> ?x_1_4 . 
+	}  
+	OPTIONAL { 
+		?x_1 <http://www.wikidata.org/prop/direct/P61> ?x_1_5 .
+		?x_1_5 <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q5> . 
+		OPTIONAL { 
+			?x_1_5 <http://www.w3.org/2000/01/rdf-schema#label> ?x_1_5_1 .
+			FILTER (lang(?x_1_5_1) = "en") .  
+		}  
+		OPTIONAL { 
+			?x_1_5 <http://www.wikidata.org/prop/direct/P19> ?x_1_5_2 .
+			?x_1_5_2 <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q515> . 
+			OPTIONAL { 
+				?x_1_5_2 <http://www.w3.org/2000/01/rdf-schema#label> ?x_1_5_2_1 .
+				FILTER (lang(?x_1_5_2_1) = "en") .  
+			}  
+			OPTIONAL { 
+				?x_1_5_2 <http://www.wikidata.org/prop/direct/P17> ?x_1_5_2_2 .
+				?x_1_5_2_2 <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q3624078> . 
+				OPTIONAL { 
+					?x_1_5_2_2 <http://www.w3.org/2000/01/rdf-schema#label> ?x_1_5_2_2_1 .
+					FILTER (lang(?x_1_5_2_2_1) = "en") .  
+				}  
+			}  
+		}  
+	}  
+	OPTIONAL { 
+		?x_1 <http://www.wikidata.org/prop/direct/P274> ?x_1_6 . 
+	}  
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=listing:listing33, caption={Output}]
+{
+  "extensions": {},
+  "data": {
+    "@context": {
+      "placeBirth": "http://www.wikidata.org/prop/direct/P19",
+      "country": "http://www.wikidata.org/prop/direct/P17",
+      "density": "http://www.wikidata.org/prop/direct/P2054",
+      "chemicalFormula": "http://www.wikidata.org/prop/direct/P274",
+      "_type": "@type",
+      "_id": "@id",
+      "label": "http://www.w3.org/2000/01/rdf-schema#label",
+      "discoverer": "http://www.wikidata.org/prop/direct/P61",
+      "meltingPoint": "http://www.wikidata.org/prop/direct/P2101",
+      "ChemicalElement_GET": "http://hypergraphql.org/query/ChemicalElement_GET",
+      "boilingPoint": "http://www.wikidata.org/prop/direct/P2102"
+    },
+    "ChemicalElement_GET": [
+      {
+        "_id": "http://www.wikidata.org/entity/Q876",
+        "label": [
+          "selenium"
+        ],
+        "chemicalFormula": "[Se]",
+        "boilingPoint": "[1265]",
+        "meltingPoint": "[392]",
+        "density": "[4.28]",
+        "discoverer": [
+          {
+            "_id": "http://www.wikidata.org/entity/Q353490",
+            "label": [
+              "Johan Gottlieb Gahn"
+            ],
+            "placeBirth": []
+          },
+          {
+            "_id": "http://www.wikidata.org/entity/Q151911",
+            "label": [
+              "J\"{o}ns Jacob Berzelius"
+            ],
+            "placeBirth": []
+          }
+        ]
+      },
+      {
+        "_id": "http://www.wikidata.org/entity/Q54377",
+        "label": [
+          "unbihexium"
+        ],
+        "chemicalFormula": "[]",
+        "boilingPoint": "[]",
+        "meltingPoint": "[]",
+        "density": "[]",
+        "discoverer": []
+      },
+      {
+        "_id": "http://www.wikidata.org/entity/Q743",
+        "label": [
+          "tungsten"
+        ],
+        "chemicalFormula": "[W]",
+        "boilingPoint": "[5930, 10701]",
+        "meltingPoint": "[6170, 3410]",
+        "density": "[19.3]",
+        "discoverer": [
+          {
+            "_id": "http://www.wikidata.org/entity/Q182745",
+            "label": [
+              "Fausto Elhuyar"
+            ],
+            "placeBirth": []
+          },
+          {
+            "_id": "http://www.wikidata.org/entity/Q728386",
+            "label": [
+              "Juan Jos\'{e} Elhuyar"
+            ],
+            "placeBirth": []
+          }
+        ]
+      },
+	  ...
+      }
+    ]
+  },
+  "errors": []
+}
+\end{lstlisting}
+\end{minipage}
+
+\section{Differences and Limitations}
+
+\textcolor{red}{Query, Functionality, Performance, Limitations}
