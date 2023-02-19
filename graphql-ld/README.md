@@ -11,23 +11,6 @@
             birthPlace
         }
     }
-
-##### query2.graphql
-    query {
-        id (instance: chemicalElement) @single(scope: all) {
-            id
-            chemicalFormula
-            boilingPoint
-            meltingPoint
-            density
-            discoverer {
-                placeBirth {
-                    id
-                    country
-                }
-            }
-        }
-    }
     
 ##### context.jsonld
     {
@@ -65,20 +48,6 @@ graphql-to-sparql context.jsonld query.qraphql
         <http://www.wikidata.org/prop/direct/P19> ?id_birthPlace.
     }
     
-```sh
-graphql-to-sparql context.jsonld query2.qraphql
-```
-##### The generated SPARQL query
-    SELECT ?id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discoverer_id ?discoverer_placeBirth_id ?discoverer_placeBirth_country WHERE {
-      ?id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q11344>;
-        <http://www.wikidata.org/prop/direct/P274> ?chemicalFormula;
-        <http://www.wikidata.org/prop/direct/P2102> ?boilingPoint;
-        <http://www.wikidata.org/prop/direct/P2101> ?meltingPoint;
-        <http://www.wikidata.org/prop/direct/P2054> ?density;
-        <http://www.wikidata.org/prop/direct/P61> ?discoverer_id.
-      ?discoverer_id <http://www.wikidata.org/prop/direct/P19> ?discoverer_placeBirth_id.
-    ?discoverer_placeBirth_id <http://www.wikidata.org/prop/direct/P17> ?discoverer_placeBirth_country.
-    }
 
 #### Run the tool ***graphql-ld-sparqlendpoint*** to query the Wikidata SPARQL endpoint
 ```sh
@@ -114,58 +83,3 @@ graphql-ld-sparqlendpoint context.jsonld query.qraphql https://query.wikidata.or
         }
       }
     ]
-
-```sh
-graphql-ld-sparqlendpoint context.jsonld query2.qraphql https://query.wikidata.org/sparql
-```
-#### Output query result in JSON format
-    [
-      {
-        "id": {
-          "id": "http://www.wikidata.org/entity/Q560",        
-          "boilingPoint": -268.9,
-          "density": 0.1785,
-          "meltingPoint": -272.05,
-          "chemicalFormula": "He",
-          "discoverer": {
-            "placeBirth": {
-              "id": "http://www.wikidata.org/entity/Q90",     
-              "country": "http://www.wikidata.org/entity/Q142"
-            }
-          }
-        }
-      },
-      {
-        "id": {
-          "id": "http://www.wikidata.org/entity/Q1119",
-          "boilingPoint": 8316,
-          "density": 13,
-          "meltingPoint": 4041,
-          "chemicalFormula": "Hf",
-          "discoverer": {
-            "placeBirth": {
-              "id": "http://www.wikidata.org/entity/Q727",
-              "country": "http://www.wikidata.org/entity/Q55"
-            }
-          }
-        }
-      },
-      {
-        "id": {
-          "id": "http://www.wikidata.org/entity/Q1094",
-          "boilingPoint": 3767,
-          "density": 7.31,
-          "meltingPoint": 314,
-          "chemicalFormula": "In",
-          "discoverer": {
-            "placeBirth": {
-              "id": "http://www.wikidata.org/entity/Q1731",
-              "country": "http://www.wikidata.org/entity/Q183"
-            }
-          }
-        }
-      },
-      .........
-    ]
-
-
