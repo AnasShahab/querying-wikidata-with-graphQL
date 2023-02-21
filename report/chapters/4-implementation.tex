@@ -75,6 +75,7 @@ The above SPARQL query does not produce any results in Wikidata. As we mentioned
 We propose three solutions that can be potentially use as a workaround. 
 
 \subsection{Solution 1}
+\lukas{give the solutions names that reflect their key idea}
 
 This solution is inspired by the "Setting an inline id"\footnote{https://github.com/rubensworks/graphql-to-sparql.js\#setting-an-inline-id.} section provided in the documentation of GraphQL-LD. Although it is intended to be used for defining or looking up the id of entities as per the documentation, we realized this option come help overcome the issue we were having when defining an item to be an instance of another item. Listings XYZ and XYZ show the GraphQL query and the corresponding generated SPARQL query generated using the JSON-LD context in Listing XYZ respectively. 
 
@@ -166,6 +167,7 @@ SELECT ?id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discoverer_id 
 \end{minipage}
 
 \subsection{Solution 2}
+\lukas{what was the benefit of solution 2 over 1 again?}
 
 This solution is proposed after doing some experiments with the source code. The documentation from GraphQL-LD does not provide any reference to this but we consider this to be a potential solution. Initially, when no id was provided as a field in the GraphQL query, the fetched result only contained ids of the queried item, and ignored the rest of the properties. We had to update the source code to overcome this issue.
 
