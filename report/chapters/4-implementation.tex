@@ -74,8 +74,7 @@ The above SPARQL query does not produce any results in Wikidata. As we mentioned
 
 We propose three solutions that can be potentially use as a workaround. 
 
-\subsection{Solution 1}
-\lukas{give the solutions names that reflect their key idea}
+\subsection{Inline-ID based Solution 1}
 
 This solution is inspired by the "Setting an inline id"\footnote{https://github.com/rubensworks/graphql-to-sparql.js\#setting-an-inline-id.} section provided in the documentation of GraphQL-LD. Although it is intended to be used for defining or looking up the id of entities as per the documentation, we realized this option come help overcome the issue we were having when defining an item to be an instance of another item. Listings XYZ and XYZ show the GraphQL query and the corresponding generated SPARQL query generated using the JSON-LD context in Listing XYZ respectively. 
 
@@ -166,8 +165,7 @@ SELECT ?id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discoverer_id 
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Solution 2}
-\lukas{what was the benefit of solution 2 over 1 again?}
+\subsection{ID based Solution 2}
 
 This solution is proposed after doing some experiments with the source code. The documentation from GraphQL-LD does not provide any reference to this but we consider this to be a potential solution. Initially, when no id was provided as a field in the GraphQL query, the fetched result only contained ids of the queried item, and ignored the rest of the properties. We had to update the source code to overcome this issue.
 
@@ -261,7 +259,7 @@ SELECT ?id ?id_id ?id_chemicalFormula ?id_boilingPoint ?id_meltingPoint ?id_dens
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Solution 3}
+\subsection{Fragment based Solution 3}
 
 This last solution is inspired by the inline fragment\footnote{https://github.com/rubensworks/graphql-to-sparql.js\#inline-fragments.} usage of GraphQL-LD. Initially, GraphQL-LD translated the "id ... on chemicalElement" part as "?id rdf:type <IRI of chemicalElement>".\footnote{For our query this would be "?id <http://www.w3.org/1999/02/22-rdf-syntax-ns\#type> <http://www.wikidata.org/entity/Q11344>"} This triple pattern does not correspond to the data model in Wikidata as it uses the "instance of" property instead of "rdf:type" when describing that an item is a type of a class. To overcome this issue we had to modify the source code so that it used "http://www.wikidata.org/prop/direct/P31" instead of "<http://www.w3.org/1999/02/22-rdf-syntax-ns\#type>" when translating GraphQL queries to SPARQL queries when fragments are used. Unlike the other two proposed solutions where the "instance" property must be used in the queries, this solution does not require it. Consequently, no entries for the mapping of "instance" of to its IRI, http://www.wikidata.org/entity/Q11344), is needed in the JSON-LD context.
 
@@ -352,7 +350,7 @@ SELECT ?id ?id_id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discove
 \end{lstlisting}
 \end{minipage}
 
-The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. Solutions 1 and 2 are more feasible then Solution 3. This way of describing the "instance of" relationship using inline fragments is not intuitive, as they are primarily used to query a field that returns an interface or a union type.\footnote{https://graphql.org/learn/queries/\#inline-fragments.}
+The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. The first two solutions, Inline-ID based and ID based, are more feasible than the Fragment based solution. The way of describing the “instance of” relationship using inline fragments in the third solution  is not intuitive, as they are primarily used to query a field that returns an interface or a union type.\footnote{https://graphql.org/learn/queries/\#inline-fragments.} Between the first two solutions, the second one namely the ID based solution is more intuitive in writing GraphQL queries that the first solution.
 
 \subsection{Default JSON-LD context}
 
@@ -459,7 +457,7 @@ type SovereignState @service(id:"wikidata-sparql"){
 
 Once an HyperGraphQL instance is set up, we can write the GraphQL query in the provided graphiql interface that can simply be run in a browser. After the query is executed, the instance fetches the results from Wikidata and displays them in the interface. 
 
-HyperGraphQL translates the root node to be an rdf:type of some subject. Since this does not comply with the Wikidata data model, we had a similar issue like the one we discussed in Solution 3 of the previous section regarding inline fragments in GraphQL-LD. To overcome this issue we had to update the source code so that the generated SAPRQL queries use instance of property instead of rdf:type.
+HyperGraphQL translates the root node to be an rdf:type of some subject. Since this does not comply with the Wikidata data model, we had a similar issue like the one we discussed in the Fragment based Solution 3 of the previous section regarding inline fragments in GraphQL-LD. To overcome this issue we had to update the source code so that the generated SAPRQL queries use instance of property instead of rdf:type.
 
 The generated SPARQL queries are not viewable by default. We had to modify the logging option in the source code to log SPARQL queries on the command line. Listings XYZ and XYZ show the generated SPARQL query and the results fetched. As before we show only the first 3 results. 
 
@@ -611,3 +609,14 @@ SELECT * WHERE {
 \section{Differences and Limitations}
 
 \textcolor{red}{Query, Functionality, Performance, Limitations}
+
+\section{Technicalities and setup}
+There were some challenges encountered when trying to test GraphQL-LD and HypergraphQL, and using them to query Wikidata. 
+
+With GraphQL-LD, there were issues running the examples provided in the official documentation. These were related with compatibility when invoking the programmatic API written in ES6 on modules written in CommonJS. To solve this issue we had to update the API codes and the root level node package. Since GraphQL-LD is predicate based, it was challenging to find a workaround to query Wikidata. There were no examples on the documentation for subject-based querying. A significant amount of time and research was invested in finding out the three proposed solutions. The process of creating a default context required a lot of time and resource consumption. The original dump file of truthy statements was around 60GB, and hence required a large bandwidth and memory consumption for downloading and parsing the file. 
+
+An important part of our work is to analyze the generated SPARQL queries. When working with HyperGraphQL, the viewing of the generated SPARQL queries is not available by default. We had to study the source code in detail in order to log them on the command line. 
+
+We discussed in the previous chapter about the data model in Wikidata where the RDF property name "rdf:type" is replaced by Wikidata property "instance of". This property is used when the subject is an instance of a class. In GraphQL-LD, the fragments in GraphQL queries apply on types. When translating to SPARQL queries, the predicate rdf:type is used to connect the subject to some type of object. We had to analyze the "GraphQL to SPARQL algebra" module in order to update the source code so that GraphQL-LD used "instance of" instead of "rdf:type". Similarly, HyperGraphQL also used rdf:type as the property when translating the root node in GraphQL queries to SPARQL. A similar effort was needed to update the source code such that "instance of" was used instead of "rdf:type" so that data from Wikidata could be queried.
+
+We have created a public repository\footnote{https://github.com/AnasShahab/querying-wikidata-with-graphQL.} where all the changes made to the source code of both the approaches, GraphQL-LD and HyperGraphQL, are retained. This repository can be used to test the querying of Wikidata via both of the approaches. Along with containing the installation guide to use the repository, it contains examples to query Wikidata including the ones used in this report.

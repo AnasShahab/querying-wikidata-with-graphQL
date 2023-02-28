@@ -2,8 +2,7 @@
 
 In this chapter, we focus on ways of querying RDF Graphs using GraphQL. A GraphQL query has a tree-like structure. To traverse the query we can follow this tree structure, i.e., we can go up to a parent node, down to a child node or left/right to a sibling node \cite{Perez2009}. This imitates the graph structure of by RDF data.
 
-In section XYZ of the previous chapter, we highlighted the differences between GraphQL and SPARQL. Considering the limitations of SPARQL, and the advantages that GraphQL has over it, GraphQL seems to be a prospective choice to querying RDF Graphs. For instance, the verbosity and the steep learning curve of SPARQL pose a challenge to developers in working with SPARQL. Also, the limited availability of libraries and frameworks for implementing SPARQL in applications creates a significant obstacle.
-\lukas{just a reminder: be careful to keep a balanced comparison; SPARQL has obvious advantages over GRAPHQL in being (presumably) more expressive, e.g. because of basic graph patterns}
+In section XYZ of the previous chapter, we highlighted the differences between GraphQL and SPARQL. SPARQL has advantages over GraphQL, like being more expressive owing to basic graph patterns. However it has come limitations. Considering these limitations along with the advantages that GraphQL has over SPARQL, GraphQL seems to be a prospective choice to querying RDF Graphs.  For instance, the verbosity and the steep learning curve of SPARQL pose a challenge to developers in working with SPARQL. Also, the limited availability of libraries and frameworks for implementing SPARQL in applications creates a significant obstacle. 
 
 In recent years, there have been attempts at providing approaches to querying linked data represented by RDF via GraphQL. This gave rise to several commercial and open-source solutions. Most notable ones include:
 
@@ -29,8 +28,8 @@ GraphQL-LD and HyperGraphQL are two open source solutions that can be used to qu
 
 \section{GraphQL-LD}
 
-GraphQL-LD is an \textcolor{red}{academic approach} introduced by \citeauthor{Taelman2018} to query knowledge graphs via GraphQL \cite{Taelman2018}. The main working process behind this is to extend the GraphQL queries with JSON-LD context. 
-\anas{How can I explain academic approach?}
+GraphQL-LD originates from an ongoing research work proposed by \citeauthor{Taelman2018} to query knowledge graphs via GraphQL \cite{Taelman2018}. The main working process behind this is to extend the GraphQL queries with JSON-LD context to fetch RDF data. 
+
 JSON (Java Script Object Notation) is a widely popular data exchange format used for storing and sending information over the internet. JSON-LD (JavaScript Object Notation for Linked Data) is a syntax used to serialize Linked Data in JSON. It is also a W3C Standard. JSON-LD provides features such as identifying JSON objects by IRIs and annotating strings with their language. The official documentation for JSON-LD provided by W3C gives a detailed explanation of its features \cite{Sporny2014}. JSON-LD context is used to map terms into IRIs. It allows the data exchanged to be unambiguous globally in the sense that it can be meaningful to anyone receiving it on the web.   
 
 The GraphQL query selects the data (nested in fields) that we want to fetch. The JSON-LD context maps the query fields to URIs. In other words, it helps to provide a link between the items in the nodes of the queries and the actual resources that exist in the respective Linked Data source. The GraphQL queries are then converted into SPARQL queries that can be used to query any source consisting of Linked Data and a SPARQL endpoint.
@@ -48,7 +47,6 @@ Listing XYZ and Listing XYZ shows an example where a query coupled with JSON-LD 
 }
 \end{lstlisting}
 \end{minipage}
-\lukas{reminder: same spacing on left and right would look better!}
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=listing:listing7, caption={JSON-LD context}]
@@ -63,17 +61,16 @@ Listing XYZ and Listing XYZ shows an example where a query coupled with JSON-LD 
 
 The approach taken by GraphQL-LD consists primarily of two standalone modules:
 \begin{itemize}
-	\item GraphQL to SPARQL algebra
-	\item SPARQL results to tree
+	\item \textbf{GraphQL to SPARQL algebra}: Parses a GraphQL query to SPARQL algebra expression
+	\item \textbf{SPARQL results to tree}: Converts a SPARQL query result into a tree structure
 \end{itemize}
-\lukas{maybe give like a one sentence description for each at this point}
 
 
 \subsection{GraphQL to SPARQL algebra}
 
-The "GraphQL to SPARQL algebra" module is used for parsing a GraphQL query into SPARQL algebra\footnote{https://www.w3.org/TR/sparql11-query/\#sparqlQuery.} with the help of a JSON-LD context. SPARQL algebra \lukas{being picky here but SPARQL algebra itself is probably not an expression; you could say ``A SPARQL algebra expression is formed by ...''}is an expression formed from parsing the strings in SPARQL query followed by some transformations. It is basically used to provide semantics to the syntax in SPARQL query.
+The "GraphQL to SPARQL algebra" module is used for parsing a GraphQL query into an expression in SPARQL algebra\footnote{https://www.w3.org/TR/sparql11-query/\#sparqlQuery.} with the help of a JSON-LD context. A SPARQL algebra expression is is formed from parsing the strings in SPARQL query followed by some transformations. It is basically used to provide semantics to the syntax in SPARQL query.
 
-The algorithm for the conversion of GraphQL query to SAPRQL algebra is based on translating the tree-like structure of GraphQL to links of triple patterns or statements  in SPARQL \cite{Taelman2018}. Listing XYZ shows the SPARQL algebra \lukas{the SPARQL algebra expression (?)}obtained by parsing the GraphQL query in Listing XYZ.
+The algorithm for the conversion of GraphQL query to SPARQL algebra expression is based on translating the tree-like structure of GraphQL to links of triple patterns or statements  in SPARQL \cite{Taelman2018}. Listing XYZ shows the SPARQL algebra obtained by parsing the GraphQL query in Listing XYZ.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=listing:listing8, caption={Generated SPARQL Algebra}]
@@ -97,7 +94,6 @@ The algorithm for the conversion of GraphQL query to SAPRQL algebra is based on 
 \end{minipage}
 
 The Quads are listed in Listing XYZ:
-\lukas{hope I told you that already: you can use ``label'' and ``ref'' to get section numbers or listing numbers or almost anything else}
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=listing:listing9, caption={The expansion of Quads}]
@@ -219,8 +215,7 @@ A comprehensive information on the conversion from SPARQL results to tree-strcut
 
 The basic overview is that GraphQL-LD takes a GraphQL query and a JSON-LD context from the user and converts the query into a SPARQL query. This generated SPARQL query is sent to a Linked Data interface such as a SPARQL endpoint for execution. We can also use this to query our own own local Linked Data files instead of a remote endpoint. Finally, the obtained query results from the endpoint are then converted into a tree-based structure corresponding to the original GraphQL query. Figure XYZ shows an overview of this approach. Here we show the SPARQL endpoint as the interface being queried. The modules in GraphQL-LD are implemented in TyperScript and JavaScript, and thus can be used in Javascript applications.
 
-GraphQL-LD is predicate-oriented. This means that it focuses on querying the relationships between the subject and object \cite{Werbrouck2019a}. This imposes a problem for implementing subject-based queries when we want to query for a specific class. An example for this would be querying for an item that is of type chemical element. To overcome this problem we would need a workaround. However, this makes the query complicated to write. In the next chapter where we implement querying Wikidata using GraphQL-LD, we discuss three workarounds that can used when we want to implement subject-based queries.
-\lukas{I think for DBPedia, which is what GraphQL-LD is designed for, this was not a problem since each entity also had a property with the same name(?); maybe mention this (if it is true)}
+GraphQL-LD is predicate-oriented. This means that it focuses on querying the relationships between the subject and object \cite{Werbrouck2019a}. This imposes a problem for implementing subject-based queries when we want to query for a specific class. An example for this would be querying for an item that is of type chemical element. To overcome this problem we would need a workaround. However, this makes the query complicated to write. In the next chapter where we implement querying Wikidata using GraphQL-LD, we discuss three workarounds that can used when we want to implement subject-based queries. 
 
 Since GraphQL-LD is schema-less, it not possible to perform introspection\footnote{https://graphql.org/learn/introspection/ .} -  querying a GraphQL schema for information about the supported queries - since the user is not aware of the data's schema \cite{Gleim2020}. However, this is not necessary since all exposed Linked Data can be queried with GraphQL-LD \cite{Werbrouck2019a}. When writing queries, GraphQL-LD users would need to have a good understanding of the data scheme of the queried RDF data.  
 
@@ -336,4 +331,4 @@ SELECT * WHERE {
 
 We discussed in the previous section we discussed that in GraphQL-LD implementation, the result set is empty if any of the fields does not fetch a result (if the optional tag is not given to the field in the GraphQL query). With HyperGraphQL this is relaxed since the fields are translated into optional SPARQL triple patterns. We will discuss the differences between the queries generated with GraphQL-LD and HyperGraphQL in detail in chapter XYZ.
 
-Once the instance runs on the local server, a GraphiQL\footnote{https://github.com/graphql/graphiql.} interface is created. This is the basically a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like json+rdf+xml and json+turtle.
+Once the instance runs on the local server, a GraphiQL\footnote{https://github.com/graphql/graphiql.} interface is created. This is the basically a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like json+rdf+xml and json+turtle. 
