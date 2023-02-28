@@ -25,6 +25,7 @@ RDF Schema (RDFS) is the Vocabulary Description Language for RDF. Basically, it 
 
 According to RDFS, resources are divided into groups known as classes. Each member of a class is called an instance of that class, and is itself also a resource. The relationship between subject and object resources is described via RDF properties Essentially, the predicate of an RDF statement is an instance of RDF property. For instance, to identify that a resources is an instance of a class we use the predicate rdf:type which is in turn an instance of RDF property. W3cC provides a thorough documentation on RDF Schema.\footnote{w3.org/TR/2014/REC-rdf-schema-20140225/ .} In Figure 1 we see that Helium is an instance of the class chemical element. The property instance of describes the relation between the subject Helium and object chemical element.
 \anas{Is the concept of property and predicate clear?}
+\lukas{honestly, I don't quite get it yet; let's discuss}
 
 In order to exchange graphs across the web we need to identify the resources uniquely. For this we use IRIs which are basically identifiers in RDF. The graph shown in Figure~\ref{fig:figure 1} can be represented using an RDF graph. Formally, the building blocks of RDF graphs are IRIs, literals and blank nodes. These are defined as follows.
 
@@ -183,7 +184,7 @@ Wikidata is a free and publicly available knowledge base that can be read and ed
 
 One of the original purposed behind the creation of Wikidata was to help its sister projects. Initially, Wikipedia and its sister projects used to maintain their own lists of interlanguage links. This refers to links between Wikipedia articles about the same topic but in different languages. After 2012, these interlanguage links were provisioned via Wikidata. Wikidata is also used to display data shown inside the pages in Wikipedia. The usage of this mainly depends on the language of the Wiki. For instance, in the case of some languages, parts of the Wikipedia pages are created automatically from the data in Wikidata. Others, especially those of smaller languages that are not widely used, use Wikidata to create placeholder pages when an article may not be in their respective language. In 2018, around 59\% of Wikidata information was used in English Wikipedia articles, although mostly for external identifiers and coordinate locations \cite{Wikipedia2017}. 
 
-Wikidata stores information in the form of structured data in a database \cite{Tharani2021}. This is not the case for its sister projects as they contain unstructured data stored. The information on their web pages is not directly given a structure in the form of tables or lists. Wikidata acts as a central storage for these projects and focuses on providing a structure for their data \cite{Wikidata2014}. Addtionally, Wikidata also supports linked data. This means that the data stored can be linked to datasets and databases like Google Books and OmegaWiki. Wikidata can also be used for quality checks against Wikipedia articles. This is useful when information about a specific topic needs to be known and the solution is easily found by querying the knowledge graph, in this case Wikidata.
+Wikidata stores information in the form of structured data in a database \cite{Tharani2021}. This is not the case for its sister projects as they contain unstructured data stored. The information on their web pages is not directly given a structure in the form of tables or lists. Wikidata acts as a central storage for these projects and focuses on providing a structure for their data \cite{Wikidata2014}. \lukas{typo}Addtionally, Wikidata also supports linked data. This means that the data stored can be linked to datasets and databases like Google Books and OmegaWiki. Wikidata can also be used for quality checks against Wikipedia articles. This is useful when information about a specific topic needs to be known and the solution is easily found by querying the knowledge graph, in this case Wikidata.
 
 Moreover, there is also a wide range of commercial and research oriented applications for Wikidata. This is due to the fact that it has a large amount of real world data. For instance, Wikidata has external usages in many large organizations such as Eurowings, Google, Apple and Amazon. This includes tasks such as data integration, authority control, identity providing and data-driven journalism. In the field of research, Wikidata is used for collecting test data for knowledge graph related algorithms and training data for machine learning projects.
 
@@ -277,6 +278,7 @@ WHERE {
 \end{minipage}
 
 Table 1 shows the results obtained in a tabular form. Among the results, there is the element Helium (Q560) that we have used as an example in Fig 1 and Fig 3. 
+\lukas{(fix table)}
 
 \begin{table}[h]
 	\begin{center}
