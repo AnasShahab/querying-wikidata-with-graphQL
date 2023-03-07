@@ -350,7 +350,7 @@ SELECT ?id ?id_id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discove
 \end{lstlisting}
 \end{minipage}
 
-The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. The first two solutions, Inline-ID based and ID based, are more feasible than the Fragment based solution. The way of describing the “instance of” relationship using inline fragments in the third solution  is not intuitive, as they are primarily used to query a field that returns an interface or a union type.\footnote{https://graphql.org/learn/queries/\#inline-fragments.} Between the first two solutions, the second one namely the ID based solution is more intuitive in writing GraphQL queries that the first solution.
+The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. The first two solutions, Inline-ID based and ID based, are more feasible than the Fragment based solution. The way of describing the “instance of” relationship using inline fragments in the third solution  is not intuitive, as they are primarily used to query a field that returns an interface or a union type.\footnote{https://graphql.org/learn/queries/\#inline-fragments.} Between the first two solutions, the second one namely the ID based solution is more intuitive in writing GraphQL queries than the first solution.
 
 \subsection{Default JSON-LD context}
 
@@ -606,9 +606,6 @@ SELECT * WHERE {
 \end{lstlisting}
 \end{minipage}
 
-\section{Differences and Limitations}
-
-\textcolor{red}{Query, Functionality, Performance, Limitations}
 
 \section{Technicalities and setup}
 There were some challenges encountered when trying to test GraphQL-LD and HypergraphQL, and using them to query Wikidata. 

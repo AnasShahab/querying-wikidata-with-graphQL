@@ -3,7 +3,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{mathptmx}
 \usepackage{amsmath,amssymb,amsfonts, amsthm}
-
+\usepackage{rotating}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\usepackage{tablefootnote}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
@@ -24,7 +28,7 @@
 \usepackage{xcolor}
 %\usepackage{afterpage}
 \usepackage{parskip} 
-%removes indentation but gives some spacing ebtween para
+%removes indentation but gives some spacing ebtween parae the
 \usepackage{todonotes}
 \usepackage[toc,acronym]{glossaries}
 
@@ -159,7 +163,7 @@ Dresden, \textcolor{red}{XX.XX.2023} \\
 
 \pagebreak
 
-\input{chapters/5-evaluation}
+\input{chapters/5-comparison}
 
 \pagebreak
 
