@@ -1,6 +1,7 @@
 \chapter{Approaches for Querying RDF Graphs with GraphQL}
 
 In this chapter, we focus on ways of querying RDF Graphs using GraphQL. A GraphQL query has a tree-like structure. To traverse the query we can follow this tree structure, i.e., we can go up to a parent node, down to a child node or left/right to a sibling node \cite{Perez2009}. This imitates the graph structure of by RDF data.
+\lukas{why is this not mentioned in the preliminaries when introducing graphql?}
 
 In section XYZ of the previous chapter, we highlighted the differences between GraphQL and SPARQL. SPARQL has advantages over GraphQL, like being more expressive owing to basic graph patterns. However it has come limitations. Considering these limitations along with the advantages that GraphQL has over SPARQL, GraphQL seems to be a prospective choice to querying RDF Graphs.  For instance, the verbosity and the steep learning curve of SPARQL pose a challenge to developers in working with SPARQL. Also, the limited availability of libraries and frameworks for implementing SPARQL in applications creates a significant obstacle. 
 
@@ -331,4 +332,4 @@ SELECT * WHERE {
 
 We discussed in the previous section we discussed that in GraphQL-LD implementation, the result set is empty if any of the fields does not fetch a result (if the optional tag is not given to the field in the GraphQL query). With HyperGraphQL this is relaxed since the fields are translated into optional SPARQL triple patterns. We will discuss the differences between the queries generated with GraphQL-LD and HyperGraphQL in detail in chapter XYZ.
 
-Once the instance runs on the local server, a GraphiQL\footnote{https://github.com/graphql/graphiql.} interface is created. This is the basically a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like json+rdf+xml and json+turtle. 
+Once the instance runs on the local server, a GraphiQL\footnote{https://github.com/graphql/graphiql.} interface is created. This is the basically a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like json+rdf+xml and json+turtle.

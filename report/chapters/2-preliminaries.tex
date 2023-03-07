@@ -23,12 +23,19 @@ RDF Schema (RDFS) is the Vocabulary Description Language for RDF. Basically, it 
 	\item the different concrete syntaxes such as Triples, which is shown in section XYZ
 \end{itemize}
 
-According to RDFS, resources are divided into groups known as classes. Each member of a class is called an instance of that class, and is itself also a resource. The relationship between subject and object resources is described via RDF properties Essentially, the predicate of an RDF statement is an instance of RDF property. For instance, to identify that a resources is an instance of a class we use the predicate rdf:type which is in turn an instance of RDF property. W3cC provides a thorough documentation on RDF Schema.\footnote{w3.org/TR/2014/REC-rdf-schema-20140225/ .} In Figure 1 we see that Helium is an instance of the class chemical element. The property instance of describes the relation between the subject Helium and object chemical element.
+According to RDFS, resources are divided into groups known as classes. Each member of a class is called an instance of that class, and is itself also a resource.
+\lukas{do you mean that the instance is also a resource or the class is also a resource?}
+The relationship between subject and object resources is described via RDF properties.
+\lukas{sounds like subject and object resources have been introduced but I think they have not}
+Essentially, the predicate of an RDF statement is an instance of RDF property. For instance, to identify that a resources is an instance of a class we use the predicate rdf:type which is in turn an instance of RDF property. W3cC provides a thorough documentation on RDF Schema.\footnote{w3.org/TR/2014/REC-rdf-schema-20140225/ .} In Figure 1 we see that Helium is an instance of the class chemical element. The property instance of describes the relation between the subject Helium and object chemical element.
 \anas{Is the concept of property and predicate clear?}
+\lukas{I think this needs some reworking still; you talk about a lot of things like subject, object, predicate, statements, ...; it sounds a bit like the reader should already know what some of these mean but I think you do not mention any of these ealier}
+\lukas{also: are properties part of RDF or RDFS?, i.e. is the whole paragraph about RDFS or just the first sentence?}
 
 In order to exchange graphs across the web we need to identify the resources uniquely. For this we use IRIs which are basically identifiers in RDF. The graph shown in Figure~\ref{fig:figure 1} can be represented using an RDF graph. Formally, the building blocks of RDF graphs are IRIs, literals and blank nodes. These are defined as follows.
+\lukas{what exactly do you mean by building blocks here? are those the nodes or the edges or something else?}
 
-\subsection*{IRI}
+\subsection*{IRI}\lukas{spell it out in title and maybe give abbreviation in parenthesis}
 %\subsubsection{IRIs}
 A Uniform Resource Identifier (\acrshort{URI}) is a sequence of a subset of ASCII characters that identifies any web resource by using a name, a location, or both. They have a scheme, authority, path, and query and fragment, where all parts other than scheme and path are optional. URIs are of the form \textbf{scheme:[//authority]path[?query][\#fragment]}. For example, \textit{http://www.wikidata.org/entity/Q560} is an IRI that identifies the chemical element Helium on Wikidata. A Uniform Resource Locator (\acrshort{URL}) is a subset of URI that is used to specify the location of a digital document.
 
@@ -37,7 +44,7 @@ An Internationalized Resource Identifier (\acrshort{IRI}) is a generalized form 
 In RDF an IRI is used as a name (can be thought of as an ID) for graph nodes. It defines the resources that appears as nodes or edge labels in a RDF graph. There are already several pre-existing IRIs available for common use. New domain specific IRIs can be created based on the application. However, we must ensure there no conflicts with other IRIs available on the web.
 
 \subsection*{RDF Literals}
-%\subsubsection{RDF Literals}
+% \subsubsection{RDF Literals}
 
 An RDF literal consists of three essential elements: a lexical value, a datatype IRI and an optional language tag. The lexical value is a string\footnote{RDF is based on Unicode strings.} that corresponds to a particular literal value in the value space, where value space is the set of all possible values that a datatype can have. There are many datatypes\footnote{A full list is available on the W3C's section on RDF datatypes: www.w3.org/TR/2014/REC-rdf11-concepts-20140225/\#section-Datatypes.} in RDF some of which are string, Boolean, decimal and integer.
 
@@ -210,6 +217,7 @@ Figure~\ref{fig:figure 4} shows an excerpt of the Wikidata page on the item Heli
 \end{figure}
 
 Properties in Wikidata resemble RDF properties and are essentially attributes for describing entities. They are identified by a PID - an ID prefixed with the letter "P" and followed a number. They belong to the property namespace in wikidata - http://www.wikidata.org/wiki/Property:PID. Like items, they also have labels, descriptions, aliases and statements but no sitelinks. However, they has an additional part called datatype that determines which values they accept, such as string, quantity and time.\footnote{Wikidata provides a list of all the datatypes: https://www.wikidata.org/wiki/Special:ListDatatypes.}
+\lukas{maybe more detail how wikidata relates to RDF}
 
 Figure~\ref{fig:figure 5} shows an excerpt of the property instance of page on Wikidata.\footnote{https://www.wikidata.org/wiki/P31.} The property has a PID of P31 along and with multilingual labels, descriptions and aliases. From the statement we understand that it this property also has an instance of property with Wikidata property being the value. The statement has no qualifiers or references, and has the normal rank. The instance of property accepts the datatype item as a value.
 
@@ -233,7 +241,9 @@ Wikidata dumps is useful when we know our result set will be significantly large
 %\subsection{SPARQL}
 SPARQL Protocol and RDF Query Language (SPARQL)\footnote{https://www.w3.org/TR/sparql11-overview/ .} is a W3C recommended query language for RDF. This means it allows to query any data source that can be mapped to RDF. It is also a HTTP-based protocol for linked open data on the web. This enables the transmission of SPARQL queries and results between a client and a SPARQL engine. The first working draft for SPARQL was released in 2004 and it became a W3C Recommendation in 2008 \cite{Perez2009}. 
 
-Queries in SPARQL are based on matching graph patterns and can be used to retrieve, add or delete data in the RDF based dataset. In section XYZ we saw that RDF data is based on triples - subject, object and predicate. Consequently, a query in SPARQL consists of a set of triple patterns. Each of the elements of the triple can be a variable (a string beginning with ? or \$) that needs to be queried. The solution to the variables is obtained by matching the query patterns to the triples in the dataset.
+Queries in SPARQL are based on matching graph patterns and can be used to retrieve, add or delete data in the RDF based dataset. In section XYZ we saw
+\lukas{avaid past tense}
+that RDF data is based on triples - subject, object and predicate. Consequently, a query in SPARQL consists of a set of triple patterns. Each of the elements of the triple can be a variable (a string beginning with ? or \$) that needs to be queried. The solution to the variables is obtained by matching the query patterns to the triples in the dataset.
 
 There are four forms of queries - SELECT, ASK, CONSTRUCT and DESCRIBE. 
 \begin{itemize}
@@ -245,7 +255,7 @@ There are four forms of queries - SELECT, ASK, CONSTRUCT and DESCRIBE.
 
 In our work, we only consider SELECT queries. These consist of the following major blocks:
 \begin{itemize}
-\item Prologue: PREFIX and BASE keywords that function similarly to those in RDF turtle format
+\item Prologue: PREFIX and BASE keywords that function similarly to those in RDF turtle format\lukas{point there}
 \item Select clause: SELECT keyword followed by either a list of variables and variable assignments, or by *
 \item Where clause: WHERE keyword followed by a query graph pattern to be matched
 \item Solution set modifiers: Change the set of solutions using modifiers such as LIMIT and OFFSET
@@ -310,8 +320,11 @@ Table 1 shows the results obtained in a tabular form. Among the results, there i
 \section{GraphQL}
 
 GraphQL (Graph Query Language) is an open source query language for APIs (Application Programming Interfaces) and a runtime for executing those queries against existing data. It describes data structured in a graph format – a collection of objects (nodes) connected to each other by some kind of relationships (edges). Runtime is usually implemented by a server.
+\lukas{I think it's confusing to say that graphql describes data. GraphQL is not a data store.}
 
-GraphQL is usually served over HTTP through a GraphQL server. A GraphQl server consists of two main parts – schema and resolver. The API developers create a schema that is strictly typed and describes all the possible data a client can query using the service. The schema specifies object types and fields along with operations on those types. The object type represents the kind of object that can be requested by a client. 
+GraphQL is usually served over HTTP through a GraphQL server.
+\lukas{not sure with the wording; a graphql api might be served but graphql not really; first and foremost GraphQL is a query language}
+A GraphQl server consists of two main parts – schema and resolver. The API developers create a schema that is strictly typed and describes all the possible data a client can query using the service. The schema specifies object types and fields along with operations on those types. The object type represents the kind of object that can be requested by a client. 
 
 There are three operations types – query, mutation and subscription.  We look at the query operation in this chapter; the other two are outside the scope of this report. Queries are used to fetch or read data. When compared to REST (Representational State Transfer),  queries operations in GraphQL are similar to GET requests. A resolver in GraphQL server is a function that is associated with every field and contains instructions on how to process that particular field. In other words, the resolver is responsible for retrieving a value from the data source. 
 
