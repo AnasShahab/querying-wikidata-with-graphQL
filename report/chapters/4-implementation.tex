@@ -1,4 +1,4 @@
-\chapter{Implementing the approaches on Wikidata}
+\chapter{Implementing GraphQL and HyperGraphQL on Wikidata}
 
 In this chapter we discuss and demonstrate the implementation of querying the knowledge graph Wikidata using both GraphQL-LD and HyperGraphQL. This is followed by the technical details and the setup of both the tools. Then, we conclude the chapter by discussing the differences between both the approaches and their limitations respectively.
 
@@ -350,7 +350,11 @@ SELECT ?id ?id_id ?chemicalFormula ?boilingPoint ?meltingPoint ?density ?discove
 \end{lstlisting}
 \end{minipage}
 
-The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. The first two solutions, Inline-ID based and ID based, are more feasible than the Fragment based solution. The way of describing the “instance of” relationship using inline fragments in the third solution  is not intuitive, as they are primarily used to query a field that returns an interface or a union type.\footnote{https://graphql.org/learn/queries/\#inline-fragments.} Between the first two solutions, the second one namely the ID based solution is more intuitive in writing GraphQL queries than the first solution.
+The above three proposed solution are prospective workarounds for describing the "instance of" relationship between two items in Wikidata. The first two solutions, Inline-ID based and ID based, are easier to write than the Fragment based solution. We can replace the id in the subject node of the generated SPARQL query with something more readable such as chemicalElement by using aliasing in the GraphQL query. Similarly, the results will also contain the alias in the root nodes. 
+
+The way of describing the "instance of" relationship using inline fragments in the third solution  is not intuitive, as they are primarily used to query a field that returns an interface or a union type.(footnote: https://graphql.org/learn/queries/\#inline-fragments.) 
+
+Between the first two solutions, the second one namely the ID based solution is more intuitive in writing GraphQL queries than the first solution.  We use this solution when providing examples in 
 
 \subsection{Default JSON-LD context}
 
