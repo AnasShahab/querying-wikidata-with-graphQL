@@ -11,7 +11,7 @@ The World Wide Web consists of data published in various formats such as PDF, CS
 The Resource Description Framework (RDF) is a standard framework used to represent information available in the Web in the form of Linked Data. It is also known to be the data model of Semantic Technologies and of the Semantic Web. 
 
 Structurally RDF is a graph based data model. It is used for describing and exchanging graphs over the Web. The graphs specified by RDF are directed edge-labelled graphs. This means that the edges connect source nodes to target nodes, and have labels. The graphs are a restricted form of multi-graphs. This implicates that there can be multiple edges between the same nodes. However, these edges must have different labels. Fig 2 shows the representation of some knowledge about the chemical element Helium (extracted from the knowledge graph Wikidata) using a directed edge-labelled graph. 
-
+\lukas{as always: use refs!}
 
 \begin{figure}[h]
   \centering
@@ -30,7 +30,7 @@ The technical of formal representation of graphs in RDF makes use of some import
 
 In order to exchange graphs across the web we need to identify resources uniquely. For this identification, we use identifiers in RDF called IRIs. 
 
-A Uniform Resource Identifier (\acrshort{URI}) is a sequence of a subset of ASCII characters that identifies any web resource by using a name, a location, or both. They have a scheme, authority, path, and query and fragment, where all parts other than scheme and path are optional. URIs are of the form \textbf{scheme:[//authority]path[?query][\#fragment]}. For example, \textit{http://www.wikidata.org/entity/Q560} is an IRI that identifies the chemical element Helium on Wikidata. A Uniform Resource Locator (\acrshort{URL}) is a subset of URI that is used to specify the location of a digital document.
+A Uniform Resource Identifier (\acrshort{URI}) is a sequence of a subset of ASCII characters that identifies any web resource by using a name, a location, or both. They have a scheme, authority, path, and query and fragment, where all parts other than scheme and path are optional. URIs are of the form \textbf{scheme:[//authority]path[?query][\#fragment]}. For example, \textit{http://www.wikidata.org/entity/Q560} is an IRI\lukas{URI(?)} that identifies the chemical element Helium on Wikidata. A Uniform Resource Locator (\acrshort{URL}) is a subset of URI that is used to specify the location of a digital document.
 
 An Internationalized Resource Identifier (\acrshort{IRI}) is a generalized form of URI that helps to distinguish resources with Unicode. Basically, the character set in URI is extended to the Universal Coded Character Set. This enables it to contain any Latin and non-Latin characters except the reserved characters.
 
@@ -39,7 +39,8 @@ In RDF an IRI is used as a name (can be thought of as an ID) for graph nodes. It
 \subsection*{RDF Literals}
 %\subsubsection{RDF Literals}
 
-We do not represent data values in RDF by IRIs. The data values do not need to be identified uniquely since they share the same meaning in every application. RDF data values or literals are used to represent resources that have values belonging to datatypes. Each literal can have only one datatype. RDF literals are written in the format "lexical value" \textasciicircum\ textasciicircum datatype-IRI, where lexical value is a string and datatype is an IRI. For example, the boiling point of helium is represented as -268.9^^xsd:decimal (footnote: abbreviation for 268.9^^http://www.w3.org/2001/XMLSchema\#decimal) in RDF. In RDF graphs, we use rectangular nodes for RDF literals.
+We do not represent data values in RDF by IRIs. The data values do not need to be identified uniquely since they share the same meaning in every application. RDF data values or literals are used to represent resources that have values belonging to datatypes. Each literal can have only one datatype. RDF literals are written in the format "lexical~value"{\textasciicircum\textasciicircum}datatype-IRI, where lexical value is a string and datatype is an IRI. For example, the boiling point of helium is represented as -268.9^^xsd:decimal (footnote: abbreviation for 268.9^^http://www.w3.org/2001/XMLSchema\#decimal) in RDF. In RDF graphs, we use rectangular nodes for RDF literals.
+\lukas{make this final! (footnote should be a footnote, fix formatting)}
 
 The W3C standard XML Schema defines the datatypes and their IRIs. For example, decimals are identified by the IRI http://www.w3.org/2001/XMLSchema\#decimal. W3C has a good documentation on the different XML Schema built-in datatypes \cite{R.Cyganiak2014}. 
 
@@ -398,6 +399,7 @@ query QueryChemicalElement (limit 2){
 
 \end{lstlisting}
 \end{minipage}
+\lukas{shouldnt there be an array in here somewhere?}
 
 \anas{Lukas told to provide one example showing all imp features of GraphQL}
 
