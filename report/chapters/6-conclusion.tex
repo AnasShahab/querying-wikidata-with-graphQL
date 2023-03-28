@@ -1,2 +1,18 @@
 \chapter{Conclusion and future work}
 \label{ch:6}
+
+Knowledge graphs are a collection of data that is stored in the form of RDF graphs. There are many practical uses of knowledge graphs in commercial and scientific fields. Wikidata is a free and publicly available knowledge graph created at Wikimedia Deutschland. It is built on top of RDF but it has some key differences with RDF data model. 
+
+RDF is a framework that represents information in the form of Linked Data. Both RDF and RDFS provide vocabulary that defines resources and properties. RDF graphs are directed-edge labelled graphs composed of a set of triples - <subject, predicate, object>. A syntactic representation is needed to exchange RDF graphs. There are several formats for the representation such as N-Triples and Turtle.
+
+SPARQL is a protocol and query language for RDF. It is based on matching graph patterns and can query data source structured in RDF format. It supports a variety of query types such as SELECT and CONSTRUCT. However, there are some barriers in using SPARQL in commercial domains. SPARQL queries are complex in nature and have a steep learning curve. There are few tools and libraries available for working with SPARQL.
+
+GraphQL is a popular query language for working with APIs. It is simple to learn and is flexible to implement. It uses a schema that defines objects and fields. GraphQL can be integrated into commercial applications easily since there are many supporting resources that help its implementation. In this report, we provided some key differences that exist between GraphQL and SPARQL. These included the fundamental goals, growth in commercial uses, expressivity and ability to query multiple data sources.
+
+We researched on several different mechanisms to query RDF data via GraphQL. Stardog, TopBraid EDG and Ontotext Platofrm are commercial solutions that provides services to query their knowledge graphs using GraphQL. GraphQL-LD and HyperGraphQL are two open-source approaches that can be used to query RDF data using GraphQL. Since they are open sourced, they provide the opportunity to query arbitrary RDF data source and make modifications to code. We focused on the fundamental principles and features of the two approaches.
+
+Since our focus on this report was on querying Wikidata with GraphQL, we used and adapted GraphQL-LD and HyperGraphQL accordingly. As they are open-sourced, we were able to make changes that were necessary for the implementation. GraphQL-LD is predicate-based and a workaround is needed to query for resources that are a type of come specific class. We offered three solutions and offered examples for each. 
+
+Lastly, we provided a comparison on GraphQL-LD and HyperGraphQL. We highlighted on schema usage, intermediary server, updating data, reverse querying and generated SPARQL queries. When comparing the generated SPARQL queries we used examples that distinguished the capabilities of the two approaches.
+
+Both GraphQL-LD and HyperGraphQL are work in progress. They do not have all the features that are typical to GraphQL. However, they provide a prospective way to query Linked Data via GraphQL. In future we aim to work on the two approaches so that they can more seamlessly be used to query RDF graphs.
