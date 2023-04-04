@@ -27,7 +27,8 @@ The technical of formal representation of graphs in RDF makes use of some import
 %\subsubsection{IRIs}
 
 In order to exchange graphs across the web we need to identify resources uniquely. For this identification, we use identifiers in RDF called IRIs. 
-%\acrshort{URI}
+% \acrshort{URI}
+\lukas{it's odd that you talk about IRIs but then you suddenly define a URI}
 A Uniform Resource Identifier (URI) is a sequence of a subset of ASCII characters that identifies any web resource by using a name, a location, or both. It has a scheme, authority, path, and query and fragment, where all parts other than scheme and path are optional. URIs are of the form \texttt{scheme:[//authority]path[?query][\#fragment]}. A Uniform Resource Locator (URL) is a subset of URI that is used to specify the location of a digital document.
 %\acrshort{URL}
 An Internationalized Resource Identifier (IRI) is a generalized form of URI that helps to distinguish resources with Unicode. In other words, the character set in URI is extended to the Universal Coded Character Set. This enables it to contain any Latin and non-Latin characters except the reserved characters. For example, \texttt{http://www.wikidata.org/entity/Q560} is an IRI that identifies the chemical element helium on Wikidata. 
@@ -44,7 +45,8 @@ The W3C standard XML Schema defines datatypes and their IRIs.\footnote{www.w3.or
 
 Datatypes in RDF are specified by three components – value space, lexical space and lexical-to-value mapping. The value space is the set of all possible values that a datatype can have. The lexical value is a string\footnote{RDF is based on Unicode strings} that corresponds to a particular literal value in the value space. The lexical space contains a set of strings that are used to denote the values of the datatype. Lastly, the lexical-to-value mapping is a function that maps each string in the lexical space to an element in the value space. 
 
-For instance, the datatype boolean has the set \texttt{{true, false}} in the value space and the set \texttt{{true, false, 1, 0}} in the lexical space. The strings \texttt{true} and \texttt{1} from the lexical space are mapped to true that belongs to the value space. Similarly, the strings false and \texttt{0} are mapped to \texttt{0}. 
+For instance, the datatype boolean has the set \texttt{{true, false}} in the value space and the set \texttt{{true, false, 1, 0}} in the lexical space. The strings \texttt{true} and \texttt{1} from the lexical space are mapped to true that belongs to the value space. Similarly, the strings false and \texttt{0} are mapped to \texttt{0}.
+\lukas{you can try to end the paragraph on the line before (i.e. not only have a few symbols on the next line); this just looks nicer but it is not a real issue}
 
 In RDF, we can use a language-tagged string to denote a string in a specific language. This helps to provide human-readable labels to RDF literals. A language-tagged string is of the form \texttt{"string"@language}.\footnote{Here language is a well-formed language tag (after BCP47)} For example, the label for \textit{helium} in French langauge is \texttt{hélium}, and is denoted as \texttt{"hélium"@fr} in RDF. We normally ignore the datatype-IRI for strings \texttt{(http://www.w3.org/1999/02/22-rdf-syntax-ns\#langString)} when representing string literals. 
 
@@ -81,6 +83,7 @@ Figure~\ref{fig:4} shows the RDF graph of our example represented in Figure~\ref
   \caption{An RDF graph representing information about helium}
   \label{fig:4}
 \end{figure}
+\lukas{figure might be hard to read}
 
 In RDF, IRIs and literals denote resources, also called entities. In Chapter~\ref{ch:1}, we defined entities to be real world objects and abstract concepts. The predicate edge is also denoted by an IRI and represents a property. In other words, it represents a binary relation between the entities. RDF defines some resources and properties using its vocabulary. An RDF vocabulary is a collection of IRIs that we can use in RDF graphs. The RDF vocabulary is defined in the namespace \texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}, normally prefixed as \texttt{rdf:}. For example \texttt{rdf:HTML} and \texttt{rdf:type} are RDF vocabularies.
 
@@ -317,6 +320,7 @@ The namespace \texttt{http://www.wikidata.org/entity/} is used for items when qu
 		\renewcommand{\arraystretch}{1}
 	\end{center}
 \end{sidewaystable}
+\lukas{table might be hard to read}
 
 \section{GraphQL}
 \label{sec:graphql}
@@ -345,7 +349,7 @@ type ChemicalElement {
 }
 \end{lstlisting}
 \end{minipage}
-
+\lukas{did you explain what ``[ChemicalElement]'' means?}
 
 A resolver in GraphQL server is a function that is associated with every field. It contains instructions on how to process that particular field. In other words, the resolver is responsible for retrieving a value from the data source.
  
@@ -366,6 +370,7 @@ query QueryChemicalElement {
 }
 \end{lstlisting}
 \end{minipage}
+\lukas{I think i GraphQL to be able to use limit or other arguments, they need to be defined in the schema (which is not the case here)}
 
 Running the query against some data source provides a sample result as shown in Listing~\ref{lst:6}. The results obtained are in JSON format. We see that the shape of the results is similar to the shape of our query. This is crucial to GraphQL as we always get the type of response we expect when we write queries. Defining the types and fields in the schema allows the server to know the fields that the client can query for an object type. Also, GraphQL ensures the queries to return predictable results by providing the clients with control over the content of the data they receive. Hence, there is not over or under fetching of data.
 
@@ -504,6 +509,7 @@ fragment elementFields on ChemicalElement {
 }
 \end{lstlisting}
 \end{minipage}
+\lukas{Again: I think i GraphQL to be able to use first, checmicalFormula or other arguments, they need to be defined in the schema (which is not the case here)}
 
 The query \textit{GetChemicalElementDetails} takes three non-null arguments as input from the client in the form of variables – \textit{\$chemicalFormula} of type "String", \textit{\$first} of type "Int" and \textit{\$includeBoilingPoint} of type "Boolean". We see in the variable definitions section the input passed.
 
@@ -548,4 +554,4 @@ Furthermore, in SPARQL we can query if a node is connected to another node by a 
 RDF provides a system to build detailed structures from the meaning of data, and is hence more complete and capable than GraphQL schemas~\cite{Dresslar2019}. Since SPARQL works with the schema organization of RDF, this makes it more powerful than GraphQL. With SPARQL we can write complex queries that can be used to retrieve or modify data~\cite{Angele2022}. As a result, it is capable to satisfy many complex use cases.
 
 \subsection{Querying multiple sources}
-Since GraphQL alone has no notion of semantics~\cite{Taelman2018}, a schema needs to be defined by the GraphQL API developers for every interface they want the client to query. This makes it difficult to integrate data returned when querying multiple different sources. SPARQL however supports federated queries which makes it more powerful and rich. 
+Since GraphQL alone has no notion of semantics~\cite{Taelman2018}, a schema needs to be defined by the GraphQL API developers for every interface they want the client to query. This makes it difficult to integrate data returned when querying multiple different sources. SPARQL however supports federated queries which makes it more powerful and rich.
