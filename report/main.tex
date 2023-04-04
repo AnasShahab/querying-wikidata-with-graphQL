@@ -2,6 +2,8 @@
 %\documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
 \usepackage{mathptmx}
+%\usepackage{tabularx}
+%\usepackage{array}
 \usepackage{amsmath,amssymb,amsfonts, amsthm}
 \usepackage{rotating}
 \usepackage{pifont}% http://ctan.org/pkg/pifont
@@ -11,6 +13,8 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
+%\newcommand{\citeauthor}[1]{\citeauthor*{#1}}
+
 \usepackage{setspace}
 %\usepackage[top=1 in,bottom=1 in,left=3.2 cm,right=2.6 cm]{geometry}
 \usepackage[utf8]{inputenc}
@@ -19,6 +23,8 @@
 %\renewcommand{\baselinestretch}{2}
 %\renewcommand{\thesection}{\arabic{section}}
 %\raggedbottom
+%\usepackage{cite}
+%\usepackage{biblatex}
 \usepackage[sort&compress,numbers]{natbib}
 \usepackage[hidelinks]{hyperref}
 \usepackage[nottoc]{tocbibind}
@@ -33,13 +39,16 @@
 \usepackage[toc,acronym]{glossaries}
 
 \usepackage{booktabs}
+\usepackage{rotating}
 %\usepackage{minted}
 \usepackage{listings}
-
+%\usepackage{float}
+%\usepackage{caption}
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.90,0.90,0.90}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
 
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},   
@@ -59,14 +68,134 @@
     showtabs=false,                  
     tabsize=2,
     escapechar=\%,
-    framexleftmargin=5mm,
+    framexleftmargin=0.25mm,
     frame=single,
+%    float=H,
+%    escapeinside=``,
     rulecolor=\color{black}
+%    moredelim=[s][\color{purple}]{<}{>}
+%    alsoletter={<},  moredelim=[s][\color{blue}\bfseries]{<}{>},
+%    moredelim=[is][\color{blue}\bfseries\ttfamily]{<}{>}
+%    moredelim=[is][\color{blue\bfseries]{[}{]},  
 %    flexiblecolumns=true	
 }
 
+%\lstdefinestyle{mystyle2}{
+%    backgroundcolor=\color{backcolour},   
+%    commentstyle=\color{codegreen},
+%    keywordstyle=\color{magenta},
+%    numberstyle=\tiny\color{codegray},
+%    stringstyle=\color{codepurple},
+%    basicstyle=\ttfamily\large,
+%    breakatwhitespace=false,         
+%    breaklines=true,                 
+%    captionpos=b,                    
+%    keepspaces=true,                 
+%    numbers=none,                    
+%    numbersep=5pt,                  
+%    showspaces=false,                
+%    showstringspaces=false,
+%    showtabs=false,                  
+%    tabsize=2,
+%    escapechar=\%,
+%    framexleftmargin=0.25mm,
+%    frame=single,
+%    rulecolor=\color{black}
+%    flexiblecolumns=true	
+%}
+
 \lstset{style=mystyle}
 
+
+\lstdefinelanguage{SPARQL}{
+  keywords={BASE, PREFIX, SELECT, WHERE, ChemicalCompound_GET, Cat_GET, OPTIONAL, query},
+  keywordstyle=\color{red}\bfseries,
+  ndkeywords={FILTER, LANG, LIMIT, OFFSET, first, offset, limit, SERVICE,@optional, lang, COUNT, VALUES},
+  ndkeywordstyle=\color{blue}\bfseries,
+  moredelim=[s][\color{blue}]{<}{>},
+%  alsoletter={\$}, moredelim=[s][\color{red}]{[},
+%  alsoletter={[},  moredelim=[s][\color{red}\bfseries]{[}{]},  
+%  identifierstyle=\color{black},
+  sensitive=true
+%  morecomment=[l]{\#},
+%  morestring=[b]',
+%  morestring=[b]",
+%  alsodigit={-},
+%  basicstyle=\ttfamily,  
+%  stringstyle=\color{red}\itshape,
+%  commentstyle=\color{gray}\ttfamily
+%  literate=
+%    {->}{{\(\rightarrow\)}}2
+%    {<=}{{\(\leq\)}}2
+%    {>=}{{\(\geq\)}}2
+%    {|}{{\(\mid\)}}1
+}
+
+\lstdefinelanguage{GraphQL}{
+  keywords={query,mutation,subscription,fragment,on, type, data, @context, subject, predicate, object, graph, results, ChemicalElement_GET, extensions, errors},
+  keywordstyle=\color{red}\bfseries,
+  keywords=[3]{String, Int, Float, Boolean, limit, ChemicalElement, first, offset, if, Quad, bindings, lang},
+  keywordstyle=[3]\color{blue}\bfseries,
+  keywords=[2]{chemicalElement, name, id, label, chemicalFormula, boilingPoint, meltingPoint, density, discoverer, placeBirth, country, wd, wdt, instance,_id, Human, City, SovereignState, _type, @vocab, cat, chemicalCompound, color, rgb, JohannSebastianBach, hasFather, fatherOf, hasMother, cathedral, place, Paris, Cat, ChemicalCompound, Color, Airport, connectingLine, coordinateLocation, placeServed},
+  keywordstyle=[2]\color{codegreen}\bfseries,
+%  morekeywordstyle=\color{green}\bfseries,
+  moredelim=[s][\color{blue}]{"http}{"},
+%  moredelim=[s][\color{purple}]{<}{>},
+%  alsoletter={\$}, moredelim=[s][\color{red}]{[},
+%  alsoletter={[},  moredelim=[s][\color{red}\bfseries]{[}{]},  
+%  identifierstyle=\color{black},
+  sensitive=true
+%  morecomment=[l]{\#},
+%  morestring=[b]',
+%  morestring=[b]",
+%  alsodigit={-},
+%  basicstyle=\ttfamily,  
+%  stringstyle=\color{red}\itshape,
+%  commentstyle=\color{gray}\ttfamily
+%  literate=
+%    {->}{{\(\rightarrow\)}}2
+%    {<=}{{\(\leq\)}}2
+%    {>=}{{\(\geq\)}}2
+%    {|}{{\(\mid\)}}1
+}
+
+\lstdefinelanguage{GraphQLException}{
+  keywords={query,mutation,subscription,fragment,on, data, @context, results, chemicalElement, bindings},
+  keywordstyle=\color{red}\bfseries,
+  keywords=[3]{String, Int, Float, Boolean, limit, ChemicalElement, first, offset, if, Quad}, keywordstyle=[3]\color{blue}\bfseries,
+  keywords=[2]{name, chemicalFormula, boilingPoint, meltingPoint, density, input, variables, type, subject, predicate, object, graph, value},
+  keywordstyle=[2]\color{codegreen}\bfseries,
+%  morekeywordstyle=\color{green}\bfseries,
+  moredelim=[s][\color{blue}]{"http}{"},
+  sensitive=true
+}
+
+\lstdefinelanguage{GraphQLException2}{
+  keywords={Quad, chemicalElement},
+  keywordstyle=\color{red}\bfseries,
+%  keywords=[3]{String, Int, Float, Boolean, limit, ChemicalElement, first, offset, if, bindings},
+%  keywordstyle=[3]\color{blue}\bfseries,
+  keywords=[2]{termType, value, subject, predicate, object, graph, type, name, chemicalFormula, boilingPoint},
+  keywordstyle=[2]\color{codegreen}\bfseries,
+%  morekeywordstyle=\color{green}\bfseries,
+  moredelim=[s][\color{blue}]{"http}{"},
+  sensitive=true
+}
+
+\lstdefinelanguage{GraphQLException3}{
+%  keywords={Quad, chemicalElement},
+%  keywordstyle=\color{red}\bfseries,
+%  keywords=[3]{String, Int, Float, Boolean, limit, ChemicalElement, first, offset, if, bindings},
+%  keywordstyle=[3]\color{blue}\bfseries,
+  keywords=[2]{name, schema, server, services},
+  keywordstyle=[2]\color{codegreen}\bfseries,
+%  morekeywordstyle=\color{green}\bfseries,
+  moredelim=[s][\color{blue}]{"http}{"},
+  sensitive=true
+}
+
+%\lstset{language=GraphQL}
+\setlength {\marginparwidth }{2cm} 
 \newcommand{\lukas}[1]{\todo[color=green,inline]{#1}}
 \newcommand{\anas}[1]{\todo[color=red,inline]{#1}}
 
@@ -97,12 +226,14 @@
 
 \counterwithout{footnote}{chapter}
 
-\makeglossaries
 
-\input{chapters/glossary.tex}
+
+%\input{chapters/glossary.tex}
+
 
 \onehalfspacing
 \begin{document}
+
 %\maketitle
 \sloppy
 \input{chapters/title.tex}
@@ -136,15 +267,30 @@ Dresden, \textcolor{red}{XX.XX.2023} \\
 
 \chapter*{Abstract}
 %\section*{Abstract}
-Wikidata is a knowledge graph based on RDF data model. It has several applications in commercial and scientific domains. SPARQL is a query language for RDF but it is complex and poses a barrier in commercial development. On the other hand, GraphQL is a popular query language for APIs. It allows querying and manipulating data using flexible and human-oriented syntax. In this work, we show some key differences between GraphQL and SPARQL. 
+A Knowledge graph is a collection of data that is stored in the form of RDF graphs. It represents knowledge that conveys information about the real world. Knowledge graphs can be modelled using different graphs, the most commonly one being directed-edge labelled graphs. The nodes of the graph represent entities while the edges represent the relationships that exists between the entities. Knowledge graphs have several uses both in commercial and research domains. There are used widely by large companies like Google and Amazon in their applications. Some of the popular uses of knowledge graphs in the field of research are in data mining and machine learning.
 
-There are some commercial and open-source solution to query RDF data via GraphQL. In this work, we highlight some of these solutions. We mainly focus two open-source solution - GraphQL-LD and HyperGraphQL. We use these two approaches to query Wikidata. There are some key differences between these two approaches. We also demonstrate these in this work. 
+Wikidata is a free and publicly available knowledge graph created at Wikimedia Deutschland. It is popular within the research community and has a has a wide range of applications. Many large organizations such as Apple and Amazon use Wikidata for their applications. Since it has a large amount of real world data it is used for collecting data in machine learning algorithms.
+
+Wikidata is built on top of RDF but it has some key differences with RDF data model. RDF is a framework that represents information in the form of Linked Data. Both RDF and RDFS provide vocabulary that defines resources and properties. RDF graphs are directed-edge labelled graphs composed of a set of triples - <subject, predicate, object>. A syntactic representation is needed to exchange RDF graphs. There are several formats for the representation such as N-Triples and Turtle.
+
+SPARQL is a protocol and query language for RDF. It is based on matching graph patterns and can query data source structured in RDF format. It supports a variety of query types such as SELECT and CONSTRUCT. 
+
+
+\anas{complete this}
+
 
 
 %\pagenumbering{roman}
 \tableofcontents
-%\listoffigures
-%\listoftables
+\newpage
+%\renewcommand*{\lstlistingname}{List of XYZ}
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\lstlistoflistings
+%\addcontentsline{toc}{chapters}{\lstlistlistingname}
+\newpage
 \pagebreak
 
 %\doublespacing
@@ -173,10 +319,9 @@ There are some commercial and open-source solution to query RDF data via GraphQL
 \input{chapters/6-conclusion}
 %\appendix
 \singlespacing
-\bibliographystyle{splncs04}
+\bibliographystyle{ieeetr}
 \bibliography{main}
 
 
-\printglossaries
-\lukas{if the glossary and acronym list really only contain so few entries, I'd rather leave them out}
+%\printglossaries
 \end{document}
