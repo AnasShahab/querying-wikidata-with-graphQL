@@ -87,8 +87,6 @@ The algorithm for the conversion of GraphQL query to SPARQL algebra expression i
 \end{lstlisting}
 \end{minipage}
 
-\lukas{there is a lot of empty space here; can you fix this? (don't worry though if you cannot)}
-
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[columns=fullflexible, label=lst:11, caption={The expansion of Quads}, language=GraphQLException2]
 [
@@ -234,7 +232,6 @@ The basic overview is that GraphQL-LD takes a GraphQL query and a JSON-LD contex
   \caption{An overview of the flow process in GraphQL-LD}
   \label{fig:8}
 \end{figure}
-\lukas{hard to read}
 
 GraphQL-LD is predicate-oriented. This means that it focuses on querying the relationships between the subject and object~\cite{Werbrouck2019a}. This imposes a problem for implementing subject-based queries when we want to query for a specific class. An example for this would be querying for an item that is of type chemical element. To overcome this problem we would need a workaround. However, this makes the query complicated to write. In the next chapter where we implement querying Wikidata using GraphQL-LD, we discuss three workarounds that can used when we want to implement subject-based queries. 
 
@@ -353,4 +350,4 @@ SELECT * WHERE {
 
 We discussed in the previous section we discussed that in GraphQL-LD implementation, the result set is empty if any of the fields does not fetch a result (if the \texttt{@optional} directive is not given to the field in the GraphQL query). With HyperGraphQL this is relaxed since the fields are translated into \texttt{OPTIONAL} SPARQL triple patterns.
 
-Once the instance runs on the local server, a \textit{graphiQL}\footnote{https://github.com/graphql/graphiql} interface is created. This is a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like \textit{json+rdf+xml} and \textit{json+turtle}.
+Once the instance runs on the local server, a \textit{graphiQL}\footnote{https://github.com/graphql/graphiql} interface is created. This is a graphical user interface where the user can write GraphQL queries and send them to the HyperGraphQL instance running on the local server. The instance queries the RDF data and returns a response in JSON-LD enhanced with JSON-LD context. Other RDF serialization formats are also supported for the returned response like \textit{json+rdf+xml} and \textit{json+turtle}. 

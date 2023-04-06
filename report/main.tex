@@ -255,7 +255,9 @@ Dresden, \textcolor{red}{XX.XX.2023} \\
 %\thispagestyle{empty}
 \chapter*{Acknowledgements}
 %\section*{Acknowledgements}
-\textcolor{red}{\lipsum[1]}
+I want to thank Prof. Dr. Markus Kr{\"otzsch} for supervising and reviewing this thesis, and for giving me the opportunity to do it under the Chair of Knowledge-Based Systems. I want to thank Dr. D{\"o}rthe Arndt for reviewing this thesis as part of the formal assessment. I also want to deeply thank Lukas Gerlach for supporting and guiding me during the preparation of this thesis.
+
+Lastly, I want to thank my family and friends for supporting and motivating me throughout this journey.
 \blankpage
 
 %\begin{abstract}
@@ -267,18 +269,28 @@ Dresden, \textcolor{red}{XX.XX.2023} \\
 
 \chapter*{Abstract}
 %\section*{Abstract}
-A Knowledge graph is a collection of data that is stored in the form of RDF graphs. It represents knowledge that conveys information about the real world. Knowledge graphs can be modelled using different graphs, the most commonly one being directed-edge labelled graphs. The nodes of the graph represent entities while the edges represent the relationships that exists between the entities. Knowledge graphs have several uses both in commercial and research domains. There are used widely by large companies like Google and Amazon in their applications. Some of the popular uses of knowledge graphs in the field of research are in data mining and machine learning.
-\lukas{Abstract should be mostly self contained; RDF was not introduced for example (spelling it out once would be enough)}
 
-Wikidata is a free and publicly available knowledge graph created at Wikimedia Deutschland. It is popular within the research community and has a has a wide range of applications. Many large organizations such as Apple and Amazon use Wikidata for their applications. Since it has a large amount of real world data it is used for collecting data in machine learning algorithms.
+A Knowledge graph is a collection of data stored in the form of graphs. It represents knowledge that conveys information about the real world. Knowledge graphs can be modelled using different graphs, the most commonly one being directed-edge labelled graphs. In such a graph, the nodes represent entities and the edges represent the relationships that exists between the entities. Knowledge graphs have several uses in commercial and research domains. Many large companies such as Google and Amazon use knowledge graphs in their applications. In the field of research, some of the popular uses of knowledge graphs are in data mining and machine learning.
 
-Wikidata is built on top of RDF but it has some key differences with RDF data model. RDF is a framework that represents information in the form of Linked Data. Both RDF and RDFS provide vocabulary that defines resources and properties. RDF graphs are directed-edge labelled graphs composed of a set of triples - <subject, predicate, object>. A syntactic representation is needed to exchange RDF graphs. There are several formats for the representation such as N-Triples and Turtle.
+Wikidata is a free and publicly available knowledge graph created at Wikimedia Deutschland. It is widely popular within the research community and has a vast range of commercial applications. Large organizations such as Apple and Amazon use Wikidata to enrich their products and services. Wikidata is a valuable resource for researchers in many scientific domains such as biomedical research and helps in collection of data in machine learning algorithms.
 
-SPARQL is a protocol and query language for RDF. It is based on matching graph patterns and can query data source structured in RDF format. It supports a variety of query types such as SELECT and CONSTRUCT. 
+Resource Description Framework (RDF) is a framework that represents information in the form of Linked Data. RDF is based on a graph based data model, where it represents information in the form of directed-edge labelled graphs. Data in RDF is represented syntactically using triples, where a triple is a statement that consists of three parts - \textit{subject, predicate and object}. The subject and object correspond to the source and destination nodes in the graphs respectively, and represent entities. The predicate corresponds to an edge in the graphs, and represent the relationships between the entities. Several formats such as N-Triples and Turtle exists for exchanging graphs over the web. Both RDF and RDF Schema (RDFS) provide vocabulary that defines resources and properties. RDF is the primary data model for building knowledge graphs. Wikidata is built on top of RDF but it has some key differences with the RDF data model. One such example is the existence of optional qualifiers in Wikidata statements. 
 
+SPARQL is a protocol and query language for RDF. It is based on matching graph patterns and is used to query RDF graphs. As a result, we use SPARQL to query knowledge graphs. SPARQL is a powerful query language as it is expressive, and provides many features to retrieve and manipulate data. However, SPARQL queries are complex in nature and have a steep learning curve. There are few tools and libraries available to developers for working with SPARQL. This poses a barrier to using and integrating SPARQL in applications to query data from knowledge graphs.
 
-\anas{complete this}
-\lukas{need to see this again when finished}
+GraphQL is a popular query language for working with APIs. It queries data from a source using a set of fields and parameters that are defined in a schema. It is a flexible query language as users can retrieve exactly the data they need without issues of under or over fetching. They can shape the order of the query results as per their application needs. GraphQL is designed to have a human-oriented syntax. This makes it easy for developers to learn and implement it in applications. Moreover, there are many supporting resources that help the integration of GraphQL into the development of such systems.
+
+The purpose of our work is to show ways of querying the knowledge graph, Wikidata, using GraphQL queries. This helps avoid the complexity of dealing with SPARQL queries, and makes use of the flexibility and features offered by GraphQL.
+
+In this work, we show some key differences between GraphQL and SPARQL. Both the query languages were developed with different goals in mind. Developers are more experienced working with GraphQL queries than with the triple patterns that are part of SPARQL queries. They are also more equipped with working with GraphQL since fewer resources exist that support the integration of SPARQL into applications. Moreover, the complexity of SPARQL queries pose a barrier to developers to use SPARQL in commercial applications. However, SPARQL is more expressive than GraphQL since we can specify triple patterns and traverse entire graphs. GraphQL can only represent trees and retrieves data by starting from a root or parent node and then traversing along its descendants. SPARQL also supports federated querying using which it is possible to query and integrate data from multiple sources. GraphQL works with schemas that need to be defined each time a different source is queried. This makes integration of data from multiple sources difficult.
+
+We show there are some existing commercial and open-source solutions to query RDF data via GraphQL. Our main focus is to introduce two open-source solutions, GraphQL-LD and HyperGraphQL, that can be used to query Wikidata via GraphQL queries. Both these approaches use GraphQL queries to act as layer of abstraction that hides the complexity of SPARQL queries. We show extensively how these approaches operate and the respective features that they offer. 
+
+In this work, we provide details on how we can use GraphQL-LD and HyperGraphQL to fetch data from WIkidata and demonstrate the results. Since they are open-source, we made appropriate changes to the source code to implement the approaches on Wikidata. The changes were also made to help analyse the steps in the implementation and facilitate querying.
+
+Our results show that some key differences between GraphQL-LD and HyperGraphQL in terms of implementation and features. We demonstrate these in this work extensively and compare them via examples against standard GraphQL and SPARQL features.
+
+Both GraphQL and HypergraphQL are prospective choices for querying knowledge graphs like Wikidata. Each of them have their own merits and limitations. Since they are both work in progress, they do not have all the standard GraphQL features. However, as they are open-sourced there is a great scope for improvement and they can prove to be effective in fetching data having complex relationships. Moreover, our work proves that GraphQL is a viable solution to querying with RDF graphs and can effectively help lower the barrier that developers face when working with knowledge graphs.
 
 
 
@@ -291,7 +303,7 @@ SPARQL is a protocol and query language for RDF. It is based on matching graph p
 \listoftables
 \newpage
 \lstlistoflistings
-%\addcontentsline{toc}{chapters}{\lstlistlistingname}
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
 \newpage
 \pagebreak
 

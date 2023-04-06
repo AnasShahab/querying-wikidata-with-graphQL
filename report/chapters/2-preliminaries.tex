@@ -7,53 +7,51 @@ In this chapter, we introduce concepts of RDF, Wikidata, SPARQL and GraphQL. We 
 %\setcounter{secnumdepth}{2}
 \section{Resource Description Framework (RDF)}
 %\subsection{RDF}
-The World Wide Web consists of data published in various formats such as PDF, CSV and many forms of plain text~\cite{Ruth2013}. Linked Data is a set of principles that aims to connect and share structured data on the Web. It helps to form the web into a global database that creates meaningful networks of information where data can be reused and shared. 
+The World Wide Web consists of data published in various formats such as PDF, CSV and many forms of plain text~\cite{Ruth2013}. Linked Data is a set of principles that aims to connect and share structured data on the Web. It helps to form the Web into a global database that creates meaningful networks of information where data can be reused and shared. 
 
 The Resource Description Framework (RDF) is a standard framework used to represent information available in the Web in the form of Linked Data. It is also considered to be the data model of Semantic Technologies and of the Semantic Web.
 
-Structurally RDF is a graph based data model. It is used for describing and exchanging graphs over the Web. The graphs specified by RDF are directed edge-labelled graphs. This means that the edges connect source nodes to target nodes, and have labels. The graphs are a restricted form of multi-graphs. This implicates that there can be multiple edges between the same nodes. However, these edges must have different labels. Figure~\ref{fig:2} shows the representation of some knowledge about the chemical element helium (extracted from the knowledge graph Wikidata) using a directed edge-labelled graph. 
-
-
+Structurally RDF is a graph based data model. It is used for describing and exchanging graphs over the Web. The graphs specified by RDF are directed edge-labelled graphs. This means that the edges connect source nodes to target nodes, and have labels. The graphs are a restricted form of multi-graphs. This implicates that there can be multiple edges between the same nodes. However, these edges must have different labels. Figure~\ref{fig:2} shows the representation of some extensive knowledge about the chemical element helium (extracted from the Wikidata knowledge graph) using a directed edge-labelled graph. The graph conveys the following information:\\
+\hspace*{0.25cm} \textit{"Helium is a type of chemical element that has the chemical formula He. It has a boiling point, melting point and density of $-268.9^\circ\text{C}$, $-272.05^\circ\text{C}$ and $0.1785\text{kg}/\text{m}^{3}$ respectively. Helium has a discoverer/inventor by the name of Pierre Janssen whose place of birth is Paris which belongs to the country of France."}\\
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.75\linewidth]{images/del_graph.drawio.pdf}
+  \includegraphics[width=0.95\linewidth]{images/del_graph.drawio.pdf}
   \caption{A directed edge-labelled graph describing helium}
   \label{fig:2}
 \end{figure}
 
-The technical of formal representation of graphs in RDF makes use of some important terms - IRIs, RDF literals and blank nodes. We discuss these briefly before providing a formal definition of RDF graphs.
+The technical or formal representation of graphs in RDF makes use of some important terms - IRIs, RDF literals and blank nodes. We discuss these briefly before providing a formal definition of RDF graphs.
 
 \subsection{Internationalized Resource Identifier (IRI)}
 %\subsubsection{IRIs}
 
 In order to exchange graphs across the web we need to identify resources uniquely. For this identification, we use identifiers in RDF called IRIs. 
-% \acrshort{URI}
-\lukas{it's odd that you talk about IRIs but then you suddenly define a URI}
-A Uniform Resource Identifier (URI) is a sequence of a subset of ASCII characters that identifies any web resource by using a name, a location, or both. It has a scheme, authority, path, and query and fragment, where all parts other than scheme and path are optional. URIs are of the form \texttt{scheme:[//authority]path[?query][\#fragment]}. A Uniform Resource Locator (URL) is a subset of URI that is used to specify the location of a digital document.
+
+An Internationalized Resource Identifier (IRI) is a generalized form of URI that helps to distinguish resources with Unicode. A Uniform Resource Identifier (URI) is a sequence of a subset of ASCII characters that identifies any web resource by using a name, a location, or both. It has a scheme, authority, path, and query and fragment, where all parts other than scheme and path are optional. URIs are of the form \texttt{scheme:[//authority]path[?query][\#fragment]}. 
 %\acrshort{URL}
-An Internationalized Resource Identifier (IRI) is a generalized form of URI that helps to distinguish resources with Unicode. In other words, the character set in URI is extended to the Universal Coded Character Set. This enables it to contain any Latin and non-Latin characters except the reserved characters. For example, \texttt{http://www.wikidata.org/entity/Q560} is an IRI that identifies the chemical element helium on Wikidata. 
+Since in IRIs the character set of URIs is extended to the Universal Coded Character Set, IRIs can contain any Latin and non-Latin characters. This excludes some reserved characters such as \texttt{\#} and \texttt{@}. For example, \texttt{http://www.wikidata.org/entity/Q560} is an IRI that identifies the chemical element \textit{helium} in Wikidata. A Uniform Resource Locator (URL) is a subset of URI that is used to specify the location of a digital document.
 %\acrshort{IRI}
-In RDF an IRI is used as a name (can be thought of as an ID) for graph nodes. It defines the resources that appears as nodes or edge labels in a RDF graph. There are several pre-existing IRIs available for common use. For example, \texttt{http://www.w3.org/2000/01/rdf-schema\#label} (\texttt{rdf:label} for short) is a commonly used property in RDF to identify a subject with a label. New domain specific IRIs can be created based on the application. However, we must ensure there no conflicts with other IRIs available on the web.
+
+An IRI is used to identify resources and properties that appear as nodes and edge labels respectively in RDF graphs. There are several pre-existing IRIs available for common use. For example, \texttt{http://www.w3.org/2000/01/rdf-schema\#label} (\textit{rdfs:label} for short) is a commonly used property in RDF to identify a resource or property with a label. New domain specific IRIs can be created based on the application. However, we must ensure there are no conflicts with other IRIs available on the web.
 
 \subsection{RDF Literals}
 %\subsubsection{RDF Literals}
 \label{subsec:rdf-literals}
 
-Data values in RDF are not represented by IRIs. They do not need to be identified uniquely since they share the same meaning in every application. RDF data values, also known as literals, represent resources that have values belonging to some datatype. Each literal can have only one datatype. RDF literals are written in the format \texttt{"lexical value"\textasciicircum \textasciicircum datatype-IRI}, where lexical value is a string and datatype is an IRI. For example, the boiling point of helium is represented as \texttt{-268.9\textasciicircum \textasciicircum http://www.w3.org/2001/XMLSchema\#decimal} (\texttt{-268.9\textasciicircum \textasciicircum xsd:decimal} for short) in RDF. In RDF graphs, we use rectangular nodes for RDF literals.
+Data values in RDF, also known as RDF literals, are not represented by IRIs. They do not need to be identified uniquely since they share the same meaning in every application. RDF literals represent resources that have values belonging to some datatype. Each literal can have only one datatype associated to it. RDF literals are written in the format \texttt{"lexical value"\textasciicircum \textasciicircum datatype-IRI}, where lexical value is a string and datatype is an IRI. For example, the boiling point of helium is represented as \texttt{-268.9\textasciicircum \textasciicircum http://www.w3.org/2001/XMLSchema\#decimal} (\textit{-268.9\textasciicircum \textasciicircum xsd:decimal} for short) in RDF. We use rectangular nodes in graphs for RDF literals.
 
 The W3C standard XML Schema defines datatypes and their IRIs.\footnote{www.w3.org/TR/2014/REC-rdf11-concepts-20140225/\#section-Datatypes} There are different XML Schema built-in datatypes in RDF such as string, Boolean, decimal and integer, and all of them have their own defined IRIs. For example, decimals are identified by the IRI \texttt{http://www.w3.org/2001/XMLSchema\#decimal}. 
 
-Datatypes in RDF are specified by three components – value space, lexical space and lexical-to-value mapping. The value space is the set of all possible values that a datatype can have. The lexical value is a string\footnote{RDF is based on Unicode strings} that corresponds to a particular literal value in the value space. The lexical space contains a set of strings that are used to denote the values of the datatype. Lastly, the lexical-to-value mapping is a function that maps each string in the lexical space to an element in the value space. 
+Datatypes in RDF are specified by three components – value space, lexical space and lexical-to-value mapping. The value space is the set of all possible values that a datatype can have. A lexical value is a string\footnote{RDF is based on Unicode strings} that corresponds to a particular literal value in the value space. The lexical space contains a set of strings that are used to denote the values of the datatype. Lastly, the lexical-to-value mapping is a function that maps each string in the lexical space to an element in the value space. 
 
-For instance, the datatype boolean has the set \texttt{{true, false}} in the value space and the set \texttt{{true, false, 1, 0}} in the lexical space. The strings \texttt{true} and \texttt{1} from the lexical space are mapped to true that belongs to the value space. Similarly, the strings false and \texttt{0} are mapped to \texttt{0}.
-\lukas{you can try to end the paragraph on the line before (i.e. not only have a few symbols on the next line); this just looks nicer but it is not a real issue}
+For instance, the datatype boolean has the set \texttt{{true, false}} in the value space and the set \texttt{{true, false, 1, 0}} in the lexical space. The strings \texttt{true} and \texttt{1} from the lexical space are mapped to \texttt{true} that belongs to the value space. Similarly, the strings \texttt{false} and \texttt{0} are mapped to \texttt{0}. 
 
-In RDF, we can use a language-tagged string to denote a string in a specific language. This helps to provide human-readable labels to RDF literals. A language-tagged string is of the form \texttt{"string"@language}.\footnote{Here language is a well-formed language tag (after BCP47)} For example, the label for \textit{helium} in French langauge is \texttt{hélium}, and is denoted as \texttt{"hélium"@fr} in RDF. We normally ignore the datatype-IRI for strings \texttt{(http://www.w3.org/1999/02/22-rdf-syntax-ns\#langString)} when representing string literals. 
+In RDF, we can use a language-tagged string to denote a string in a specific language. This helps to provide human-readable labels to RDF literals. A language-tagged string is of the form \texttt{"string"@language}.\footnote{Here language is a well-formed language tag (after BCP47)} For example, the label for helium in French langauge is \texttt{hélium}, and is denoted as \texttt{"hélium"@fr} in RDF. We normally ignore the datatype-IRI for strings \texttt{(http://www.w3.org/1999/02/22-rdf-syntax-ns\#langString)} when representing string literals. 
 
 %\acrshort{bnodes}
 \subsection{Blank Nodes}
 %\subsubsection{Blank Nodes}
-Blank nodes in RDF, also known as bnodes, do not identify specific resources as IRIs or literals do. They are used as placeholders for some nodes, i.e., to say that something exits at the position, without specifying what the node actually is. Figure~\ref{fig:3} shows the use of a blank node in RDF. The information for the address is of multi-component structure and we use a blank node in its place. The domain \texttt{http://example.org} is an example domain and does not identify a real RDF data source.
+Blank nodes in RDF, also known as bnodes, do not identify specific resources as IRIs or literals do. They are used as placeholders for some nodes, i.e., to say that something exists at the position, without specifying what the node actually is. Figure~\ref{fig:3} shows the use of a blank node in RDF. The information for address is of multi-component structure and we use a blank node in its place. The domain \texttt{http://example.org} is an example domain and does not identify a real RDF data source.
 
 \begin{figure}[h]
   \centering
@@ -68,9 +66,9 @@ Blank nodes in RDF, also known as bnodes, do not identify specific resources as 
 An RDF graph is a directed edge-labelled graph composed of a set of triples. A triple, also known as statement, represents the relationship between a subject and an object, linked by a predicate. The subject and object nodes are the source and destination nodes respectively. Formally, each triple consist of the following elements:   
 
 \begin{itemize}
-	\item a subject node that is an IRI or a blank node
-	\item a predicate edge that is an IRI
-	\item an object node that is an IRI, a blank node, or a literal
+	\item A subject node that is an IRI or a blank node.
+	\item A predicate edge that is an IRI.
+	\item An object node that is an IRI, a blank node, or a literal.
 \end{itemize}	
 
 \end{definition}
@@ -79,15 +77,16 @@ Figure~\ref{fig:4} shows the RDF graph of our example represented in Figure~\ref
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.75 \linewidth]{images/rdf_graph_updated.drawio.pdf}
+  \includegraphics[width=\linewidth]{images/rdf_graph_updated.drawio.pdf}
   \caption{An RDF graph representing information about helium}
   \label{fig:4}
 \end{figure}
-\lukas{figure might be hard to read}
 
-In RDF, IRIs and literals denote resources, also called entities. In Chapter~\ref{ch:1}, we defined entities to be real world objects and abstract concepts. The predicate edge is also denoted by an IRI and represents a property. In other words, it represents a binary relation between the entities. RDF defines some resources and properties using its vocabulary. An RDF vocabulary is a collection of IRIs that we can use in RDF graphs. The RDF vocabulary is defined in the namespace \texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}, normally prefixed as \texttt{rdf:}. For example \texttt{rdf:HTML} and \texttt{rdf:type} are RDF vocabularies.
+In RDF, IRIs and literals denote resources, also called entities. In Chapter~\ref{ch:1}, we defined entities to be real world objects and abstract concepts. The predicate edge is also denoted by an IRI and represents a property. In other words, it represents a binary relation between the entities. RDF defines some resources and properties using its vocabulary. An RDF vocabulary is a collection of IRIs that we can use in RDF graphs. The RDF vocabulary is defined in the namespace \texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}, normally prefixed as \textit{rdf:}. For example \textit{rdf:HTML} and \textit{rdf:type} are RDF vocabularies.
 
-RDFS extends the RDF vocabulary and is defined in the namespace \texttt{http://www.w3.org/2000/01/rdf-schema\#}, prefixed as \texttt{rdfs:} such as \texttt{rdfs:class} and \texttt{rdfs:label}. It provides mechanisms that allow for the depiction of groups of interconnected resources and their interrelationships. Resources can be divided into groups known as classes, and classes themselves are also resources~\cite{Brickley2014}. A resource belonging to a class is known to be an instance of that class. The property \texttt{rdf:type} is used to represent this via the statement \textit{"X rdf:type Y"}, denoting X to be an instance of Y. We recall that an RDF triple is called a statement. For example, from the RDF graph in Figure~\ref{fig:4} we see that \texttt{https://example.org./helium} is an instance of the class \texttt{https://example.org./chemical-element}. 
+RDF Schema (RDFS) extends the RDF vocabulary and is defined in the namespace \texttt{http://www.w3.org/2000/01/rdf-schema\#}, prefixed as \textit{rdfs:}. For example \textit{rdfs:class} and \textit{rdfs:label} are vocabularies defined in RDFS. RDFS provides mechanisms that allow for the depiction of groups of interconnected resources and their interrelationships. Resources can be divided into groups known as classes, and classes themselves are also resources~\cite{Brickley2014}. 
+
+A resource belonging to a class is known to be an instance of that class. The property \textit{rdf:type} is used to represent this via the statement \textit{"X rdf:type Y"}, describing X to be an instance of Y. We recall that an RDF triple is called a statement. For example, from the RDF graph in Figure~\ref{fig:4} we see that \textit{Helium} (\texttt{https://example.org./helium}) is an instance of the class \textit{chemical element} (\texttt{https://example.org./chemical-element}) represented the property \textit{rdf:type} (\texttt{http://www.w3.org/2000/01/rdf-schema\#type)}. 
 
 
 %\begin{table}[b!]
@@ -119,7 +118,7 @@ RDFS extends the RDF vocabulary and is defined in the namespace \texttt{http://w
 For exchanging graphs across the web, we need a syntactical representation of RDF. There are different formats available~\cite{W3C2011}, the most common ones are N-Triples, Turtle, JSON-LD, RDF/XML and RDFa. In this report, we focus on N-Triples and Turtle.
 
 \subsubsection*{N-Triples}
-N-Triples~\cite{Beckett} represents RDF graphs in a simple line-based format. Every triple is encoded in a single line. The IRIs are written within pointy brackets and literals are written as \texttt{"lexical value"\textasciicircum \textasciicircum datatype-IRI}. Blank nodes are represented as \textit{\_:stringID}, where stringID can be any string used to identify the blank node in the document. After every element of a triple there is a whitespace, and all the lines end with a dot. We can use comments using hash symbol after the end of every triple in a line or in a single dedicated line, and they are treated as white spaces. The files are saved with a \textit{.nt} extension.
+N-Triples~\cite{Beckett} represents RDF graphs in a simple line-based format. Every triple is encoded in a single line. The IRIs are written within pointy brackets and literals are written as \texttt{"lexical value"\textasciicircum \textasciicircum datatype-IRI}. Blank nodes are represented as \textit{\_:stringID}, where stringID can be any string used to identify the blank node in the document. After every element of a triple there is a whitespace, and all the lines end with a dot. We can use comments using hash symbol after the end of every triple in a line or in a single dedicated line, and they are treated as white spaces. N-triples files are saved with a \textit{.nt} extension.
 
 Listing~\ref{lst:1} shows the representation of the RDF graph in Figure~\ref{fig:4} in N-triples format. We included line breaks for better readability.
 
@@ -151,7 +150,9 @@ Listing~\ref{lst:1} shows the representation of the RDF graph in Figure~\ref{fig
 
 \subsubsection*{Turtle}
 \label{subsubsec:turtle}
-Turtle~\cite{D.Beckett} is an easy to read representation of RDF graphs. It extends the N-Triples format by providing several simplifications. We can use prefix declarations and base namespaces at the beginning of the file to shorten IRIs. This allows us to avoid repetition. We can use a semicolon at the end of a line instead of a dot if we know the next line has the same subject. Consequently, the next line will only have a predicate and object omitting the subject. Also, we can use a comma at the end of a line if we know the next line will start with the same subject and predicate. Analogously, the next line will only have a an object omitting the subject and the predicate. Blank nodes are represented using only square brackets. Additionally, we can provide predicate-object pairs within the square brackets to give further triples keeping the blank node as the subject. Turtle also provides a shorthand syntax for writing numbers. Numbers of the datatype integer, decimal and double can be written without quotes and datatype-IRIs. Boolean values can be written directly as either \texttt{true} or \texttt{false}. The files are saved with a \texttt{.ttl} extension.
+Turtle~\cite{D.Beckett} is an easy to read representation of RDF graphs. It extends the N-Triples format by providing several simplifications. We can use prefix (\texttt{PREFIX}) declarations and base namespaces \texttt{(BASE)} at the beginning of the file to shorten IRIs. This allows us to avoid repetition. We can use a semicolon at the end of a line instead of a dot if we know the next line has the same subject. Consequently, the next line will only have a predicate and object, omitting the subject. Also, we can use a comma at the end of a line if we know the next line will start with the same subject and predicate. Analogously, the next line will only have a an object omitting the subject and the predicate. 
+
+Blank nodes are represented using only square brackets. Additionally, we can provide predicate-object pairs within the square brackets to give further triples keeping the blank node as the subject. Turtle also provides a shorthand syntax for writing numbers. Numbers of the datatype integer, decimal and double can be written without quotes and datatype-IRIs. Boolean values can be written directly as either \texttt{true} or \texttt{false}. Turtle files are saved with a \texttt{.ttl} extension.
 
 Listing~\ref{lst:2} shows the representation of the RDF graph in Figure~\ref{fig:4} in Turtle format. 
 
@@ -180,46 +181,46 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 Wikidata is built on the RDF framework. However, it does not define its resources in terms of RDFS. Instead, it has its own data model known as Wikibase data model~\citep{MediaWiki}. This data model can be expressed in RDF but there are some important differences compared to the standard Linked Data practices that RDF follows. 
 
-Wikidata defines its own classes and properties that are equivalent to RDF constructs. For example, to denote that the subject node is an instance of a class, Wikidata uses the \texttt{instance of} property instead of the \texttt{rdf:type} property in RDF. Wikidata offers an explanation for some of the standards properties in Wikidata that correspond to the ones in RDF~\cite{Foundation}. 
+Wikidata defines its own classes and properties that are equivalent to RDF constructs. For example, to denote that the subject node is an instance of a class, Wikidata uses the \textit{instance of} property instead of the \textit{rdf:type} property in RDF. Wikidata offers an explanation for some of the standards properties in Wikidata that correspond to the ones in RDF~\cite{Foundation}. 
 
-Unlike RDF, statements in Wikidata are ranked. Additionally, they can have annotations and references. In Section~\ref{subsec:rdf-literals} we discussed that data types in RDF are mapped to XML Schema data types. However, property types in Wikidata are not defined in terms of XML Schema types. They are defined in terms of the types of values that the properties can have. For example, the \textit{element symbol} property in Wikidata - \texttt{https://www.wikidata.org/wiki/Property:P246} has the property of type \textit{String} indicating it can have values that are strings.
+Unlike RDF, statements in Wikidata are ranked. Additionally, they can have annotations and references. In Section~\ref{subsec:rdf-literals} we discussed that data types in RDF are mapped to XML Schema data types. However, property types in Wikidata are not defined in terms of XML Schema types. They are defined in terms of the types of values that the properties can have. For example, the \textit{element symbol} (\texttt{https://www.wikidata.org/wiki/Property:P246}) property in Wikidata is of type String, indicating it can have values that are strings.
 
 Resources in Wikidata are called entities, and each entity is uniquely identified by an entity ID. The next section describes Wikidata entities and statements in detail.
 
 \subsection{Entities}
 Wikidata maintains its data structure by pages. Each entity has a dedicated page for itself and is identified by an unique ID. Wikidata has mainly three types of entities – items, properties and lexemes. Other extensions can define new entity types such as MediaInfo and subentities like Form and Sense. We refer to items and properties when mentioning entities. The rest are out of the scope of this report.
 
-Items are real-world objects, concepts or events.  These generally have a page in Wikipedia. For instance, there is an English Wikipedia on helium - \texttt{https://en.wikipedia.org/wiki/Helium}. Here the item is \textit{helium} and Wikidata records facts about it in a page - \texttt{https://www.wikidata.org/wiki/Q560}. Each item is identified by a \textit{QID} - an ID prefixed with the letter \texttt{Q} followed by a number. For example, the item \textit{helium} has the \textit{QID} of \texttt{Q560}. Items in Wikidata belong to the main namespace - \texttt{http://www.wikidata.org/wiki/QID}. 
+Items are real-world objects, concepts or events. These generally have a page in Wikipedia. For instance, there is an English Wikipedia on helium - \texttt{https://en.wikipedia.org/wiki/Helium}. Here the item is \textit{helium} and Wikidata records facts about it in a page - \texttt{https://www.wikidata.org/wiki/Q560}. Each item is identified by a \textit{QID} - an ID prefixed with the letter \texttt{Q} followed by a number. For example, the item \textit{helium} has the \textit{QID} of \texttt{Q560}. Items in Wikidata belong to the main namespace - \texttt{http://www.wikidata.org/wiki/QID}. 
 
 Properties describe the relationship between entities and property values. Each property in Wikidata has a datatype that specifies the type and shape of the values assigned to the property. In other words, datatypes determine which values the property can accept, such as string, quantity or time.\footnote{Wikidata provides a list of all the datatypes: https://www.wikidata.org/wiki/Special:ListDatatypes} Properties are identified by a \textit{PID} - an ID prefixed with the letter \texttt{P} followed a number. They belong to the property namespace in Wikidata - \texttt{http://www.wikidata.org/wiki/Property:PID}. 
 
-Every entity constitutes of the following main parts - labels, descriptions, aliases, and statements. Items also have sitelinks. Labels, descriptions and aliases are multilingual which help to find the respective entity. They are used to identify them clearly, since entities are identified by IDs and are not understood by humans. Sitelinks provide links about an individual item to external pages on other Wikimedia sites such as Wikipedia. 
+Every entity constitutes of the following main parts - labels, descriptions, aliases, and statements. Items also have sitelinks. Labels, descriptions and aliases are multilingual which help to find the respective entity. They are used to identify them clearly, since entities are identified by IDs that are not understood by humans. Sitelinks provide links about an individual item to external pages on other Wikimedia sites such as Wikipedia. 
 
 A statement in Wikidata consists of a claim and references. Claims are property-value pairs, which along with the entity form a RDF triple, where the entity is the subject. Claims can also contain optional qualifiers that provide some additional information for the claim. This information is in the form of property-value pairs that refer to the claim instead of the entity. References point to specific resources that support the claim of statement. They can be links to URLs or items.
 
-An entity can have several statements for the same property, and all of them might not necessarily be important or relevant. Ranks are used as a quality factor to distinguish between several statements. A Wikidata statement can have one of three types of ranks - \textit{normal}, \textit{preferred} and \textit{deprecated}. By default, a statement has the \textit{normal} rank unless changed to \textit{preferred} or \textit{deprecated}. A statement with \textit{preferred} rank means it should be given priority over the normal ranked statements. A \texttt{deprecated} rank indicates that the statement is incorrect or under discussion, and it may have a reference. \textit{Deprecated} statements are kept either for the sake for completion or to prevent users from constantly adding or removing them. Wikidata has around 100 million items\footnote{https://grafana.wikimedia.org/d/000000167/wikidata-datamodel} and around 1.43 billion item statements\footnote{https://grafana.wikimedia.org/d/000000175/wikidata-datamodel-statements} as of December 2022. 
+An entity can have several statements for the same property, and all of them might not necessarily be important or relevant. Ranks are used as a quality factor to distinguish between several statements. A Wikidata statement can have one of three types of ranks - normal, preferred and deprecated. By default, a statement has the normal rank unless changed to preferred or deprecated. A statement with preferred rank means it should be given priority over the normal ranked statements. A deprecated rank indicates that the statement is incorrect or under discussion. Deprecated statements are kept either for the sake for completion or to prevent users from constantly adding or removing them. Wikidata has around 100 million items\footnote{https://grafana.wikimedia.org/d/000000167/wikidata-datamodel} and around 1.43 billion item statements\footnote{https://grafana.wikimedia.org/d/000000175/wikidata-datamodel-statements} as of December 2022. 
 
-Figure~\ref{fig:5} shows an excerpt of the Wikidata page on the item \textit{helium} - \texttt{https://www.wikidata.org/wiki/Q560}. We can see helium has the \textit{QID} of \texttt{Q560}, and has labels, descriptions and aliases in different languages. It has a sitelink for the item in Wikipedia offered in 186 languages. We show one of the statements that has a claim indicating that \textit{helium} has the \textit{instance of} property with \textit{chemical element} as the value. The property-value pairs \textit{follows, hydrogen} and \textit{followed by, lithium} are qualifiers of the claim. At the time of this writing, there are no references provided for this claim. This statement hence gives us the information that \textit{"Helium is an instance of chemical element, and it comes after the element hydrogen and is followed by the element lithium"}. The statement has  the \textit{normal} rank (indicated by the greyed middle portion). 
+Figure~\ref{fig:5} shows an excerpt of the Wikidata page on the item \textit{helium} - \texttt{https://www.wikidata.org/wiki/Q560}. We can see helium has the \textit{QID} of \texttt{Q560}, and has labels, descriptions and aliases in different languages. It has a sitelink for the item in Wikipedia offered in 186 languages. We show one of the statements that has a claim indicating that \textit{helium} has the \textit{instance of} property with \textit{chemical element} as the value. The property-value pairs (\textit{follows, hydrogen}) and (\textit{followed by, lithium}) are qualifiers of the claim. At the time of this writing, there are no references provided for this claim. This statement hence gives us the information that \textit{"Helium is an instance of chemical element, and it comes after the element hydrogen and is followed by the element lithium"}. The statement has  the normal rank (indicated by the greyed middle portion). 
 
-\begin{figure}[h]
+\begin{figure}[hp]
   \centering
-  \includegraphics[width=0.75 \linewidth]{images/helium.pdf}
-  \caption{Excerpt of the Wikidata page on \texttt{helium}}
+  \includegraphics[width=\linewidth]{images/helium_new.pdf}
+  \caption{Excerpt of the Wikidata page on helium}
   \label{fig:5}
 \end{figure}
 
-Figure~\ref{fig:6} shows an excerpt of the property instance of page on Wikidata - \texttt{https://www.wikidata.org/wiki/Property:P31}. The property has a \textit{PID} of \texttt{P31} along and with multilingual labels, descriptions and aliases. The statement has a claim indicating that this property also has an instance of property with Wikidata property being the value. The claim has no qualifiers and there are no references to support it. The instance of property accepts the datatype item as a value. The rank for this statement is \textit{normal}.
+Figure~\ref{fig:6} shows an excerpt of the property \textit{instance of} page on Wikidata - \texttt{https://www.wikidata.org/wiki/Property:P31}. The property has a \textit{PID} of \texttt{P31} along and with multilingual labels, descriptions and aliases. The statement has a claim indicating that this property also has an \textit{instance of} property with \textit{Wikidata property} being the value. The rank for this statement is normal. The claim has no qualifiers and there are no references to support it. The \textit{instance of property} accepts the datatype item as a value. 
 
 
-\begin{figure}[h]
+\begin{figure}[hp]
   \centering
-  \includegraphics[width=0.75 \linewidth]{images/instance_of.pdf}
+  \includegraphics[width=\linewidth]{images/instance_of.pdf}
   \caption{Excerpt of the Wikidata page on \texttt{instance of}}
   \label{fig:6}
 \end{figure}
 
 
-The RDF graph in Figure~\ref{fig:4} used the \textit{example.org} domain and the resources identified with this domain do not point to any real data about \textit{helium}. Figure~\ref{fig:7} show information about \textit{helium} taken from Wikidata represented in a RDF graph based on Wikidata data model. 
+The RDF graph in Figure~\ref{fig:4} used the \textit{example.org} domain and the resources identified with this domain did not point to any real data about \textit{helium}. Figure~\ref{fig:7} show information about helium, taken from Wikidata, represented in a RDF graph based on the Wikidata data model. 
 
 
 \begin{figure}[h]
@@ -229,9 +230,13 @@ The RDF graph in Figure~\ref{fig:4} used the \textit{example.org} domain and the
   \label{fig:7}
 \end{figure}
 
-Entity nodes are represented using \texttt{wd:} (prefix for \texttt{http://www.wikidata.org/entity/}) followed by the \textit{QID} for items and \textit{PID} for properties. In our example, we represent only truthy statements. This refers to statements that hold the highest rank for a given property. If any statement has a \texttt{preferred} rank then that statement is considered truthy, otherwise the \texttt{normal} ranked statements are considered truthy. Predicates for truthy statements are represented by \texttt{wdt:} (prefix for \texttt{http://www.wikidata.org/prop/direct/}) followed by the \textit{PID} of the property. 
+From the graphs, we see that entity nodes are represented using \textit{wd:} (prefix for \texttt{http://www.wikidata.org/entity/}) followed by the \textit{QID} for items and \textit{PID} for properties. In our example, we represent only truthy statements. This refers to statements that hold the highest rank for a given property. If any statement has a preferred rank then that statement is considered truthy, otherwise the normal ranked statements are considered truthy. Predicates for truthy statements are represented by \textit{wdt:} (prefix for \texttt{http://www.wikidata.org/prop/direct/}) followed by the \textit{PID} of the property. 
 
-From Figure~\ref{fig:7} we understand that \textit{Helium} \texttt{(wd:Q560)} is an \textit{instance of} \texttt{(wdt:P31)} \textit{chemical element} \texttt{(wd:Q11344)}. It has a human understandable english \textit{label}\texttt{(rdfs:label)} of \textit{helium} and has the \textit{chemical formula} \texttt{(P274)} of \textit{He}. Its \textit{boiling point} \texttt{(P2102)}, \textit{melting point} \texttt{(P2102)} and \textit{density} \texttt{(P2054)} are \textit{-268.9°C}, \textit{0.1785°C} and \textit{-272.05kg/m3} respectively. Helium has a \textit{discoverer/inventor} \texttt{(P61)} by the name of \textit{Pierre Janssen} \texttt{(Q298581)}. His \textit{place of birth} \texttt{(P19)} was \textit{Paris} \texttt{(Q90)} that belongs to the \textit{country} \texttt{(P17)} of \textit{France} \texttt{(Q142)}.
+From Figure~\ref{fig:7} we understand the information that
+
+\hspace*{0.25cm} \textit{"Helium is a type of chemical element that has the chemical formula He. It has a boiling point, melting point and density of $-268.9^\circ\text{C}$, $-272.05^\circ\text{C}$ and $0.1785\text{kg}/\text{m}^{3}$ respectively. Helium has a discoverer/inventor by the name of Pierre Janssen whose place of birth is Paris which belongs to the country of France."}\\
+
+ \textit{Helium} \texttt{(wd:Q560)} is an \textit{instance of} \texttt{(wdt:P31)} \textit{chemical element} \texttt{(wd:Q11344)}. It has a human understandable english \textit{label}\texttt{(rdfs:label)} of \textit{helium} and has the \textit{chemical formula} \texttt{(P274)} of \textit{He}. Its \textit{boiling point} \texttt{(P2102)}, \textit{melting point} \texttt{(P2102)} and \textit{density} \texttt{(P2054)} are \textit{-268.9°C}, \textit{0.1785°C} and \textit{-272.05kg/m3} respectively. Helium has a \textit{discoverer/inventor} \texttt{(P61)} by the name of \textit{Pierre Janssen} \texttt{(Q298581)}. His \textit{place of birth} \texttt{(P19)} was \textit{Paris} \texttt{(Q90)} that belongs to the \textit{country} \texttt{(P17)} of \textit{France} \texttt{(Q142)}.
 
 \subsection{Querying Wikidata}
 
@@ -320,7 +325,6 @@ The namespace \texttt{http://www.wikidata.org/entity/} is used for items when qu
 		\renewcommand{\arraystretch}{1}
 	\end{center}
 \end{sidewaystable}
-\lukas{table might be hard to read}
 
 \section{GraphQL}
 \label{sec:graphql}
@@ -349,7 +353,7 @@ type ChemicalElement {
 }
 \end{lstlisting}
 \end{minipage}
-\lukas{did you explain what ``[ChemicalElement]'' means?}
+
 
 A resolver in GraphQL server is a function that is associated with every field. It contains instructions on how to process that particular field. In other words, the resolver is responsible for retrieving a value from the data source.
  
@@ -370,7 +374,6 @@ query QueryChemicalElement {
 }
 \end{lstlisting}
 \end{minipage}
-\lukas{I think i GraphQL to be able to use limit or other arguments, they need to be defined in the schema (which is not the case here)}
 
 Running the query against some data source provides a sample result as shown in Listing~\ref{lst:6}. The results obtained are in JSON format. We see that the shape of the results is similar to the shape of our query. This is crucial to GraphQL as we always get the type of response we expect when we write queries. Defining the types and fields in the schema allows the server to know the fields that the client can query for an object type. Also, GraphQL ensures the queries to return predictable results by providing the clients with control over the content of the data they receive. Hence, there is not over or under fetching of data.
 
@@ -509,7 +512,6 @@ fragment elementFields on ChemicalElement {
 }
 \end{lstlisting}
 \end{minipage}
-\lukas{Again: I think i GraphQL to be able to use first, checmicalFormula or other arguments, they need to be defined in the schema (which is not the case here)}
 
 The query \textit{GetChemicalElementDetails} takes three non-null arguments as input from the client in the form of variables – \textit{\$chemicalFormula} of type "String", \textit{\$first} of type "Int" and \textit{\$includeBoilingPoint} of type "Boolean". We see in the variable definitions section the input passed.
 
@@ -554,4 +556,4 @@ Furthermore, in SPARQL we can query if a node is connected to another node by a 
 RDF provides a system to build detailed structures from the meaning of data, and is hence more complete and capable than GraphQL schemas~\cite{Dresslar2019}. Since SPARQL works with the schema organization of RDF, this makes it more powerful than GraphQL. With SPARQL we can write complex queries that can be used to retrieve or modify data~\cite{Angele2022}. As a result, it is capable to satisfy many complex use cases.
 
 \subsection{Querying multiple sources}
-Since GraphQL alone has no notion of semantics~\cite{Taelman2018}, a schema needs to be defined by the GraphQL API developers for every interface they want the client to query. This makes it difficult to integrate data returned when querying multiple different sources. SPARQL however supports federated queries which makes it more powerful and rich.
+Since GraphQL alone has no notion of semantics~\cite{Taelman2018}, a schema needs to be defined by the GraphQL API developers for every interface they want the client to query. This makes it difficult to integrate data returned when querying multiple different sources. SPARQL however supports federated queries which makes it more powerful and rich. 

@@ -1,6 +1,5 @@
 \chapter{Comparison of GraphQL-LD and HyperGraphQL}
 \label{ch:5}
-\lukas{didnt you want to rename this?}
 In this chapter, we compare GraphQL-LD and HyperGraphQL by highlighting the important similarities and differences they have among each other. At the end of the chapter, we provide tables that summarize the comparison against the features of GraphQL and SPARQL respectively.
 
 The comparison is based on the following criteria:
@@ -102,10 +101,7 @@ Since HyperGraphQL uses a schema, another advantage is that it distinguishes wha
 \section{Intermediary server}
 We create and run a HyperGraphQL instance by setting up an intermediary server using a configuration file and an annotated schema. A GraphQL endpoint is exposed that points to the service or Linked Data source configured in the parameters of the configuration file. However, when one needs to change the service, it required to stop the running intermediary server and create a new configuration file. Additionally, the annotated schema also required to be changed to comply with the new service. 
 
-On the other hand, GraphQL-LD does not require the setup of a server. It can be executed simply via the command line by providing a GraphQL query, JSON-LD context and SPARQL endpoint. This implementation is relatively easier and provides more flexibility when one needs to query a different Linked Data source.
-\lukas{might be worthwhile to mention somewhere (not necessarily here) that this is not only possible via the command line but since this is just a javascript library, you can include it in frontend web applications, i.e. execute graphql queries agains wikidata directly from the without an intermediary server}
-
-\lukas{another thing that crosses my mind and that I'm not sure where to put: GraphQL does not have a semantic on its own but the semantics are defined via the schema. This is also true for HypergraphQL to a large extent. However, GraphQL-LD does not have a schema but still defines semantics (included some arguments) for GraphQL (which we noticed are sometimes not so intuitive).}
+On the other hand, GraphQL-LD does not require the setup of a server. It can be executed simply via the command line by providing a GraphQL query, JSON-LD context and SPARQL endpoint. This implementation is relatively easier and provides more flexibility when one needs to query a different Linked Data source. 
 
 
 \section{Updating data}
@@ -159,7 +155,6 @@ SELECT ?hasFather_fatherOf_id ?hasFather_fatherOf_label WHERE {
 }
 \end{lstlisting}
 \end{minipage}
-\lukas{I'm still confused that there is no opening brace behind ``id(...)'' but I trust you on that :D}
 
 
 \section{Optional Fields}
@@ -169,7 +164,6 @@ In GraphQL-LD, GraphQL query fields are non-null by default. They can be defined
 HyperGraphQL always translates GraphQL fields into \texttt{OPTIONAL} SPARQL triple patterns. GraphQL allows to define fields to be non-null in the schema. However, HyperGraphQL does not support this feature and we cannot implement it in its annotated schema. As a result of this limitation, we get more results than expected in HyperGraphQL when writing GraphQL queries. 
 
 Listing~\ref{lst:39} shows a SPARQL query that fetches the colours of chemical compounds and if possible the RGB of the colours.
-\lukas{be consistent with amarican vs british english}
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=lst:39, caption={SPARQL query showing usage of OPTIONAL feature}, language=SPARQL]
@@ -661,7 +655,6 @@ Table~\ref{tab:3} provides a comparison of the two approaches with some standard
 		\end{tabular}
 	\end{center}
 \end{table}
-\lukas{make sure that the footnotes occur on the same page as the table}
 
 
 Both GraphQL-LD and HyperGraphQL are potential solutions to querying RDF graphs using GraphQL. They have their own benefits and limitations. Since GraphQL queries tree structures, it is less expressive than SPARQL~\cite{Werbrouck2019}. On the other hand, GraphQL facilitates querying basic RDF data. The two approaches support many standard features that are typical in GraphQL. However, both of the approaches are work in progress and have their own limitations. Hence, not all the expressivity of GraphQL can currently be implemented~\cite{Werbrouck2019}.
