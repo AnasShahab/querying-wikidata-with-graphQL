@@ -1,0 +1,7 @@
+#Example of alternate fields
+query {
+    id(_: JohannSebastianBach)
+    parent: hasFather(alt: hasMother){
+        id
+    }
+}

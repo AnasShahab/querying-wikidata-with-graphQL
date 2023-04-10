@@ -1,0 +1,17 @@
+[
+  {
+    "hasFather": [
+      {
+        "fatherOf": [
+          {
+            "id": [
+              "http://www.wikidata.org/entity/Q1339",
+              "http://www.wikidata.org/entity/Q539427",
+              "http://www.wikidata.org/entity/Q1862395"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

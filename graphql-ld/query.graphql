@@ -1,4 +1,5 @@
-query {
+#Get details about cats
+query GetCat{
   id(instance: cat) @single(scope: all) {
     id
     name

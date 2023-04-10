@@ -1,0 +1,7 @@
+#Example showing usage of default vocabulary
+#The context.jsonld file does not have an entry for human
+query {
+    id(instance: human){
+        name
+    }
+}

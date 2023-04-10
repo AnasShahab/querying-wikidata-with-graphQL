@@ -1,0 +1,9 @@
+#Example of reverse querying that gets all siblings of Johann Sebastian Bach
+query {
+    id (_: JohannSebastianBach)
+        hasFather {
+        fatherOf {
+            id
+        }
+    }
+}

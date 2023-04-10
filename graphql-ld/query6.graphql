@@ -1,0 +1,6 @@
+#Counts total number of humans in Wikidata
+query {
+    id(instance: humanBeing){
+        totalCount
+    }
+}

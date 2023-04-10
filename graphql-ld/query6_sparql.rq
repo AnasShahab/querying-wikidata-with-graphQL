@@ -1,0 +1,1 @@
+SELECT ?id ?id_totalCount WHERE { SELECT (COUNT(?id) AS ?id_totalCount) WHERE { ?id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q5>. } }

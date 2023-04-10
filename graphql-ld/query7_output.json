@@ -1,0 +1,50 @@
+[
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q1285196",
+      "place": {
+        "id": "http://www.wikidata.org/entity/Q200126"
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q2942460",
+      "place": {
+        "id": "http://www.wikidata.org/entity/Q245546"
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q2942526",
+      "place": {
+        "id": "http://www.wikidata.org/entity/Q270230"
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q2948368",
+      "place": {
+        "id": "http://www.wikidata.org/entity/Q238723"
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q3585930",
+      "place": {
+        "id": "http://www.wikidata.org/entity/Q238723"
+      }
+    }
+  },
+  {
+    "id": {
+      "id": "http://www.wikidata.org/entity/Q4992220",
+      "place": {
+        "id": "http://www.wikidata.org/entity/Q259463"
+      }
+    }
+  }
+]

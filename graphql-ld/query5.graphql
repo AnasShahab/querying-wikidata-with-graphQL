@@ -1,0 +1,6 @@
+#Example of first and offset
+query {
+    id(instance:cat first: 10 offset: 2) {
+        id
+    }
+}

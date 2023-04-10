@@ -1,0 +1,9 @@
+#Example showing usage of arguments
+query {
+    id(instance: cathedral) @single(scope:all) {
+        id
+        place{
+            id (place: Paris)
+        }
+    }
+}

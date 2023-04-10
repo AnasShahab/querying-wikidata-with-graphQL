@@ -16,6 +16,17 @@
     "density": "wdt:P2054",
     "discoverer": "wdt:P61",
     "placeBirth": "wdt:P19",
-    "country": "wdt:P17"
-    }
+    "country": "wdt:P17",
+    "chemicalCompound": "wd:Q11173",
+    "color": "wdt:P462",
+    "rgb": "wdt:P465",
+    "JohannSebastianBach": "wd:Q1339",
+    "hasFather": "wdt:P22",
+    "fatherOf": { "@reverse":"wdt:P22" },
+    "hasMother": "wdt:P25",
+    "cathedral": "wd:Q2977",
+    "place": "wdt:P131",
+    "Paris": "wd:Q90",
+    "humanBeing": "wd:Q5"
   }
+}

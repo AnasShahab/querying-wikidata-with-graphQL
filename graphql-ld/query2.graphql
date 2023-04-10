@@ -1,4 +1,5 @@
-query {
+#Get information about chemical elements
+query GetChemicalElement{
     id (instance: chemicalElement) @single(scope: all) {
         id
         chemicalFormula

@@ -11,10 +11,10 @@
             birthPlace
         }
     }
-    
+
 ##### context.jsonld
     {
-      "@context": {
+        "@context": {
         "@vocab":"http://www.wikidata.org/entity/",
         "wd": "http://www.wikidata.org/entity/",
         "wdt" :"http://www.wikidata.org/prop/direct/",
@@ -33,8 +33,8 @@
         "placeBirth": "wdt:P19",
         "country": "wdt:P17"
         }
-      }
-      
+    }
+
 #### Run the tool ***graphql-to-sparql*** to see the generated query
 ```sh
 graphql-to-sparql context.jsonld query.qraphql
@@ -47,7 +47,7 @@ graphql-to-sparql context.jsonld query.qraphql
         <http://www.wikidata.org/prop/direct/P735> ?id_name;
         <http://www.wikidata.org/prop/direct/P19> ?id_birthPlace.
     }
-    
+
 
 #### Run the tool ***graphql-ld-sparqlendpoint*** to query the Wikidata SPARQL endpoint
 ```sh

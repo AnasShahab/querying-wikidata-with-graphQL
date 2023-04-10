@@ -1,0 +1,4 @@
+SELECT ?hasFather_fatherOf_id WHERE {
+  <http://www.wikidata.org/entity/Q1339> <http://www.wikidata.org/prop/direct/P22> ?hasFather.
+  ?hasFather_fatherOf_id <http://www.wikidata.org/prop/direct/P22> ?hasFather.
+}

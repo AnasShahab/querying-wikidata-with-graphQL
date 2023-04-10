@@ -1,0 +1,5 @@
+SELECT ?id ?id_id ?id_place_id WHERE {
+  ?id_id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q2977>;
+    <http://www.wikidata.org/prop/direct/P131> ?id_place_id.
+  ?id_place_id <http://www.wikidata.org/prop/direct/P131> <http://www.wikidata.org/entity/Q90>.
+}

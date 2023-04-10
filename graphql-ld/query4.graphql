@@ -1,0 +1,10 @@
+#Example of optional fields
+query {
+    id(instance:chemicalCompound) @single(scope: all) {
+        id
+        color{
+            id
+            rgb @optional
+        }
+    }
+}

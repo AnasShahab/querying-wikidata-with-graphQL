@@ -1,0 +1,5 @@
+SELECT ?id ?id_id WHERE {
+  SELECT ?id_id WHERE { ?id_id <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q146>. }
+  OFFSET 2
+  LIMIT 10
+}
